@@ -1,1 +1,315 @@
-[]
+[
+  {
+    "seasonId": 137873,
+    "leagueName": "English League",
+    "matchday": 1,
+    "matches": [
+      {
+        "teams": "BHA - LIV",
+        "score": ""
+      },
+      {
+        "teams": "BOU - SUN",
+        "score": ""
+      },
+      {
+        "teams": "BUR - CHE",
+        "score": ""
+      },
+      {
+        "teams": "EVE - MUN",
+        "score": ""
+      },
+      {
+        "teams": "FUL - AST",
+        "score": ""
+      },
+      {
+        "teams": "MCI - BRE",
+        "score": ""
+      },
+      {
+        "teams": "NEW - WOL",
+        "score": ""
+      },
+      {
+        "teams": "NOT - CRY",
+        "score": ""
+      },
+      {
+        "teams": "TOT - ARS",
+        "score": ""
+      },
+      {
+        "teams": "WHU - LEE",
+        "score": ""
+      }
+    ]
+  },
+  {
+    "seasonId": 137873,
+    "leagueName": "Spanish League",
+    "matchday": 1,
+    "matches": [
+      {
+        "teams": "ATM - GIR",
+        "score": ""
+      },
+      {
+        "teams": "BAR - OSA",
+        "score": ""
+      },
+      {
+        "teams": "BET - OVI",
+        "score": ""
+      },
+      {
+        "teams": "ELC - CEL",
+        "score": ""
+      },
+      {
+        "teams": "ESP - VAL",
+        "score": ""
+      },
+      {
+        "teams": "GET - RMA",
+        "score": ""
+      },
+      {
+        "teams": "LEV - MAL",
+        "score": ""
+      },
+      {
+        "teams": "RAY - VIL",
+        "score": ""
+      },
+      {
+        "teams": "RSO - ALA",
+        "score": ""
+      },
+      {
+        "teams": "SEV - ATH",
+        "score": ""
+      }
+    ]
+  },
+  {
+    "seasonId": 137873,
+    "leagueName": "Italian League",
+    "matchday": 1,
+    "matches": [
+      {
+        "teams": "CAG - TOR",
+        "score": ""
+      },
+      {
+        "teams": "CRE - UDI",
+        "score": ""
+      },
+      {
+        "teams": "FIO - ATA",
+        "score": ""
+      },
+      {
+        "teams": "INT - BOL",
+        "score": ""
+      },
+      {
+        "teams": "MIL - NAP",
+        "score": ""
+      },
+      {
+        "teams": "PAR - JUV",
+        "score": ""
+      },
+      {
+        "teams": "PIS - GEN",
+        "score": ""
+      },
+      {
+        "teams": "ROM - LEC",
+        "score": ""
+      },
+      {
+        "teams": "SAS - COM",
+        "score": ""
+      },
+      {
+        "teams": "VER - LAZ",
+        "score": ""
+      }
+    ]
+  },
+  {
+    "seasonId": 137873,
+    "leagueName": "German League",
+    "matchday": 1,
+    "matches": [
+      {
+        "teams": "COL - HOF",
+        "score": ""
+      },
+      {
+        "teams": "EIN - DOR",
+        "score": ""
+      },
+      {
+        "teams": "FRE - AUG",
+        "score": ""
+      },
+      {
+        "teams": "LEV - MON",
+        "score": ""
+      },
+      {
+        "teams": "MAI - HSV",
+        "score": ""
+      },
+      {
+        "teams": "RBL - WOL",
+        "score": ""
+      },
+      {
+        "teams": "STU - STP",
+        "score": ""
+      },
+      {
+        "teams": "UNI - FCB",
+        "score": ""
+      },
+      {
+        "teams": "WER - HEI",
+        "score": ""
+      }
+    ]
+  },
+  {
+    "seasonId": 137873,
+    "leagueName": "French League",
+    "matchday": 1,
+    "matches": [
+      {
+        "teams": "ANG - PSG",
+        "score": ""
+      },
+      {
+        "teams": "ASM - BRE",
+        "score": ""
+      },
+      {
+        "teams": "HAV - STR",
+        "score": ""
+      },
+      {
+        "teams": "LEN - LIL",
+        "score": ""
+      },
+      {
+        "teams": "MET - AUX",
+        "score": ""
+      },
+      {
+        "teams": "NIC - LYO",
+        "score": ""
+      },
+      {
+        "teams": "PAR - LOR",
+        "score": ""
+      },
+      {
+        "teams": "REN - MAR",
+        "score": ""
+      },
+      {
+        "teams": "TOU - NAN",
+        "score": ""
+      }
+    ]
+  },
+  {
+    "seasonId": 137873,
+    "leagueName": "Dutch League",
+    "matchday": 1,
+    "matches": [
+      {
+        "teams": "AJA - UTR",
+        "score": ""
+      },
+      {
+        "teams": "AZA - FOR",
+        "score": ""
+      },
+      {
+        "teams": "FEY - EXC",
+        "score": ""
+      },
+      {
+        "teams": "GAE - PEC",
+        "score": ""
+      },
+      {
+        "teams": "HER - HEE",
+        "score": ""
+      },
+      {
+        "teams": "NAC - VOL",
+        "score": ""
+      },
+      {
+        "teams": "PSV - TEL",
+        "score": ""
+      },
+      {
+        "teams": "SPA - GRO",
+        "score": ""
+      },
+      {
+        "teams": "TWE - NEC",
+        "score": ""
+      }
+    ]
+  },
+  {
+    "seasonId": 137873,
+    "leagueName": "Portuguese League",
+    "matchday": 1,
+    "matches": [
+      {
+        "teams": "AVS - GUI",
+        "score": ""
+      },
+      {
+        "teams": "BEN - ETA",
+        "score": ""
+      },
+      {
+        "teams": "BRA - GIL",
+        "score": ""
+      },
+      {
+        "teams": "CAS - TON",
+        "score": ""
+      },
+      {
+        "teams": "EST - SAN",
+        "score": ""
+      },
+      {
+        "teams": "MOR - FAM",
+        "score": ""
+      },
+      {
+        "teams": "NAC - POR",
+        "score": ""
+      },
+      {
+        "teams": "RIO - ARO",
+        "score": ""
+      },
+      {
+        "teams": "SPO - ALV",
+        "score": ""
+      }
+    ]
+  }
+]

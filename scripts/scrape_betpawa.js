@@ -55,32 +55,37 @@ async function scrape() {
             
             console.log('Waiting for login form...');
             try {
-                await page.waitForSelector('input[type="tel"]', { timeout: 10000 });
-                await page.type('input[type="tel"]', PHONE);
-                await page.type('input[type="password"]', PASSWORD);
+                // Use exact IDs and placeholders discovered
+                await page.waitForSelector('#phoneNumber', { timeout: 10000 });
+                await page.type('#phoneNumber', PHONE);
+                await page.type('input[placeholder="XXXX"]', PASSWORD);
                 
-                // Find the login submit button inside the modal/form
+                // Find the login submit button by its text content
                 const submitButtons = await page.$$('button');
+                let submitClicked = false;
                 for (const btn of submitButtons) {
                     const text = await page.evaluate(el => el.textContent, btn);
-                    if (text && text.trim().toUpperCase() === 'LOGIN') {
+                    if (text && text.trim().toUpperCase() === 'LOG IN') {
                         await btn.click();
+                        submitClicked = true;
                         break;
                     }
                 }
-                console.log('Login submitted. Waiting for navigation...');
-                await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 15000 }).catch(() => console.log('Navigation took too long, continuing...'));
+                
+                if (submitClicked) {
+                    console.log('Login submitted. Waiting for navigation...');
+                    await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 15000 }).catch(() => console.log('Navigation took too long, continuing...'));
+                }
             } catch (e) {
-                console.log('Login form not found or timed out.');
+                console.log('Login form interaction failed.');
                 await takeScreenshot('login_fail');
             }
         } else {
             console.log('Login button not found. Already logged in?');
-            await takeScreenshot('no_login_button');
         }
 
         const latestSeason = 137873;
-        const seasonsToScrape = 1; 
+        const seasonsToScrape = 5; 
         const allResults = [];
 
         for (let s = 0; s < seasonsToScrape; s++) {
@@ -90,21 +95,35 @@ async function scrape() {
             for (const [leagueName, leagueId] of Object.entries(LEAGUES)) {
                 console.log(`Scraping ${leagueName} (ID: ${leagueId})...`);
 
-                for (let matchday = 1; matchday <= 1; matchday++) {
+                for (let matchday = 1; matchday <= 38; matchday++) {
                     const url = `https://www.betpawa.cm/virtual-sports/matchday/${seasonId}?matchday=${matchday}&leagueId=${leagueId}`;
                     await page.goto(url, { waitUntil: 'networkidle2' });
 
-                    // Wait for results to load
-                    await page.waitForSelector('div.jsx-3604018260', { timeout: 5000 }).catch(() => null);
+                    // Wait for results to load - use the new verified selector
+                    await page.waitForSelector('div[class*="SeasonResults_matchRow"]', { timeout: 10000 }).catch(() => null);
+                    
+                    // Small delay to ensure dynamic content is fully rendered
+                    await new Promise(r => setTimeout(r, 1000));
 
                     const matches = await page.evaluate(() => {
-                        const matchRows = Array.from(document.querySelectorAll('div.jsx-3604018260'));
-                        return matchRows.map(row => {
-                            const teams = row.querySelector('span.jsx-3604018260')?.textContent || '';
-                            const score = row.querySelector('span.jsx-2104192667')?.textContent || ''; // Score selector might need tweak
+                        const rows = Array.from(document.querySelectorAll('div[class*="VirtualLeagueList_matchesContainer"]'));
+                        // If that doesn't work, try finding by the team spans directly
+                        const teamSpans = Array.from(document.querySelectorAll('span[class*="VirtualLeagueList_titleMatch"]'));
+                        return teamSpans.map(span => {
+                            const row = span.closest('div'); 
+                            const teams = span.textContent || '';
+                            const score = row?.querySelector('span[class*="VirtualLeagueList_score"]')?.textContent || '';
+                            // Half-time is often part of the score span or separate
                             return { teams, score };
                         });
                     });
+
+                    console.log(`Found ${matches.length} matches for ${leagueName} Matchday ${matchday}`);
+                    if (matches.length === 0) {
+                        const content = await page.evaluate(() => document.body.innerText.substring(0, 500));
+                        console.log(`Page content snippet: ${content.replace(/\n/g, ' ')}`);
+                        await takeScreenshot(`fail_${leagueName}_md${matchday}`);
+                    }
 
                     if (matches.length > 0) {
                         allResults.push({
