@@ -16,14 +16,29 @@ const PLAN_PRICES: Record<string, number> = {
 
 const FAPSHI_API_KEY = functions.config().fapshi?.api_key || process.env.FAPSHI_API_KEY || "";
 const FAPSHI_BASE_URL = functions.config().fapshi?.base_url || process.env.FAPSHI_BASE_URL || "https://api.fapshi.com";
+const FAPSHI_WEBHOOK_SECRET = functions.config().fapshi?.webhook_secret || process.env.FAPSHI_WEBHOOK_SECRET || "";
 
-async function verifyFapshiSignature(transId: string, expectedSignature: string): Promise<boolean> {
-  if (!expectedSignature) return false;
+async function verifyFapshiTransaction(transId: string): Promise<{ valid: boolean; status: string; amount: number }> {
   try {
     const response = await axios.default.get(`${FAPSHI_BASE_URL}/payment-status/${transId}`, {
       headers: { apiuser: FAPSHI_API_KEY },
     });
-    return response.data?.status === "SUCCESSFUL";
+    return {
+      valid: true,
+      status: response.data?.status || "UNKNOWN",
+      amount: response.data?.amount || 0,
+    };
+  } catch {
+    return { valid: false, status: "UNKNOWN", amount: 0 };
+  }
+}
+
+function verifyWebhookSignature(body: string, signature: string, secret: string): boolean {
+  if (!secret) return true;
+  try {
+    const crypto = require("crypto");
+    const expected = crypto.createHmac("sha256", secret).update(body).digest("hex");
+    return crypto.timingSafeEqual(Buffer.from(signature || "", "hex"), Buffer.from(expected, "hex"));
   } catch {
     return false;
   }
@@ -41,7 +56,6 @@ export const initiatePayment = functions.https.onCall(async (data, context) => {
     throw new functions.https.HttpsError("invalid-argument", "Invalid plan ID");
   }
 
-  const plan = PLAN_DURATIONS[planId];
   const price = PLAN_PRICES[planId];
   const externalId = `${uid}:${planId}:${Date.now()}`;
 
@@ -74,25 +88,46 @@ export const initiatePayment = functions.https.onCall(async (data, context) => {
   }
 });
 
+export const onPredictionCreated = functions.firestore
+  .document("users/{uid}/predictions/{predId}")
+  .onCreate(async (snap, context) => {
+    const { uid } = context.params;
+    const db = admin.firestore();
+
+    const userRef = db.doc(`users/${uid}`);
+    const userSnap = await userRef.get();
+
+    if (!userSnap.exists) return;
+
+    const userData = userSnap.data();
+    const used = userData?.predictionsUsed || 0;
+    const limit = userData?.predictionsLimit || 5;
+
+    if (used >= limit) {
+      await snap.ref.delete();
+      console.log(`Prediction deleted for user ${uid}: limit exceeded (${used}/${limit})`);
+      return;
+    }
+
+    await userRef.update({
+      predictionsUsed: admin.firestore.FieldValue.increment(1),
+    });
+    console.log(`Incremented predictions for user ${uid}: ${used + 1}/${limit}`);
+  });
+
 export const fapshiWebhook = functions.https.onRequest(async (req, res) => {
   const signature = req.headers["x-fapshi-signature"] as string;
+  const rawBody = JSON.stringify(req.body);
   const { transId, status, amount, externalId } = req.body;
+
+  if (!verifyWebhookSignature(rawBody, signature, FAPSHI_WEBHOOK_SECRET)) {
+    console.error("Fapshi webhook: HMAC signature mismatch");
+    res.status(401).send("unauthorized");
+    return;
+  }
 
   if (status !== "SUCCESSFUL") {
     res.status(200).send("ignored");
-    return;
-  }
-
-  if (!signature) {
-    console.error("Fapshi webhook: missing signature");
-    res.status(401).send("unauthorized");
-    return;
-  }
-
-  const isValid = await verifyFapshiSignature(transId, signature);
-  if (!isValid) {
-    console.error("Fapshi webhook: invalid signature for transId", transId);
-    res.status(401).send("unauthorized");
     return;
   }
 
@@ -112,8 +147,14 @@ export const fapshiWebhook = functions.https.onRequest(async (req, res) => {
     return;
   }
 
-  const db = admin.firestore();
+  const transValid = await verifyFapshiTransaction(transId);
+  if (!transValid.valid || transValid.status !== "SUCCESSFUL") {
+    console.error("Fapshi webhook: invalid transId or status", transId, transValid.status);
+    res.status(401).send("invalid_transaction");
+    return;
+  }
 
+  const db = admin.firestore();
   const userSnap = await db.doc(`users/${uid}`).get();
   if (!userSnap.exists) {
     console.error("Fapshi webhook: user not found", uid);

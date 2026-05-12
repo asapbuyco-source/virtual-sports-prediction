@@ -31,12 +31,12 @@ const { user } = useAppStore();
           placeholder="Search teams..."
           value={search}
           onChange={e => setSearch(e.target.value)}
-          className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-green-500"
+          className="bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white placeholder-gray-500 focus:outline-none focus:border-green-500/50"
         />
         <select
           value={leagueFilter}
           onChange={e => setLeagueFilter(e.target.value)}
-          className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-green-500"
+          className="bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-green-500/50"
         >
           <option value="all">All Leagues</option>
           <option value="EPL">EPL</option>
@@ -57,7 +57,10 @@ const { user } = useAppStore();
           ))}
         </div>
       ) : (
-        <p className="text-gray-500 text-sm text-center py-10">No predictions found.</p>
+        <div className="bg-[#111118] border border-white/[0.06] rounded-2xl p-10 flex flex-col items-center justify-center text-center gap-3">
+          <div className="text-4xl">📋</div>
+          <p className="text-gray-400 text-sm">No predictions found.</p>
+        </div>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { collection, addDoc, query, orderBy, getDocs, doc, updateDoc, increment } from "firebase/firestore";
+import { collection, addDoc, query, orderBy, getDocs } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAppStore } from "@/store/useAppStore";
 import type { MatchPrediction } from "@/features/predictor/engine/predictor";
@@ -44,7 +44,7 @@ export function usePredictionHistory() {
 
 export function useSavePrediction() {
   const queryClient = useQueryClient();
-  const { user, setUser } = useAppStore();
+  const { user } = useAppStore();
 
   return useMutation({
     mutationFn: async (data: SavedPredictionInput) => {
@@ -53,18 +53,6 @@ export function useSavePrediction() {
         ...data,
         savedAt: new Date(),
       });
-
-      await updateDoc(doc(db, "users", user.uid), {
-        predictionsUsed: increment(1),
-      });
-
-      if (user) {
-        setUser({
-          ...user,
-          predictionsUsed: (user.predictionsUsed || 0) + 1,
-        });
-      }
-
       return ref.id;
     },
     onSuccess: () => {

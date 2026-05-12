@@ -7,7 +7,7 @@ export function PredictionHistoryCard({ pred }: { pred: SavedPrediction }) {
     c >= 75 ? "#22c55e" : c >= 60 ? "#eab308" : "#ef4444";
 
   return (
-    <div className="bg-gray-900 border border-gray-800 rounded-2xl p-4 space-y-3">
+    <div className="bg-[#111118] border border-white/[0.06] rounded-2xl p-4 space-y-3 hover:border-white/[0.1] transition-colors">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="text-sm font-bold text-white">{pred.homeTeam}</span>
@@ -17,7 +17,7 @@ export function PredictionHistoryCard({ pred }: { pred: SavedPrediction }) {
         <span className="text-xs text-gray-500">{format(new Date(pred.savedAt), "MMM d, yyyy")}</span>
       </div>
       <div className="flex items-center gap-3">
-        <span className="text-xs bg-gray-800 px-2 py-1 rounded">{pred.league}</span>
+        <span className="text-xs bg-white/[0.06] border border-white/[0.06] px-2 py-1 rounded">{pred.league}</span>
         <span className="text-xs text-gray-500">Matchday {pred.matchdayPosition}</span>
       </div>
       <div className="flex items-center justify-between">
