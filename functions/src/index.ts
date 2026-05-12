@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import * as axios from "axios";
+import * as crypto from "crypto";
 
 admin.initializeApp();
 
@@ -17,6 +18,7 @@ const PLAN_PRICES: Record<string, number> = {
 const FAPSHI_API_KEY = functions.config().fapshi?.api_key || process.env.FAPSHI_API_KEY || "";
 const FAPSHI_BASE_URL = functions.config().fapshi?.base_url || process.env.FAPSHI_BASE_URL || "https://api.fapshi.com";
 const FAPSHI_WEBHOOK_SECRET = functions.config().fapshi?.webhook_secret || process.env.FAPSHI_WEBHOOK_SECRET || "";
+const APP_URL = functions.config().app?.url || process.env.APP_URL || "https://vflpredictor.cm";
 
 async function verifyFapshiTransaction(transId: string): Promise<{ valid: boolean; status: string; amount: number }> {
   try {
@@ -34,9 +36,11 @@ async function verifyFapshiTransaction(transId: string): Promise<{ valid: boolea
 }
 
 function verifyWebhookSignature(body: string, signature: string, secret: string): boolean {
-  if (!secret) return true;
+  if (!secret) {
+    console.error("FAPSHI_WEBHOOK_SECRET not configured — rejecting all webhooks");
+    return false;
+  }
   try {
-    const crypto = require("crypto");
     const expected = crypto.createHmac("sha256", secret).update(body).digest("hex");
     return crypto.timingSafeEqual(Buffer.from(signature || "", "hex"), Buffer.from(expected, "hex"));
   } catch {
@@ -65,7 +69,7 @@ export const initiatePayment = functions.https.onCall(async (data, context) => {
       {
         amount: price,
         phone: phone || undefined,
-        redirectUrl: `https://vantage-ai.web.app/payment-callback?transId=${externalId}`,
+        redirectUrl: `${APP_URL}/payment-callback?transId=${externalId}`,
         userId: uid,
         externalId,
         message: `Vantage AI ${planId.charAt(0).toUpperCase() + planId.slice(1)} Plan`,

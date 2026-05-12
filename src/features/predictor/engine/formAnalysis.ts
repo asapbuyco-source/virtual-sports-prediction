@@ -1,16 +1,5 @@
 import type { FormEntry } from "./predictor";
 
-export interface FormMetrics {
-  attackMult: number;
-  defenceMult: number;
-  momentum: number;
-  scoringDrought: boolean;
-  concedingStreak: boolean;
-  winRate: number;
-  avgGoalsFor: number;
-  avgGoalsAgainst: number;
-}
-
 export function calcFormMultiplier(form: FormEntry[]): {
   attackMult: number;
   defenceMult: number;

@@ -12,7 +12,10 @@ service cloud.firestore {
 
     match /users/{uid}/predictions/{predId} {
       allow read: if request.auth != null && request.auth.uid == uid;
-      allow create: if false;
+      allow create: if request.auth != null
+        && request.auth.uid == uid
+        && get(/databases/$(database)/documents/users/$(uid)).data.predictionsUsed
+           < get(/databases/$(database)/documents/users/$(uid)).data.predictionsLimit;
       allow update, delete: if false;
     }
 

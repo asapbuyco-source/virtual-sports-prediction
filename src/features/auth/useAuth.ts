@@ -33,25 +33,18 @@ export function useAuthListener() {
           if (firebaseUser) {
             try {
               const ref = doc(db, "users", firebaseUser.uid);
-              const snap = await getDoc(ref);
+              let snap = await getDoc(ref);
               if (!snap.exists()) {
-                await setDoc(ref, {
-                  email: firebaseUser.email,
-                  displayName: firebaseUser.displayName,
-                  photoURL: firebaseUser.photoURL,
-                  plan: "free",
-                  predictionsUsed: 0,
-                  predictionsLimit: 5,
-                  createdAt: new Date(),
-                  lastActiveAt: new Date(),
-                }, { merge: true });
-              } else {
-                await setDoc(ref, {
-                  lastActiveAt: new Date(),
-                }, { merge: true });
+                await new Promise(r => setTimeout(r, 1500));
+                snap = await getDoc(ref);
               }
-              const userData = snap.data() as FirestoreUser;
-              setUser({ uid: firebaseUser.uid, email: firebaseUser.email || "", displayName: firebaseUser.displayName || "User", plan: userData?.plan ?? "free", predictionsUsed: userData?.predictionsUsed ?? 0, predictionsLimit: userData?.predictionsLimit ?? 5 });
+              const userData = snap.data() as FirestoreUser | undefined;
+              if (snap.exists() && userData) {
+                await setDoc(ref, { lastActiveAt: new Date() }, { merge: true });
+                setUser({ uid: firebaseUser.uid, email: firebaseUser.email || "", displayName: firebaseUser.displayName || "User", plan: userData.plan ?? "free", predictionsUsed: userData.predictionsUsed ?? 0, predictionsLimit: userData.predictionsLimit ?? 5 });
+              } else {
+                setUser({ uid: firebaseUser.uid, email: firebaseUser.email || "", displayName: firebaseUser.displayName || "User", plan: "free", predictionsUsed: 0, predictionsLimit: 5 });
+              }
             } catch (err) {
               console.error("Firestore error:", err);
               setUser({ uid: firebaseUser.uid, email: firebaseUser.email || "", displayName: firebaseUser.displayName || "User", plan: "free", predictionsUsed: 0, predictionsLimit: 5 });

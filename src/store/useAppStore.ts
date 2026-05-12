@@ -1,5 +1,6 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
+import type { MatchPrediction } from "@/features/predictor/engine/predictor";
 
 interface User {
   uid: string;
@@ -20,7 +21,7 @@ interface PredictorState {
   oddsHome: string;
   oddsX: string;
   oddsAway: string;
-  lastResult: any | null;
+  lastResult: MatchPrediction | null;
 }
 
 interface AppStore {
