@@ -79,6 +79,11 @@
     -webkit-appearance: none;
     appearance: none;
   }
+
+  select option {
+    background-color: #1a1a24;
+    color: #f1f1f4;
+  }
 }
 
 @layer utilities {

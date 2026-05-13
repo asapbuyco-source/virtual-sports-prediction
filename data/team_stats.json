@@ -1,0 +1,1228 @@
+{
+  "leagues": {
+    "English League": {
+      "avgGoals": 3.18921568627451,
+      "teams": {
+        "BHA": {
+          "goalsScored": 182,
+          "goalsConceded": 154,
+          "matchesPlayed": 102,
+          "wins": 49,
+          "draws": 20,
+          "losses": 33,
+          "elo": 1601.4484664828576
+        },
+        "LIV": {
+          "goalsScored": 198,
+          "goalsConceded": 142,
+          "matchesPlayed": 102,
+          "wins": 46,
+          "draws": 26,
+          "losses": 30,
+          "elo": 1567.5970274993908
+        },
+        "BOU": {
+          "goalsScored": 142,
+          "goalsConceded": 146,
+          "matchesPlayed": 102,
+          "wins": 35,
+          "draws": 27,
+          "losses": 40,
+          "elo": 1499.7661445744955
+        },
+        "SUN": {
+          "goalsScored": 128,
+          "goalsConceded": 169,
+          "matchesPlayed": 102,
+          "wins": 35,
+          "draws": 17,
+          "losses": 50,
+          "elo": 1434.1595462305752
+        },
+        "BUR": {
+          "goalsScored": 153,
+          "goalsConceded": 198,
+          "matchesPlayed": 102,
+          "wins": 32,
+          "draws": 17,
+          "losses": 53,
+          "elo": 1428.9466155674525
+        },
+        "CHE": {
+          "goalsScored": 187,
+          "goalsConceded": 179,
+          "matchesPlayed": 102,
+          "wins": 35,
+          "draws": 30,
+          "losses": 37,
+          "elo": 1493.4245801111094
+        },
+        "EVE": {
+          "goalsScored": 139,
+          "goalsConceded": 150,
+          "matchesPlayed": 102,
+          "wins": 40,
+          "draws": 27,
+          "losses": 35,
+          "elo": 1540.843671776918
+        },
+        "MUN": {
+          "goalsScored": 168,
+          "goalsConceded": 165,
+          "matchesPlayed": 102,
+          "wins": 40,
+          "draws": 22,
+          "losses": 40,
+          "elo": 1483.5292192997674
+        },
+        "FUL": {
+          "goalsScored": 138,
+          "goalsConceded": 176,
+          "matchesPlayed": 102,
+          "wins": 32,
+          "draws": 28,
+          "losses": 42,
+          "elo": 1433.5320569219398
+        },
+        "AST": {
+          "goalsScored": 182,
+          "goalsConceded": 131,
+          "matchesPlayed": 102,
+          "wins": 46,
+          "draws": 26,
+          "losses": 30,
+          "elo": 1589.8354150908683
+        },
+        "MCI": {
+          "goalsScored": 197,
+          "goalsConceded": 159,
+          "matchesPlayed": 102,
+          "wins": 44,
+          "draws": 18,
+          "losses": 40,
+          "elo": 1520.0188600531674
+        },
+        "BRE": {
+          "goalsScored": 120,
+          "goalsConceded": 153,
+          "matchesPlayed": 102,
+          "wins": 30,
+          "draws": 30,
+          "losses": 42,
+          "elo": 1412.2300267047358
+        },
+        "NEW": {
+          "goalsScored": 181,
+          "goalsConceded": 167,
+          "matchesPlayed": 102,
+          "wins": 36,
+          "draws": 31,
+          "losses": 35,
+          "elo": 1499.699655937578
+        },
+        "WOL": {
+          "goalsScored": 125,
+          "goalsConceded": 200,
+          "matchesPlayed": 102,
+          "wins": 25,
+          "draws": 21,
+          "losses": 56,
+          "elo": 1392.0355314043427
+        },
+        "NOT": {
+          "goalsScored": 194,
+          "goalsConceded": 195,
+          "matchesPlayed": 102,
+          "wins": 39,
+          "draws": 23,
+          "losses": 40,
+          "elo": 1470.4660081870927
+        },
+        "CRY": {
+          "goalsScored": 152,
+          "goalsConceded": 152,
+          "matchesPlayed": 102,
+          "wins": 39,
+          "draws": 27,
+          "losses": 36,
+          "elo": 1500.3485758123713
+        },
+        "TOT": {
+          "goalsScored": 189,
+          "goalsConceded": 153,
+          "matchesPlayed": 102,
+          "wins": 47,
+          "draws": 25,
+          "losses": 30,
+          "elo": 1568.2426714078863
+        },
+        "ARS": {
+          "goalsScored": 188,
+          "goalsConceded": 108,
+          "matchesPlayed": 102,
+          "wins": 54,
+          "draws": 27,
+          "losses": 21,
+          "elo": 1592.7388286892958
+        },
+        "WHU": {
+          "goalsScored": 156,
+          "goalsConceded": 189,
+          "matchesPlayed": 102,
+          "wins": 38,
+          "draws": 22,
+          "losses": 42,
+          "elo": 1468.838570024086
+        },
+        "LEE": {
+          "goalsScored": 134,
+          "goalsConceded": 167,
+          "matchesPlayed": 102,
+          "wins": 33,
+          "draws": 26,
+          "losses": 43,
+          "elo": 1502.2985282240693
+        }
+      }
+    },
+    "Spanish League": {
+      "avgGoals": 2.9490196078431374,
+      "teams": {
+        "ATM": {
+          "goalsScored": 207,
+          "goalsConceded": 91,
+          "matchesPlayed": 102,
+          "wins": 66,
+          "draws": 22,
+          "losses": 14,
+          "elo": 1716.1363635936643
+        },
+        "GIR": {
+          "goalsScored": 164,
+          "goalsConceded": 175,
+          "matchesPlayed": 102,
+          "wins": 33,
+          "draws": 26,
+          "losses": 43,
+          "elo": 1450.1332936072336
+        },
+        "BAR": {
+          "goalsScored": 198,
+          "goalsConceded": 107,
+          "matchesPlayed": 102,
+          "wins": 57,
+          "draws": 19,
+          "losses": 26,
+          "elo": 1609.9565719931622
+        },
+        "OSA": {
+          "goalsScored": 136,
+          "goalsConceded": 187,
+          "matchesPlayed": 102,
+          "wins": 25,
+          "draws": 25,
+          "losses": 52,
+          "elo": 1416.024496672039
+        },
+        "BET": {
+          "goalsScored": 142,
+          "goalsConceded": 145,
+          "matchesPlayed": 102,
+          "wins": 43,
+          "draws": 22,
+          "losses": 37,
+          "elo": 1490.6238595803957
+        },
+        "OVI": {
+          "goalsScored": 113,
+          "goalsConceded": 177,
+          "matchesPlayed": 102,
+          "wins": 28,
+          "draws": 20,
+          "losses": 54,
+          "elo": 1378.1913622532745
+        },
+        "ELC": {
+          "goalsScored": 152,
+          "goalsConceded": 181,
+          "matchesPlayed": 102,
+          "wins": 34,
+          "draws": 24,
+          "losses": 44,
+          "elo": 1502.4711460225571
+        },
+        "CEL": {
+          "goalsScored": 134,
+          "goalsConceded": 165,
+          "matchesPlayed": 102,
+          "wins": 35,
+          "draws": 22,
+          "losses": 45,
+          "elo": 1518.9868991822395
+        },
+        "ESP": {
+          "goalsScored": 157,
+          "goalsConceded": 187,
+          "matchesPlayed": 102,
+          "wins": 32,
+          "draws": 26,
+          "losses": 44,
+          "elo": 1432.3143023073665
+        },
+        "VAL": {
+          "goalsScored": 130,
+          "goalsConceded": 168,
+          "matchesPlayed": 102,
+          "wins": 33,
+          "draws": 20,
+          "losses": 49,
+          "elo": 1438.8552498966164
+        },
+        "GET": {
+          "goalsScored": 110,
+          "goalsConceded": 127,
+          "matchesPlayed": 102,
+          "wins": 27,
+          "draws": 40,
+          "losses": 35,
+          "elo": 1526.4999890893525
+        },
+        "RMA": {
+          "goalsScored": 187,
+          "goalsConceded": 83,
+          "matchesPlayed": 102,
+          "wins": 63,
+          "draws": 21,
+          "losses": 18,
+          "elo": 1592.9607514278437
+        },
+        "LEV": {
+          "goalsScored": 151,
+          "goalsConceded": 155,
+          "matchesPlayed": 102,
+          "wins": 34,
+          "draws": 26,
+          "losses": 42,
+          "elo": 1487.6172873694425
+        },
+        "MAL": {
+          "goalsScored": 107,
+          "goalsConceded": 148,
+          "matchesPlayed": 102,
+          "wins": 27,
+          "draws": 29,
+          "losses": 46,
+          "elo": 1448.3594353429703
+        },
+        "RAY": {
+          "goalsScored": 151,
+          "goalsConceded": 160,
+          "matchesPlayed": 102,
+          "wins": 40,
+          "draws": 22,
+          "losses": 40,
+          "elo": 1454.2957500104735
+        },
+        "VIL": {
+          "goalsScored": 178,
+          "goalsConceded": 140,
+          "matchesPlayed": 102,
+          "wins": 49,
+          "draws": 21,
+          "losses": 32,
+          "elo": 1501.7956904339699
+        },
+        "RSO": {
+          "goalsScored": 147,
+          "goalsConceded": 156,
+          "matchesPlayed": 102,
+          "wins": 37,
+          "draws": 27,
+          "losses": 38,
+          "elo": 1516.0864413250974
+        },
+        "ALA": {
+          "goalsScored": 117,
+          "goalsConceded": 164,
+          "matchesPlayed": 102,
+          "wins": 26,
+          "draws": 26,
+          "losses": 50,
+          "elo": 1354.4460191981163
+        },
+        "SEV": {
+          "goalsScored": 167,
+          "goalsConceded": 173,
+          "matchesPlayed": 102,
+          "wins": 39,
+          "draws": 19,
+          "losses": 44,
+          "elo": 1549.2222771064853
+        },
+        "ATH": {
+          "goalsScored": 160,
+          "goalsConceded": 119,
+          "matchesPlayed": 102,
+          "wins": 50,
+          "draws": 27,
+          "losses": 25,
+          "elo": 1615.0228135876987
+        }
+      }
+    },
+    "Italian League": {
+      "avgGoals": 3.0833333333333335,
+      "teams": {
+        "CAG": {
+          "goalsScored": 131,
+          "goalsConceded": 195,
+          "matchesPlayed": 102,
+          "wins": 29,
+          "draws": 21,
+          "losses": 52,
+          "elo": 1451.7268687400822
+        },
+        "TOR": {
+          "goalsScored": 150,
+          "goalsConceded": 190,
+          "matchesPlayed": 102,
+          "wins": 30,
+          "draws": 19,
+          "losses": 53,
+          "elo": 1410.9530750169406
+        },
+        "CRE": {
+          "goalsScored": 144,
+          "goalsConceded": 158,
+          "matchesPlayed": 102,
+          "wins": 33,
+          "draws": 25,
+          "losses": 44,
+          "elo": 1454.7796803777064
+        },
+        "UDI": {
+          "goalsScored": 139,
+          "goalsConceded": 141,
+          "matchesPlayed": 102,
+          "wins": 39,
+          "draws": 27,
+          "losses": 36,
+          "elo": 1455.754759262276
+        },
+        "FIO": {
+          "goalsScored": 160,
+          "goalsConceded": 138,
+          "matchesPlayed": 102,
+          "wins": 45,
+          "draws": 24,
+          "losses": 33,
+          "elo": 1548.0024367209728
+        },
+        "ATA": {
+          "goalsScored": 171,
+          "goalsConceded": 139,
+          "matchesPlayed": 102,
+          "wins": 48,
+          "draws": 14,
+          "losses": 40,
+          "elo": 1521.452329398738
+        },
+        "INT": {
+          "goalsScored": 185,
+          "goalsConceded": 94,
+          "matchesPlayed": 102,
+          "wins": 57,
+          "draws": 29,
+          "losses": 16,
+          "elo": 1640.8915429549786
+        },
+        "BOL": {
+          "goalsScored": 165,
+          "goalsConceded": 154,
+          "matchesPlayed": 102,
+          "wins": 39,
+          "draws": 20,
+          "losses": 43,
+          "elo": 1486.3231455188131
+        },
+        "MIL": {
+          "goalsScored": 176,
+          "goalsConceded": 120,
+          "matchesPlayed": 102,
+          "wins": 51,
+          "draws": 25,
+          "losses": 26,
+          "elo": 1637.664410496643
+        },
+        "NAP": {
+          "goalsScored": 186,
+          "goalsConceded": 115,
+          "matchesPlayed": 102,
+          "wins": 58,
+          "draws": 17,
+          "losses": 27,
+          "elo": 1648.9325186149156
+        },
+        "PAR": {
+          "goalsScored": 150,
+          "goalsConceded": 154,
+          "matchesPlayed": 102,
+          "wins": 36,
+          "draws": 31,
+          "losses": 35,
+          "elo": 1496.1077654969672
+        },
+        "JUV": {
+          "goalsScored": 186,
+          "goalsConceded": 132,
+          "matchesPlayed": 102,
+          "wins": 52,
+          "draws": 23,
+          "losses": 27,
+          "elo": 1544.4426240606695
+        },
+        "PIS": {
+          "goalsScored": 124,
+          "goalsConceded": 228,
+          "matchesPlayed": 102,
+          "wins": 20,
+          "draws": 18,
+          "losses": 64,
+          "elo": 1367.8501851464182
+        },
+        "GEN": {
+          "goalsScored": 139,
+          "goalsConceded": 179,
+          "matchesPlayed": 102,
+          "wins": 32,
+          "draws": 19,
+          "losses": 51,
+          "elo": 1420.556924759985
+        },
+        "ROM": {
+          "goalsScored": 190,
+          "goalsConceded": 125,
+          "matchesPlayed": 102,
+          "wins": 54,
+          "draws": 21,
+          "losses": 27,
+          "elo": 1615.7398362221115
+        },
+        "LEC": {
+          "goalsScored": 128,
+          "goalsConceded": 217,
+          "matchesPlayed": 102,
+          "wins": 25,
+          "draws": 22,
+          "losses": 55,
+          "elo": 1468.3664437636573
+        },
+        "SAS": {
+          "goalsScored": 151,
+          "goalsConceded": 198,
+          "matchesPlayed": 102,
+          "wins": 32,
+          "draws": 21,
+          "losses": 49,
+          "elo": 1449.0318162853084
+        },
+        "COM": {
+          "goalsScored": 169,
+          "goalsConceded": 147,
+          "matchesPlayed": 102,
+          "wins": 45,
+          "draws": 19,
+          "losses": 38,
+          "elo": 1522.818442735886
+        },
+        "VER": {
+          "goalsScored": 135,
+          "goalsConceded": 172,
+          "matchesPlayed": 102,
+          "wins": 29,
+          "draws": 24,
+          "losses": 49,
+          "elo": 1389.9281406528319
+        },
+        "LAZ": {
+          "goalsScored": 166,
+          "goalsConceded": 149,
+          "matchesPlayed": 102,
+          "wins": 44,
+          "draws": 25,
+          "losses": 33,
+          "elo": 1468.6770537740988
+        }
+      }
+    },
+    "German League": {
+      "avgGoals": 3.2113289760348582,
+      "teams": {
+        "COL": {
+          "goalsScored": 148,
+          "goalsConceded": 181,
+          "matchesPlayed": 102,
+          "wins": 29,
+          "draws": 27,
+          "losses": 46,
+          "elo": 1438.6159841396848
+        },
+        "HOF": {
+          "goalsScored": 175,
+          "goalsConceded": 205,
+          "matchesPlayed": 102,
+          "wins": 40,
+          "draws": 17,
+          "losses": 45,
+          "elo": 1527.239088789707
+        },
+        "EIN": {
+          "goalsScored": 179,
+          "goalsConceded": 155,
+          "matchesPlayed": 102,
+          "wins": 45,
+          "draws": 28,
+          "losses": 29,
+          "elo": 1579.7400130486442
+        },
+        "DOR": {
+          "goalsScored": 212,
+          "goalsConceded": 144,
+          "matchesPlayed": 102,
+          "wins": 55,
+          "draws": 17,
+          "losses": 30,
+          "elo": 1565.3125230972703
+        },
+        "FRE": {
+          "goalsScored": 177,
+          "goalsConceded": 168,
+          "matchesPlayed": 102,
+          "wins": 37,
+          "draws": 28,
+          "losses": 37,
+          "elo": 1512.8699965879844
+        },
+        "AUG": {
+          "goalsScored": 149,
+          "goalsConceded": 173,
+          "matchesPlayed": 102,
+          "wins": 37,
+          "draws": 22,
+          "losses": 43,
+          "elo": 1476.7903938452464
+        },
+        "LEV": {
+          "goalsScored": 190,
+          "goalsConceded": 107,
+          "matchesPlayed": 102,
+          "wins": 62,
+          "draws": 17,
+          "losses": 23,
+          "elo": 1699.5909219458003
+        },
+        "MON": {
+          "goalsScored": 145,
+          "goalsConceded": 157,
+          "matchesPlayed": 102,
+          "wins": 33,
+          "draws": 33,
+          "losses": 36,
+          "elo": 1456.1620223046266
+        },
+        "MAI": {
+          "goalsScored": 155,
+          "goalsConceded": 177,
+          "matchesPlayed": 102,
+          "wins": 35,
+          "draws": 28,
+          "losses": 39,
+          "elo": 1432.8288789975459
+        },
+        "HSV": {
+          "goalsScored": 129,
+          "goalsConceded": 160,
+          "matchesPlayed": 102,
+          "wins": 30,
+          "draws": 28,
+          "losses": 44,
+          "elo": 1439.7203363284946
+        },
+        "RBL": {
+          "goalsScored": 192,
+          "goalsConceded": 130,
+          "matchesPlayed": 102,
+          "wins": 52,
+          "draws": 19,
+          "losses": 31,
+          "elo": 1594.7504972327501
+        },
+        "WOL": {
+          "goalsScored": 150,
+          "goalsConceded": 139,
+          "matchesPlayed": 102,
+          "wins": 40,
+          "draws": 24,
+          "losses": 38,
+          "elo": 1515.6477279636972
+        },
+        "STU": {
+          "goalsScored": 170,
+          "goalsConceded": 158,
+          "matchesPlayed": 102,
+          "wins": 40,
+          "draws": 30,
+          "losses": 32,
+          "elo": 1517.5487492250495
+        },
+        "STP": {
+          "goalsScored": 147,
+          "goalsConceded": 204,
+          "matchesPlayed": 102,
+          "wins": 27,
+          "draws": 19,
+          "losses": 56,
+          "elo": 1447.1054587440083
+        },
+        "UNI": {
+          "goalsScored": 134,
+          "goalsConceded": 176,
+          "matchesPlayed": 102,
+          "wins": 29,
+          "draws": 25,
+          "losses": 48,
+          "elo": 1436.1254644256132
+        },
+        "FCB": {
+          "goalsScored": 208,
+          "goalsConceded": 136,
+          "matchesPlayed": 102,
+          "wins": 51,
+          "draws": 26,
+          "losses": 25,
+          "elo": 1625.1856053864437
+        },
+        "WER": {
+          "goalsScored": 137,
+          "goalsConceded": 171,
+          "matchesPlayed": 102,
+          "wins": 30,
+          "draws": 26,
+          "losses": 46,
+          "elo": 1421.7434992613544
+        },
+        "HEI": {
+          "goalsScored": 151,
+          "goalsConceded": 207,
+          "matchesPlayed": 102,
+          "wins": 31,
+          "draws": 16,
+          "losses": 55,
+          "elo": 1313.0228386760793
+        }
+      }
+    },
+    "French League": {
+      "avgGoals": 3.318082788671024,
+      "teams": {
+        "ANG": {
+          "goalsScored": 152,
+          "goalsConceded": 191,
+          "matchesPlayed": 102,
+          "wins": 34,
+          "draws": 19,
+          "losses": 49,
+          "elo": 1435.7404517537161
+        },
+        "PSG": {
+          "goalsScored": 196,
+          "goalsConceded": 132,
+          "matchesPlayed": 102,
+          "wins": 54,
+          "draws": 22,
+          "losses": 26,
+          "elo": 1598.6175190727827
+        },
+        "ASM": {
+          "goalsScored": 216,
+          "goalsConceded": 128,
+          "matchesPlayed": 102,
+          "wins": 60,
+          "draws": 14,
+          "losses": 28,
+          "elo": 1579.1820280023323
+        },
+        "BRE": {
+          "goalsScored": 157,
+          "goalsConceded": 215,
+          "matchesPlayed": 102,
+          "wins": 24,
+          "draws": 17,
+          "losses": 61,
+          "elo": 1363.0122527841545
+        },
+        "HAV": {
+          "goalsScored": 130,
+          "goalsConceded": 199,
+          "matchesPlayed": 102,
+          "wins": 28,
+          "draws": 27,
+          "losses": 47,
+          "elo": 1418.9643203425442
+        },
+        "STR": {
+          "goalsScored": 146,
+          "goalsConceded": 184,
+          "matchesPlayed": 102,
+          "wins": 28,
+          "draws": 26,
+          "losses": 48,
+          "elo": 1381.5789196071673
+        },
+        "LEN": {
+          "goalsScored": 202,
+          "goalsConceded": 132,
+          "matchesPlayed": 102,
+          "wins": 50,
+          "draws": 28,
+          "losses": 24,
+          "elo": 1575.932961843466
+        },
+        "LIL": {
+          "goalsScored": 201,
+          "goalsConceded": 164,
+          "matchesPlayed": 102,
+          "wins": 53,
+          "draws": 18,
+          "losses": 31,
+          "elo": 1515.0909126511401
+        },
+        "MET": {
+          "goalsScored": 160,
+          "goalsConceded": 218,
+          "matchesPlayed": 102,
+          "wins": 29,
+          "draws": 26,
+          "losses": 47,
+          "elo": 1434.0796825624866
+        },
+        "AUX": {
+          "goalsScored": 150,
+          "goalsConceded": 185,
+          "matchesPlayed": 102,
+          "wins": 33,
+          "draws": 25,
+          "losses": 44,
+          "elo": 1514.279797637292
+        },
+        "NIC": {
+          "goalsScored": 182,
+          "goalsConceded": 140,
+          "matchesPlayed": 102,
+          "wins": 46,
+          "draws": 26,
+          "losses": 30,
+          "elo": 1533.8306525614564
+        },
+        "LYO": {
+          "goalsScored": 160,
+          "goalsConceded": 144,
+          "matchesPlayed": 102,
+          "wins": 43,
+          "draws": 22,
+          "losses": 37,
+          "elo": 1525.564047705743
+        },
+        "PAR": {
+          "goalsScored": 141,
+          "goalsConceded": 191,
+          "matchesPlayed": 102,
+          "wins": 30,
+          "draws": 24,
+          "losses": 48,
+          "elo": 1439.3701048860285
+        },
+        "LOR": {
+          "goalsScored": 147,
+          "goalsConceded": 162,
+          "matchesPlayed": 102,
+          "wins": 32,
+          "draws": 26,
+          "losses": 44,
+          "elo": 1487.9782354135832
+        },
+        "REN": {
+          "goalsScored": 160,
+          "goalsConceded": 176,
+          "matchesPlayed": 102,
+          "wins": 30,
+          "draws": 30,
+          "losses": 42,
+          "elo": 1517.3818699901062
+        },
+        "MAR": {
+          "goalsScored": 193,
+          "goalsConceded": 113,
+          "matchesPlayed": 102,
+          "wins": 60,
+          "draws": 20,
+          "losses": 22,
+          "elo": 1614.0283697466891
+        },
+        "TOU": {
+          "goalsScored": 188,
+          "goalsConceded": 166,
+          "matchesPlayed": 102,
+          "wins": 40,
+          "draws": 27,
+          "losses": 35,
+          "elo": 1530.8335904838384
+        },
+        "NAN": {
+          "goalsScored": 165,
+          "goalsConceded": 206,
+          "matchesPlayed": 102,
+          "wins": 35,
+          "draws": 21,
+          "losses": 46,
+          "elo": 1534.5342829554738
+        }
+      }
+    },
+    "Dutch League": {
+      "avgGoals": 3.1476964769647697,
+      "teams": {
+        "AJA": {
+          "goalsScored": 146,
+          "goalsConceded": 95,
+          "matchesPlayed": 82,
+          "wins": 42,
+          "draws": 21,
+          "losses": 19,
+          "elo": 1629.8134324017124
+        },
+        "UTR": {
+          "goalsScored": 153,
+          "goalsConceded": 119,
+          "matchesPlayed": 82,
+          "wins": 38,
+          "draws": 15,
+          "losses": 29,
+          "elo": 1502.444387796007
+        },
+        "AZA": {
+          "goalsScored": 146,
+          "goalsConceded": 114,
+          "matchesPlayed": 82,
+          "wins": 39,
+          "draws": 20,
+          "losses": 23,
+          "elo": 1609.0022374513119
+        },
+        "FOR": {
+          "goalsScored": 100,
+          "goalsConceded": 109,
+          "matchesPlayed": 82,
+          "wins": 28,
+          "draws": 22,
+          "losses": 32,
+          "elo": 1503.842709557675
+        },
+        "FEY": {
+          "goalsScored": 150,
+          "goalsConceded": 99,
+          "matchesPlayed": 82,
+          "wins": 43,
+          "draws": 18,
+          "losses": 21,
+          "elo": 1546.9983881683866
+        },
+        "EXC": {
+          "goalsScored": 117,
+          "goalsConceded": 152,
+          "matchesPlayed": 82,
+          "wins": 25,
+          "draws": 22,
+          "losses": 35,
+          "elo": 1509.1146368444731
+        },
+        "GAE": {
+          "goalsScored": 106,
+          "goalsConceded": 127,
+          "matchesPlayed": 82,
+          "wins": 28,
+          "draws": 17,
+          "losses": 37,
+          "elo": 1463.7594461210315
+        },
+        "PEC": {
+          "goalsScored": 113,
+          "goalsConceded": 148,
+          "matchesPlayed": 82,
+          "wins": 20,
+          "draws": 23,
+          "losses": 39,
+          "elo": 1386.2167741439093
+        },
+        "HER": {
+          "goalsScored": 123,
+          "goalsConceded": 161,
+          "matchesPlayed": 82,
+          "wins": 28,
+          "draws": 16,
+          "losses": 38,
+          "elo": 1508.8202190715094
+        },
+        "HEE": {
+          "goalsScored": 120,
+          "goalsConceded": 160,
+          "matchesPlayed": 82,
+          "wins": 24,
+          "draws": 13,
+          "losses": 45,
+          "elo": 1398.6283944911581
+        },
+        "NAC": {
+          "goalsScored": 117,
+          "goalsConceded": 151,
+          "matchesPlayed": 82,
+          "wins": 24,
+          "draws": 14,
+          "losses": 44,
+          "elo": 1395.3405253549313
+        },
+        "VOL": {
+          "goalsScored": 101,
+          "goalsConceded": 142,
+          "matchesPlayed": 82,
+          "wins": 20,
+          "draws": 20,
+          "losses": 42,
+          "elo": 1401.8222083462138
+        },
+        "PSV": {
+          "goalsScored": 174,
+          "goalsConceded": 73,
+          "matchesPlayed": 82,
+          "wins": 52,
+          "draws": 17,
+          "losses": 13,
+          "elo": 1687.7139135521854
+        },
+        "TEL": {
+          "goalsScored": 121,
+          "goalsConceded": 162,
+          "matchesPlayed": 82,
+          "wins": 24,
+          "draws": 18,
+          "losses": 40,
+          "elo": 1381.4484344165348
+        },
+        "SPA": {
+          "goalsScored": 131,
+          "goalsConceded": 124,
+          "matchesPlayed": 82,
+          "wins": 35,
+          "draws": 18,
+          "losses": 29,
+          "elo": 1525.7113725080549
+        },
+        "GRO": {
+          "goalsScored": 138,
+          "goalsConceded": 148,
+          "matchesPlayed": 82,
+          "wins": 26,
+          "draws": 22,
+          "losses": 34,
+          "elo": 1451.4491920686025
+        },
+        "TWE": {
+          "goalsScored": 143,
+          "goalsConceded": 97,
+          "matchesPlayed": 82,
+          "wins": 46,
+          "draws": 17,
+          "losses": 19,
+          "elo": 1626.0916759511001
+        },
+        "NEC": {
+          "goalsScored": 124,
+          "goalsConceded": 142,
+          "matchesPlayed": 82,
+          "wins": 29,
+          "draws": 21,
+          "losses": 32,
+          "elo": 1471.7820517552032
+        }
+      }
+    },
+    "Portuguese League": {
+      "avgGoals": 3.373015873015873,
+      "teams": {
+        "AVS": {
+          "goalsScored": 157,
+          "goalsConceded": 195,
+          "matchesPlayed": 98,
+          "wins": 31,
+          "draws": 17,
+          "losses": 50,
+          "elo": 1425.2436379912735
+        },
+        "GUI": {
+          "goalsScored": 171,
+          "goalsConceded": 157,
+          "matchesPlayed": 98,
+          "wins": 36,
+          "draws": 32,
+          "losses": 30,
+          "elo": 1525.7979670461673
+        },
+        "BEN": {
+          "goalsScored": 191,
+          "goalsConceded": 142,
+          "matchesPlayed": 98,
+          "wins": 47,
+          "draws": 25,
+          "losses": 26,
+          "elo": 1671.0253532995675
+        },
+        "ETA": {
+          "goalsScored": 147,
+          "goalsConceded": 185,
+          "matchesPlayed": 98,
+          "wins": 29,
+          "draws": 27,
+          "losses": 42,
+          "elo": 1467.0345009416098
+        },
+        "BRA": {
+          "goalsScored": 181,
+          "goalsConceded": 141,
+          "matchesPlayed": 98,
+          "wins": 48,
+          "draws": 20,
+          "losses": 30,
+          "elo": 1586.4805453766985
+        },
+        "GIL": {
+          "goalsScored": 143,
+          "goalsConceded": 194,
+          "matchesPlayed": 98,
+          "wins": 27,
+          "draws": 28,
+          "losses": 43,
+          "elo": 1438.1627746639058
+        },
+        "CAS": {
+          "goalsScored": 171,
+          "goalsConceded": 185,
+          "matchesPlayed": 98,
+          "wins": 37,
+          "draws": 21,
+          "losses": 40,
+          "elo": 1510.1724154199867
+        },
+        "TON": {
+          "goalsScored": 181,
+          "goalsConceded": 222,
+          "matchesPlayed": 98,
+          "wins": 39,
+          "draws": 14,
+          "losses": 45,
+          "elo": 1465.2375670549864
+        },
+        "EST": {
+          "goalsScored": 163,
+          "goalsConceded": 146,
+          "matchesPlayed": 98,
+          "wins": 43,
+          "draws": 18,
+          "losses": 37,
+          "elo": 1467.817416459899
+        },
+        "SAN": {
+          "goalsScored": 170,
+          "goalsConceded": 146,
+          "matchesPlayed": 98,
+          "wins": 40,
+          "draws": 22,
+          "losses": 36,
+          "elo": 1472.5138803163281
+        },
+        "MOR": {
+          "goalsScored": 141,
+          "goalsConceded": 158,
+          "matchesPlayed": 98,
+          "wins": 30,
+          "draws": 27,
+          "losses": 41,
+          "elo": 1473.2095013179542
+        },
+        "FAM": {
+          "goalsScored": 144,
+          "goalsConceded": 173,
+          "matchesPlayed": 98,
+          "wins": 27,
+          "draws": 26,
+          "losses": 45,
+          "elo": 1446.5494715290695
+        },
+        "NAC": {
+          "goalsScored": 154,
+          "goalsConceded": 194,
+          "matchesPlayed": 98,
+          "wins": 38,
+          "draws": 19,
+          "losses": 41,
+          "elo": 1454.2110199625047
+        },
+        "POR": {
+          "goalsScored": 199,
+          "goalsConceded": 120,
+          "matchesPlayed": 98,
+          "wins": 56,
+          "draws": 24,
+          "losses": 18,
+          "elo": 1669.100845746168
+        },
+        "RIO": {
+          "goalsScored": 175,
+          "goalsConceded": 180,
+          "matchesPlayed": 98,
+          "wins": 36,
+          "draws": 23,
+          "losses": 39,
+          "elo": 1490.9000746966694
+        },
+        "ARO": {
+          "goalsScored": 126,
+          "goalsConceded": 139,
+          "matchesPlayed": 98,
+          "wins": 33,
+          "draws": 25,
+          "losses": 40,
+          "elo": 1471.7216889730319
+        },
+        "SPO": {
+          "goalsScored": 235,
+          "goalsConceded": 119,
+          "matchesPlayed": 98,
+          "wins": 60,
+          "draws": 14,
+          "losses": 24,
+          "elo": 1624.9704653356835
+        },
+        "ALV": {
+          "goalsScored": 126,
+          "goalsConceded": 179,
+          "matchesPlayed": 98,
+          "wins": 21,
+          "draws": 26,
+          "losses": 51,
+          "elo": 1339.8508738684964
+        }
+      }
+    }
+  },
+  "lastUpdated": "2026-05-13T09:30:45.714Z"
+}

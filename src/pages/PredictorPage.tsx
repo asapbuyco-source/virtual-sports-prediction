@@ -1,8 +1,4 @@
-import { useState, useMemo } from "react";
-import { useAppStore } from "@/store/useAppStore";
-import { ALL_LEAGUES } from "@/data/teamsData";
-import { predict } from "@/features/predictor/engine/predictor";
-import type { FormEntry, MatchPrediction } from "@/features/predictor/engine/predictor";
+import { DataService } from "@/lib/predictor/DataService";
 import { PredictionSkeleton } from "@/components/skeleton/PredictionSkeleton";
 import { Tag } from "@/components/ui/Tag";
 import { useSavePrediction } from "@/features/history/usePredictionHistory";
@@ -89,7 +85,8 @@ export default function PredictorPage() {
 
   const { mutate: savePrediction, isPending: isSaving } = useSavePrediction();
 
-  const leagueTeams = useMemo(() => ALL_LEAGUES.find(l => l.id === predictor.selectedLeague)?.teams ?? ALL_LEAGUES[0].teams, [predictor.selectedLeague]);
+  const leagues = useMemo(() => DataService.getLeagues(), []);
+  const leagueTeams = useMemo(() => DataService.getTeams(predictor.selectedLeague), [predictor.selectedLeague]);
   const homeTeam = useMemo(() => leagueTeams.find(t => t.id === predictor.homeTeamId) ?? leagueTeams[0], [leagueTeams, predictor.homeTeamId]);
   const awayTeam = useMemo(() => leagueTeams.find(t => t.id === predictor.awayTeamId) ?? leagueTeams[1], [leagueTeams, predictor.awayTeamId]);
 
@@ -140,15 +137,53 @@ export default function PredictorPage() {
       <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
         {/* Setup Panel */}
         <div className="lg:col-span-2 space-y-4">
+          <div className="bg-green-500/10 border border-green-500/20 rounded-2xl p-4 flex items-center justify-between">
+            <div>
+              <h2 className="text-sm font-bold text-green-400">Live Session Sync</h2>
+              <p className="text-[10px] text-gray-500">Last updated: {new Date().toLocaleTimeString()}</p>
+            </div>
+            <button onClick={() => window.location.reload()} className="p-2 rounded-lg bg-green-600/20 text-green-400 hover:bg-green-600/30 transition">
+              🔄 Refresh
+            </button>
+          </div>
+
+          <div className="bg-[#111118] border border-white/[0.06] rounded-2xl p-4 space-y-3">
+             <h2 className="text-sm font-bold text-green-400 uppercase tracking-widest">🚀 Upcoming Matches</h2>
+             <div className="space-y-2 max-h-[200px] overflow-y-auto pr-1 custom-scrollbar">
+                {DataService.getLiveMatches().map((m: any, i: number) => (
+                  <button key={i} onClick={() => {
+                      const [h, a] = m.teams.split('-').map((s: string) => s.trim());
+                      const hTeam = leagueTeams.find(t => t.shortName === h || t.id === h);
+                      const aTeam = leagueTeams.find(t => t.shortName === a || t.id === a);
+                      if (hTeam && aTeam) {
+                        updatePredictor({ homeTeamId: hTeam.id, awayTeamId: aTeam.id, oddsHome: m.odds.home, oddsX: m.odds.draw, oddsAway: m.odds.away });
+                      }
+                  }} className="w-full bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.06] rounded-xl p-3 flex justify-between items-center transition group">
+                    <div className="text-left">
+                      <p className="text-xs font-bold text-white group-hover:text-green-400 transition">{m.teams}</p>
+                      <p className="text-[10px] text-gray-500">Odds: {m.odds.home} | {m.odds.draw} | {m.odds.away}</p>
+                    </div>
+                    <span className="text-xs text-green-500 font-bold opacity-0 group-hover:opacity-100 transition">PREDICT →</span>
+                  </button>
+                ))}
+                {DataService.getLiveMatches().length === 0 && (
+                  <p className="text-xs text-gray-500 text-center py-4 italic">No live matches synced. Run 'node scripts/fetch_live_odds.js' to sync.</p>
+                )}
+             </div>
+          </div>
 <div className="bg-[#111118] border border-white/[0.06] rounded-2xl p-4 space-y-3">
              <h2 className="text-sm font-bold text-green-400 uppercase tracking-widest">🏟️ Select League</h2>
 <div className="grid grid-cols-3 gap-2">
-               {ALL_LEAGUES.map(l => (
-                 <button key={l.id} onClick={() => { updatePredictor({ selectedLeague: l.id, homeTeamId: l.teams[0].id, awayTeamId: l.teams[1].id }); setResult(null); }}
+               {leagues.map(l => (
+                 <button key={l.id} onClick={() => { 
+                    const teams = DataService.getTeams(l.id);
+                    updatePredictor({ selectedLeague: l.id, homeTeamId: teams[0].id, awayTeamId: teams[1].id }); 
+                    setResult(null); 
+                  }}
                    className={`py-2 px-2 rounded-lg text-xs font-bold transition ${predictor.selectedLeague === l.id ? "bg-green-600 text-white shadow-lg shadow-green-500/20" : "bg-white/[0.04] text-gray-400 hover:bg-white/[0.08] border border-white/[0.06]"}`}>
                    {l.name}
                  </button>
-              ))}
+               ))}
             </div>
           </div>
 
@@ -156,22 +191,22 @@ export default function PredictorPage() {
              <h2 className="text-sm font-bold text-green-400 uppercase tracking-widest">🆚 Match Setup</h2>
             <div className="space-y-1">
               <label className="text-xs text-gray-400 uppercase tracking-wider">🏠 Home Team</label>
-              <select value={predictor.homeTeamId} onChange={e => { updatePredictor({ homeTeamId: e.target.value }); setResult(null); }}
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-green-500/50">
-                {leagueTeams.map(t => <option key={t.id} value={t.id}>{t.emoji} {t.name}</option>)}
+<select value={predictor.homeTeamId} onChange={e => { updatePredictor({ homeTeamId: e.target.value }); setResult(null); }}
+                 className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-green-500/50 [&>option]:bg-[#1a1a24] [&>option]:text-white">
+                 {leagueTeams.map(t => <option key={t.id} value={t.id}>{t.emoji} {t.name} ({t.shortName})</option>)}
               </select>
             </div>
             <button onClick={() => { updatePredictor({ homeTeamId: predictor.awayTeamId, awayTeamId: predictor.homeTeamId }); setResult(null); }}
               className="w-full bg-white/[0.04] hover:bg-white/[0.06] rounded-lg text-gray-400 text-xs transition">⇅ Swap Teams</button>
             <div className="space-y-1">
               <label className="text-xs text-gray-400 uppercase tracking-wider">✈️ Away Team</label>
-              <select value={predictor.awayTeamId} onChange={e => { updatePredictor({ awayTeamId: e.target.value }); setResult(null); }}
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-green-500/50">
-                {leagueTeams.filter(t => t.id !== predictor.homeTeamId).map(t => <option key={t.id} value={t.id}>{t.emoji} {t.name}</option>)}
+<select value={predictor.awayTeamId} onChange={e => { updatePredictor({ awayTeamId: e.target.value }); setResult(null); }}
+                 className="w-full bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2.5 text-sm text-white focus:outline-none focus:border-green-500/50 [&>option]:bg-[#1a1a24] [&>option]:text-white">
+                 {leagueTeams.filter(t => t.id !== predictor.homeTeamId).map(t => <option key={t.id} value={t.id}>{t.emoji} {t.name} ({t.shortName})</option>)}
               </select>
             </div>
             <div className="space-y-1">
-              <label className="text-xs text-gray-400 uppercase tracking-wider">🗓️ Matchday: <span className="text-white font-bold">{predictor.matchdayPos}</span></label>
+              <label className="text-xs text-gray-400 uppercase tracking-wider">📍 Match Position: <span className="text-white font-bold">{predictor.matchdayPos}</span></label>
               <input type="range" min={1} max={10} value={predictor.matchdayPos} onChange={e => updatePredictor({ matchdayPos: parseInt(e.target.value) })} className="w-full accent-green-500" />
             </div>
           </div>
@@ -251,10 +286,18 @@ export default function PredictorPage() {
                     <div className="h-3 rounded-full transition-all duration-1000" style={{ width: `${result.confidence}%`, background: `linear-gradient(90deg, ${confidenceColor(result.confidence)}, #86efac)` }} />
                   </div>
                 </div>
-                <div className="mt-3 flex gap-2">
-                  <button onClick={handleSave} disabled={isSaving || !result} className={`px-4 py-2 rounded-lg text-xs font-bold text-white ${isSaving ? "opacity-50" : "bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08]"}`}>
-                    {isSaving ? "💾 Saving..." : "💾 Save"}
-                  </button>
+                <div className="mt-3 flex items-center justify-between">
+                  <div className="flex gap-2">
+                    <button onClick={handleSave} disabled={isSaving || !result} className={`px-4 py-2 rounded-lg text-xs font-bold text-white ${isSaving ? "opacity-50" : "bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08]"}`}>
+                      {isSaving ? "💾 Saving..." : "💾 Save"}
+                    </button>
+                  </div>
+                  {result.recommendedStake && (
+                    <div className="flex flex-col items-end">
+                      <span className="text-[10px] text-gray-500 uppercase">Suggested Stake</span>
+                      <span className="text-sm font-black text-green-400">{result.recommendedStake}% of Bankroll</span>
+                    </div>
+                  )}
                 </div>
               </div>
 

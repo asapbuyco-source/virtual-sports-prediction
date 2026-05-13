@@ -36,7 +36,7 @@ const { user } = useAppStore();
         <select
           value={leagueFilter}
           onChange={e => setLeagueFilter(e.target.value)}
-          className="bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-green-500/50"
+          className="bg-white/[0.04] border border-white/[0.08] rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-green-500/50 [&>option]:bg-[#1a1a24] [&>option]:text-white"
         >
           <option value="all">All Leagues</option>
           <option value="EPL">EPL</option>
