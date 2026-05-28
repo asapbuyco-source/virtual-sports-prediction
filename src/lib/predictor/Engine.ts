@@ -111,8 +111,11 @@ export class PredictorEngine {
 
         // 5. Calculate Confidence & Stake
         // Confidence is based on how strongly the model favors the most likely outcome
-        const maxProb = Math.max(homeWinProb, drawProb, awayWinProb, over25Prob, 1 - over25Prob);
-        const confidence = Math.round(maxProb * 100);
+        const sorted = [homeWinProb, drawProb, awayWinProb].sort((a, b) => b - a);
+        const separation = sorted[0] - sorted[1];
+        const over25Signal = Math.abs(over25Prob - 0.5);
+        const rawConf = 50 + (separation * 100) + (over25Signal * 30);
+        const confidence = Math.round(Math.min(92, Math.max(45, rawConf)));
 
         // Stake suggestion (Conservative for High Win Rate)
         // We use a modified Kelly Criterion or flat stake based on confidence

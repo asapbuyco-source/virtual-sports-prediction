@@ -1,7 +1,11 @@
+import { useState, useMemo } from "react";
+import { useAppStore } from "@/store/useAppStore";
 import { DataService } from "@/lib/predictor/DataService";
 import { PredictionSkeleton } from "@/components/skeleton/PredictionSkeleton";
 import { Tag } from "@/components/ui/Tag";
 import { useSavePrediction } from "@/features/history/usePredictionHistory";
+import { predict } from "@/features/predictor/engine/predictor";
+import type { FormEntry, MatchPrediction } from "@/features/predictor/engine/predictor";
 import toast from "react-hot-toast";
 import { PLAN_LIMITS } from "@/utils/constants";
 

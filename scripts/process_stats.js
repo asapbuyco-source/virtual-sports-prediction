@@ -8,10 +8,9 @@ async function processStats() {
         const rawData = await fs.readFile(dataPath, 'utf8');
         const history = JSON.parse(rawData);
 
-        const stats = {}; // { leagueName: { teamName: { goalsScored, goalsConceded, matchesPlayed, elo } } }
-        const leagueAverages = {}; // { leagueName: { avgGoals } }
+        const stats = {};
+        const leagueAverages = {};
 
-        // Initial Elo Rating
         const INITIAL_ELO = 1500;
         const K_FACTOR = 32;
 
@@ -23,11 +22,10 @@ async function processStats() {
             day.matches.forEach(match => {
                 const [homeTeam, awayTeam] = match.teams.split('-').map(t => t.trim());
                 const scores = match.score.split('-').map(s => parseInt(s.trim()));
-                
+
                 if (isNaN(scores[0]) || isNaN(scores[1])) return;
                 const [homeScore, awayScore] = scores;
 
-                // Initialize teams if not exists
                 [homeTeam, awayTeam].forEach(team => {
                     if (!stats[league][team]) {
                         stats[league][team] = {
@@ -37,19 +35,30 @@ async function processStats() {
                             wins: 0,
                             draws: 0,
                             losses: 0,
-                            elo: INITIAL_ELO
+                            elo: INITIAL_ELO,
+                            homeGoalsScored: 0,
+                            homeGoalsConceded: 0,
+                            homeMatchesPlayed: 0,
+                            awayGoalsScored: 0,
+                            awayGoalsConceded: 0,
+                            awayMatchesPlayed: 0,
                         };
                     }
                 });
 
-                // Update basic stats
                 stats[league][homeTeam].goalsScored += homeScore;
                 stats[league][homeTeam].goalsConceded += awayScore;
                 stats[league][homeTeam].matchesPlayed += 1;
+                stats[league][homeTeam].homeGoalsScored += homeScore;
+                stats[league][homeTeam].homeGoalsConceded += awayScore;
+                stats[league][homeTeam].homeMatchesPlayed += 1;
 
                 stats[league][awayTeam].goalsScored += awayScore;
                 stats[league][awayTeam].goalsConceded += homeScore;
                 stats[league][awayTeam].matchesPlayed += 1;
+                stats[league][awayTeam].awayGoalsScored += awayScore;
+                stats[league][awayTeam].awayGoalsConceded += homeScore;
+                stats[league][awayTeam].awayMatchesPlayed += 1;
 
                 if (homeScore > awayScore) {
                     stats[league][homeTeam].wins++;
@@ -65,7 +74,6 @@ async function processStats() {
                 leagueAverages[league].totalGoals += (homeScore + awayScore);
                 leagueAverages[league].totalMatches += 1;
 
-                // Update Elo
                 const expectedHome = 1 / (1 + Math.pow(10, (stats[league][awayTeam].elo - stats[league][homeTeam].elo) / 400));
                 const expectedAway = 1 - expectedHome;
 
@@ -78,7 +86,6 @@ async function processStats() {
             });
         });
 
-        // Calculate final averages
         const result = {
             leagues: {},
             lastUpdated: new Date().toISOString()

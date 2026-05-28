@@ -10,7 +10,13 @@
           "wins": 49,
           "draws": 20,
           "losses": 33,
-          "elo": 1601.4484664828576
+          "elo": 1601.4484664828576,
+          "homeGoalsScored": 110,
+          "homeGoalsConceded": 65,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 72,
+          "awayGoalsConceded": 89,
+          "awayMatchesPlayed": 52
         },
         "LIV": {
           "goalsScored": 198,
@@ -19,7 +25,13 @@
           "wins": 46,
           "draws": 26,
           "losses": 30,
-          "elo": 1567.5970274993908
+          "elo": 1567.5970274993908,
+          "homeGoalsScored": 109,
+          "homeGoalsConceded": 60,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 89,
+          "awayGoalsConceded": 82,
+          "awayMatchesPlayed": 52
         },
         "BOU": {
           "goalsScored": 142,
@@ -28,7 +40,13 @@
           "wins": 35,
           "draws": 27,
           "losses": 40,
-          "elo": 1499.7661445744955
+          "elo": 1499.7661445744955,
+          "homeGoalsScored": 76,
+          "homeGoalsConceded": 56,
+          "homeMatchesPlayed": 48,
+          "awayGoalsScored": 66,
+          "awayGoalsConceded": 90,
+          "awayMatchesPlayed": 54
         },
         "SUN": {
           "goalsScored": 128,
@@ -37,7 +55,13 @@
           "wins": 35,
           "draws": 17,
           "losses": 50,
-          "elo": 1434.1595462305752
+          "elo": 1434.1595462305752,
+          "homeGoalsScored": 67,
+          "homeGoalsConceded": 71,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 61,
+          "awayGoalsConceded": 98,
+          "awayMatchesPlayed": 52
         },
         "BUR": {
           "goalsScored": 153,
@@ -46,7 +70,13 @@
           "wins": 32,
           "draws": 17,
           "losses": 53,
-          "elo": 1428.9466155674525
+          "elo": 1428.9466155674525,
+          "homeGoalsScored": 94,
+          "homeGoalsConceded": 95,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 59,
+          "awayGoalsConceded": 103,
+          "awayMatchesPlayed": 50
         },
         "CHE": {
           "goalsScored": 187,
@@ -55,7 +85,13 @@
           "wins": 35,
           "draws": 30,
           "losses": 37,
-          "elo": 1493.4245801111094
+          "elo": 1493.4245801111094,
+          "homeGoalsScored": 90,
+          "homeGoalsConceded": 76,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 97,
+          "awayGoalsConceded": 103,
+          "awayMatchesPlayed": 50
         },
         "EVE": {
           "goalsScored": 139,
@@ -64,7 +100,13 @@
           "wins": 40,
           "draws": 27,
           "losses": 35,
-          "elo": 1540.843671776918
+          "elo": 1540.843671776918,
+          "homeGoalsScored": 80,
+          "homeGoalsConceded": 61,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 59,
+          "awayGoalsConceded": 89,
+          "awayMatchesPlayed": 51
         },
         "MUN": {
           "goalsScored": 168,
@@ -73,7 +115,13 @@
           "wins": 40,
           "draws": 22,
           "losses": 40,
-          "elo": 1483.5292192997674
+          "elo": 1483.5292192997674,
+          "homeGoalsScored": 95,
+          "homeGoalsConceded": 67,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 73,
+          "awayGoalsConceded": 98,
+          "awayMatchesPlayed": 52
         },
         "FUL": {
           "goalsScored": 138,
@@ -82,7 +130,13 @@
           "wins": 32,
           "draws": 28,
           "losses": 42,
-          "elo": 1433.5320569219398
+          "elo": 1433.5320569219398,
+          "homeGoalsScored": 79,
+          "homeGoalsConceded": 67,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 59,
+          "awayGoalsConceded": 109,
+          "awayMatchesPlayed": 52
         },
         "AST": {
           "goalsScored": 182,
@@ -91,7 +145,13 @@
           "wins": 46,
           "draws": 26,
           "losses": 30,
-          "elo": 1589.8354150908683
+          "elo": 1589.8354150908683,
+          "homeGoalsScored": 104,
+          "homeGoalsConceded": 62,
+          "homeMatchesPlayed": 54,
+          "awayGoalsScored": 78,
+          "awayGoalsConceded": 69,
+          "awayMatchesPlayed": 48
         },
         "MCI": {
           "goalsScored": 197,
@@ -100,7 +160,13 @@
           "wins": 44,
           "draws": 18,
           "losses": 40,
-          "elo": 1520.0188600531674
+          "elo": 1520.0188600531674,
+          "homeGoalsScored": 117,
+          "homeGoalsConceded": 71,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 80,
+          "awayGoalsConceded": 88,
+          "awayMatchesPlayed": 52
         },
         "BRE": {
           "goalsScored": 120,
@@ -109,7 +175,13 @@
           "wins": 30,
           "draws": 30,
           "losses": 42,
-          "elo": 1412.2300267047358
+          "elo": 1412.2300267047358,
+          "homeGoalsScored": 57,
+          "homeGoalsConceded": 75,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 78,
+          "awayMatchesPlayed": 50
         },
         "NEW": {
           "goalsScored": 181,
@@ -118,7 +190,13 @@
           "wins": 36,
           "draws": 31,
           "losses": 35,
-          "elo": 1499.699655937578
+          "elo": 1499.699655937578,
+          "homeGoalsScored": 102,
+          "homeGoalsConceded": 79,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 79,
+          "awayGoalsConceded": 88,
+          "awayMatchesPlayed": 50
         },
         "WOL": {
           "goalsScored": 125,
@@ -127,7 +205,13 @@
           "wins": 25,
           "draws": 21,
           "losses": 56,
-          "elo": 1392.0355314043427
+          "elo": 1392.0355314043427,
+          "homeGoalsScored": 70,
+          "homeGoalsConceded": 103,
+          "homeMatchesPlayed": 53,
+          "awayGoalsScored": 55,
+          "awayGoalsConceded": 97,
+          "awayMatchesPlayed": 49
         },
         "NOT": {
           "goalsScored": 194,
@@ -136,7 +220,13 @@
           "wins": 39,
           "draws": 23,
           "losses": 40,
-          "elo": 1470.4660081870927
+          "elo": 1470.4660081870927,
+          "homeGoalsScored": 104,
+          "homeGoalsConceded": 95,
+          "homeMatchesPlayed": 54,
+          "awayGoalsScored": 90,
+          "awayGoalsConceded": 100,
+          "awayMatchesPlayed": 48
         },
         "CRY": {
           "goalsScored": 152,
@@ -145,7 +235,13 @@
           "wins": 39,
           "draws": 27,
           "losses": 36,
-          "elo": 1500.3485758123713
+          "elo": 1500.3485758123713,
+          "homeGoalsScored": 97,
+          "homeGoalsConceded": 75,
+          "homeMatchesPlayed": 53,
+          "awayGoalsScored": 55,
+          "awayGoalsConceded": 77,
+          "awayMatchesPlayed": 49
         },
         "TOT": {
           "goalsScored": 189,
@@ -154,7 +250,13 @@
           "wins": 47,
           "draws": 25,
           "losses": 30,
-          "elo": 1568.2426714078863
+          "elo": 1568.2426714078863,
+          "homeGoalsScored": 111,
+          "homeGoalsConceded": 62,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 78,
+          "awayGoalsConceded": 91,
+          "awayMatchesPlayed": 51
         },
         "ARS": {
           "goalsScored": 188,
@@ -163,7 +265,13 @@
           "wins": 54,
           "draws": 27,
           "losses": 21,
-          "elo": 1592.7388286892958
+          "elo": 1592.7388286892958,
+          "homeGoalsScored": 105,
+          "homeGoalsConceded": 50,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 83,
+          "awayGoalsConceded": 58,
+          "awayMatchesPlayed": 53
         },
         "WHU": {
           "goalsScored": 156,
@@ -172,7 +280,13 @@
           "wins": 38,
           "draws": 22,
           "losses": 42,
-          "elo": 1468.838570024086
+          "elo": 1468.838570024086,
+          "homeGoalsScored": 80,
+          "homeGoalsConceded": 76,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 76,
+          "awayGoalsConceded": 113,
+          "awayMatchesPlayed": 52
         },
         "LEE": {
           "goalsScored": 134,
@@ -181,7 +295,13 @@
           "wins": 33,
           "draws": 26,
           "losses": 43,
-          "elo": 1502.2985282240693
+          "elo": 1502.2985282240693,
+          "homeGoalsScored": 77,
+          "homeGoalsConceded": 63,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 57,
+          "awayGoalsConceded": 104,
+          "awayMatchesPlayed": 53
         }
       }
     },
@@ -195,7 +315,13 @@
           "wins": 66,
           "draws": 22,
           "losses": 14,
-          "elo": 1716.1363635936643
+          "elo": 1716.1363635936643,
+          "homeGoalsScored": 112,
+          "homeGoalsConceded": 35,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 95,
+          "awayGoalsConceded": 56,
+          "awayMatchesPlayed": 51
         },
         "GIR": {
           "goalsScored": 164,
@@ -204,7 +330,13 @@
           "wins": 33,
           "draws": 26,
           "losses": 43,
-          "elo": 1450.1332936072336
+          "elo": 1450.1332936072336,
+          "homeGoalsScored": 87,
+          "homeGoalsConceded": 65,
+          "homeMatchesPlayed": 47,
+          "awayGoalsScored": 77,
+          "awayGoalsConceded": 110,
+          "awayMatchesPlayed": 55
         },
         "BAR": {
           "goalsScored": 198,
@@ -213,7 +345,13 @@
           "wins": 57,
           "draws": 19,
           "losses": 26,
-          "elo": 1609.9565719931622
+          "elo": 1609.9565719931622,
+          "homeGoalsScored": 103,
+          "homeGoalsConceded": 45,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 95,
+          "awayGoalsConceded": 62,
+          "awayMatchesPlayed": 53
         },
         "OSA": {
           "goalsScored": 136,
@@ -222,7 +360,13 @@
           "wins": 25,
           "draws": 25,
           "losses": 52,
-          "elo": 1416.024496672039
+          "elo": 1416.024496672039,
+          "homeGoalsScored": 83,
+          "homeGoalsConceded": 76,
+          "homeMatchesPlayed": 48,
+          "awayGoalsScored": 53,
+          "awayGoalsConceded": 111,
+          "awayMatchesPlayed": 54
         },
         "BET": {
           "goalsScored": 142,
@@ -231,7 +375,13 @@
           "wins": 43,
           "draws": 22,
           "losses": 37,
-          "elo": 1490.6238595803957
+          "elo": 1490.6238595803957,
+          "homeGoalsScored": 87,
+          "homeGoalsConceded": 57,
+          "homeMatchesPlayed": 53,
+          "awayGoalsScored": 55,
+          "awayGoalsConceded": 88,
+          "awayMatchesPlayed": 49
         },
         "OVI": {
           "goalsScored": 113,
@@ -240,7 +390,13 @@
           "wins": 28,
           "draws": 20,
           "losses": 54,
-          "elo": 1378.1913622532745
+          "elo": 1378.1913622532745,
+          "homeGoalsScored": 82,
+          "homeGoalsConceded": 81,
+          "homeMatchesPlayed": 53,
+          "awayGoalsScored": 31,
+          "awayGoalsConceded": 96,
+          "awayMatchesPlayed": 49
         },
         "ELC": {
           "goalsScored": 152,
@@ -249,7 +405,13 @@
           "wins": 34,
           "draws": 24,
           "losses": 44,
-          "elo": 1502.4711460225571
+          "elo": 1502.4711460225571,
+          "homeGoalsScored": 95,
+          "homeGoalsConceded": 69,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 57,
+          "awayGoalsConceded": 112,
+          "awayMatchesPlayed": 50
         },
         "CEL": {
           "goalsScored": 134,
@@ -258,7 +420,13 @@
           "wins": 35,
           "draws": 22,
           "losses": 45,
-          "elo": 1518.9868991822395
+          "elo": 1518.9868991822395,
+          "homeGoalsScored": 80,
+          "homeGoalsConceded": 75,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 54,
+          "awayGoalsConceded": 90,
+          "awayMatchesPlayed": 50
         },
         "ESP": {
           "goalsScored": 157,
@@ -267,7 +435,13 @@
           "wins": 32,
           "draws": 26,
           "losses": 44,
-          "elo": 1432.3143023073665
+          "elo": 1432.3143023073665,
+          "homeGoalsScored": 95,
+          "homeGoalsConceded": 92,
+          "homeMatchesPlayed": 53,
+          "awayGoalsScored": 62,
+          "awayGoalsConceded": 95,
+          "awayMatchesPlayed": 49
         },
         "VAL": {
           "goalsScored": 130,
@@ -276,7 +450,13 @@
           "wins": 33,
           "draws": 20,
           "losses": 49,
-          "elo": 1438.8552498966164
+          "elo": 1438.8552498966164,
+          "homeGoalsScored": 68,
+          "homeGoalsConceded": 70,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 62,
+          "awayGoalsConceded": 98,
+          "awayMatchesPlayed": 52
         },
         "GET": {
           "goalsScored": 110,
@@ -285,7 +465,13 @@
           "wins": 27,
           "draws": 40,
           "losses": 35,
-          "elo": 1526.4999890893525
+          "elo": 1526.4999890893525,
+          "homeGoalsScored": 65,
+          "homeGoalsConceded": 53,
+          "homeMatchesPlayed": 53,
+          "awayGoalsScored": 45,
+          "awayGoalsConceded": 74,
+          "awayMatchesPlayed": 49
         },
         "RMA": {
           "goalsScored": 187,
@@ -294,7 +480,13 @@
           "wins": 63,
           "draws": 21,
           "losses": 18,
-          "elo": 1592.9607514278437
+          "elo": 1592.9607514278437,
+          "homeGoalsScored": 110,
+          "homeGoalsConceded": 33,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 77,
+          "awayGoalsConceded": 50,
+          "awayMatchesPlayed": 51
         },
         "LEV": {
           "goalsScored": 151,
@@ -303,7 +495,13 @@
           "wins": 34,
           "draws": 26,
           "losses": 42,
-          "elo": 1487.6172873694425
+          "elo": 1487.6172873694425,
+          "homeGoalsScored": 100,
+          "homeGoalsConceded": 74,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 51,
+          "awayGoalsConceded": 81,
+          "awayMatchesPlayed": 50
         },
         "MAL": {
           "goalsScored": 107,
@@ -312,7 +510,13 @@
           "wins": 27,
           "draws": 29,
           "losses": 46,
-          "elo": 1448.3594353429703
+          "elo": 1448.3594353429703,
+          "homeGoalsScored": 64,
+          "homeGoalsConceded": 57,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 43,
+          "awayGoalsConceded": 91,
+          "awayMatchesPlayed": 50
         },
         "RAY": {
           "goalsScored": 151,
@@ -321,7 +525,13 @@
           "wins": 40,
           "draws": 22,
           "losses": 40,
-          "elo": 1454.2957500104735
+          "elo": 1454.2957500104735,
+          "homeGoalsScored": 82,
+          "homeGoalsConceded": 59,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 69,
+          "awayGoalsConceded": 101,
+          "awayMatchesPlayed": 52
         },
         "VIL": {
           "goalsScored": 178,
@@ -330,7 +540,13 @@
           "wins": 49,
           "draws": 21,
           "losses": 32,
-          "elo": 1501.7956904339699
+          "elo": 1501.7956904339699,
+          "homeGoalsScored": 112,
+          "homeGoalsConceded": 55,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 66,
+          "awayGoalsConceded": 85,
+          "awayMatchesPlayed": 50
         },
         "RSO": {
           "goalsScored": 147,
@@ -339,7 +555,13 @@
           "wins": 37,
           "draws": 27,
           "losses": 38,
-          "elo": 1516.0864413250974
+          "elo": 1516.0864413250974,
+          "homeGoalsScored": 87,
+          "homeGoalsConceded": 64,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 60,
+          "awayGoalsConceded": 92,
+          "awayMatchesPlayed": 53
         },
         "ALA": {
           "goalsScored": 117,
@@ -348,7 +570,13 @@
           "wins": 26,
           "draws": 26,
           "losses": 50,
-          "elo": 1354.4460191981163
+          "elo": 1354.4460191981163,
+          "homeGoalsScored": 59,
+          "homeGoalsConceded": 66,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 58,
+          "awayGoalsConceded": 98,
+          "awayMatchesPlayed": 50
         },
         "SEV": {
           "goalsScored": 167,
@@ -357,7 +585,13 @@
           "wins": 39,
           "draws": 19,
           "losses": 44,
-          "elo": 1549.2222771064853
+          "elo": 1549.2222771064853,
+          "homeGoalsScored": 107,
+          "homeGoalsConceded": 82,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 60,
+          "awayGoalsConceded": 91,
+          "awayMatchesPlayed": 50
         },
         "ATH": {
           "goalsScored": 160,
@@ -366,7 +600,13 @@
           "wins": 50,
           "draws": 27,
           "losses": 25,
-          "elo": 1615.0228135876987
+          "elo": 1615.0228135876987,
+          "homeGoalsScored": 82,
+          "homeGoalsConceded": 40,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 78,
+          "awayGoalsConceded": 79,
+          "awayMatchesPlayed": 53
         }
       }
     },
@@ -380,7 +620,13 @@
           "wins": 29,
           "draws": 21,
           "losses": 52,
-          "elo": 1451.7268687400822
+          "elo": 1451.7268687400822,
+          "homeGoalsScored": 61,
+          "homeGoalsConceded": 92,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 70,
+          "awayGoalsConceded": 103,
+          "awayMatchesPlayed": 51
         },
         "TOR": {
           "goalsScored": 150,
@@ -389,7 +635,13 @@
           "wins": 30,
           "draws": 19,
           "losses": 53,
-          "elo": 1410.9530750169406
+          "elo": 1410.9530750169406,
+          "homeGoalsScored": 84,
+          "homeGoalsConceded": 103,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 66,
+          "awayGoalsConceded": 87,
+          "awayMatchesPlayed": 50
         },
         "CRE": {
           "goalsScored": 144,
@@ -398,7 +650,13 @@
           "wins": 33,
           "draws": 25,
           "losses": 44,
-          "elo": 1454.7796803777064
+          "elo": 1454.7796803777064,
+          "homeGoalsScored": 73,
+          "homeGoalsConceded": 79,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 71,
+          "awayGoalsConceded": 79,
+          "awayMatchesPlayed": 52
         },
         "UDI": {
           "goalsScored": 139,
@@ -407,7 +665,13 @@
           "wins": 39,
           "draws": 27,
           "losses": 36,
-          "elo": 1455.754759262276
+          "elo": 1455.754759262276,
+          "homeGoalsScored": 86,
+          "homeGoalsConceded": 58,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 53,
+          "awayGoalsConceded": 83,
+          "awayMatchesPlayed": 51
         },
         "FIO": {
           "goalsScored": 160,
@@ -416,7 +680,13 @@
           "wins": 45,
           "draws": 24,
           "losses": 33,
-          "elo": 1548.0024367209728
+          "elo": 1548.0024367209728,
+          "homeGoalsScored": 87,
+          "homeGoalsConceded": 59,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 73,
+          "awayGoalsConceded": 79,
+          "awayMatchesPlayed": 51
         },
         "ATA": {
           "goalsScored": 171,
@@ -425,7 +695,13 @@
           "wins": 48,
           "draws": 14,
           "losses": 40,
-          "elo": 1521.452329398738
+          "elo": 1521.452329398738,
+          "homeGoalsScored": 99,
+          "homeGoalsConceded": 63,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 72,
+          "awayGoalsConceded": 76,
+          "awayMatchesPlayed": 52
         },
         "INT": {
           "goalsScored": 185,
@@ -434,7 +710,13 @@
           "wins": 57,
           "draws": 29,
           "losses": 16,
-          "elo": 1640.8915429549786
+          "elo": 1640.8915429549786,
+          "homeGoalsScored": 108,
+          "homeGoalsConceded": 48,
+          "homeMatchesPlayed": 54,
+          "awayGoalsScored": 77,
+          "awayGoalsConceded": 46,
+          "awayMatchesPlayed": 48
         },
         "BOL": {
           "goalsScored": 165,
@@ -443,7 +725,13 @@
           "wins": 39,
           "draws": 20,
           "losses": 43,
-          "elo": 1486.3231455188131
+          "elo": 1486.3231455188131,
+          "homeGoalsScored": 90,
+          "homeGoalsConceded": 63,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 75,
+          "awayGoalsConceded": 91,
+          "awayMatchesPlayed": 52
         },
         "MIL": {
           "goalsScored": 176,
@@ -452,7 +740,13 @@
           "wins": 51,
           "draws": 25,
           "losses": 26,
-          "elo": 1637.664410496643
+          "elo": 1637.664410496643,
+          "homeGoalsScored": 103,
+          "homeGoalsConceded": 50,
+          "homeMatchesPlayed": 55,
+          "awayGoalsScored": 73,
+          "awayGoalsConceded": 70,
+          "awayMatchesPlayed": 47
         },
         "NAP": {
           "goalsScored": 186,
@@ -461,7 +755,13 @@
           "wins": 58,
           "draws": 17,
           "losses": 27,
-          "elo": 1648.9325186149156
+          "elo": 1648.9325186149156,
+          "homeGoalsScored": 98,
+          "homeGoalsConceded": 45,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 88,
+          "awayGoalsConceded": 70,
+          "awayMatchesPlayed": 53
         },
         "PAR": {
           "goalsScored": 150,
@@ -470,7 +770,13 @@
           "wins": 36,
           "draws": 31,
           "losses": 35,
-          "elo": 1496.1077654969672
+          "elo": 1496.1077654969672,
+          "homeGoalsScored": 87,
+          "homeGoalsConceded": 59,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 95,
+          "awayMatchesPlayed": 51
         },
         "JUV": {
           "goalsScored": 186,
@@ -479,7 +785,13 @@
           "wins": 52,
           "draws": 23,
           "losses": 27,
-          "elo": 1544.4426240606695
+          "elo": 1544.4426240606695,
+          "homeGoalsScored": 86,
+          "homeGoalsConceded": 60,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 100,
+          "awayGoalsConceded": 72,
+          "awayMatchesPlayed": 51
         },
         "PIS": {
           "goalsScored": 124,
@@ -488,7 +800,13 @@
           "wins": 20,
           "draws": 18,
           "losses": 64,
-          "elo": 1367.8501851464182
+          "elo": 1367.8501851464182,
+          "homeGoalsScored": 73,
+          "homeGoalsConceded": 105,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 51,
+          "awayGoalsConceded": 123,
+          "awayMatchesPlayed": 52
         },
         "GEN": {
           "goalsScored": 139,
@@ -497,7 +815,13 @@
           "wins": 32,
           "draws": 19,
           "losses": 51,
-          "elo": 1420.556924759985
+          "elo": 1420.556924759985,
+          "homeGoalsScored": 73,
+          "homeGoalsConceded": 73,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 66,
+          "awayGoalsConceded": 106,
+          "awayMatchesPlayed": 51
         },
         "ROM": {
           "goalsScored": 190,
@@ -506,7 +830,13 @@
           "wins": 54,
           "draws": 21,
           "losses": 27,
-          "elo": 1615.7398362221115
+          "elo": 1615.7398362221115,
+          "homeGoalsScored": 108,
+          "homeGoalsConceded": 63,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 82,
+          "awayGoalsConceded": 62,
+          "awayMatchesPlayed": 52
         },
         "LEC": {
           "goalsScored": 128,
@@ -515,7 +845,13 @@
           "wins": 25,
           "draws": 22,
           "losses": 55,
-          "elo": 1468.3664437636573
+          "elo": 1468.3664437636573,
+          "homeGoalsScored": 65,
+          "homeGoalsConceded": 85,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 132,
+          "awayMatchesPlayed": 53
         },
         "SAS": {
           "goalsScored": 151,
@@ -524,7 +860,13 @@
           "wins": 32,
           "draws": 21,
           "losses": 49,
-          "elo": 1449.0318162853084
+          "elo": 1449.0318162853084,
+          "homeGoalsScored": 94,
+          "homeGoalsConceded": 91,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 57,
+          "awayGoalsConceded": 107,
+          "awayMatchesPlayed": 51
         },
         "COM": {
           "goalsScored": 169,
@@ -533,7 +875,13 @@
           "wins": 45,
           "draws": 19,
           "losses": 38,
-          "elo": 1522.818442735886
+          "elo": 1522.818442735886,
+          "homeGoalsScored": 94,
+          "homeGoalsConceded": 71,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 75,
+          "awayGoalsConceded": 76,
+          "awayMatchesPlayed": 50
         },
         "VER": {
           "goalsScored": 135,
@@ -542,7 +890,13 @@
           "wins": 29,
           "draws": 24,
           "losses": 49,
-          "elo": 1389.9281406528319
+          "elo": 1389.9281406528319,
+          "homeGoalsScored": 76,
+          "homeGoalsConceded": 67,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 59,
+          "awayGoalsConceded": 105,
+          "awayMatchesPlayed": 52
         },
         "LAZ": {
           "goalsScored": 166,
@@ -551,7 +905,13 @@
           "wins": 44,
           "draws": 25,
           "losses": 33,
-          "elo": 1468.6770537740988
+          "elo": 1468.6770537740988,
+          "homeGoalsScored": 98,
+          "homeGoalsConceded": 68,
+          "homeMatchesPlayed": 52,
+          "awayGoalsScored": 68,
+          "awayGoalsConceded": 81,
+          "awayMatchesPlayed": 50
         }
       }
     },
@@ -565,7 +925,13 @@
           "wins": 29,
           "draws": 27,
           "losses": 46,
-          "elo": 1438.6159841396848
+          "elo": 1438.6159841396848,
+          "homeGoalsScored": 83,
+          "homeGoalsConceded": 87,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 65,
+          "awayGoalsConceded": 94,
+          "awayMatchesPlayed": 51
         },
         "HOF": {
           "goalsScored": 175,
@@ -574,7 +940,13 @@
           "wins": 40,
           "draws": 17,
           "losses": 45,
-          "elo": 1527.239088789707
+          "elo": 1527.239088789707,
+          "homeGoalsScored": 99,
+          "homeGoalsConceded": 86,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 76,
+          "awayGoalsConceded": 119,
+          "awayMatchesPlayed": 51
         },
         "EIN": {
           "goalsScored": 179,
@@ -583,7 +955,13 @@
           "wins": 45,
           "draws": 28,
           "losses": 29,
-          "elo": 1579.7400130486442
+          "elo": 1579.7400130486442,
+          "homeGoalsScored": 111,
+          "homeGoalsConceded": 63,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 68,
+          "awayGoalsConceded": 92,
+          "awayMatchesPlayed": 51
         },
         "DOR": {
           "goalsScored": 212,
@@ -592,7 +970,13 @@
           "wins": 55,
           "draws": 17,
           "losses": 30,
-          "elo": 1565.3125230972703
+          "elo": 1565.3125230972703,
+          "homeGoalsScored": 127,
+          "homeGoalsConceded": 63,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 85,
+          "awayGoalsConceded": 81,
+          "awayMatchesPlayed": 51
         },
         "FRE": {
           "goalsScored": 177,
@@ -601,7 +985,13 @@
           "wins": 37,
           "draws": 28,
           "losses": 37,
-          "elo": 1512.8699965879844
+          "elo": 1512.8699965879844,
+          "homeGoalsScored": 98,
+          "homeGoalsConceded": 65,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 79,
+          "awayGoalsConceded": 103,
+          "awayMatchesPlayed": 51
         },
         "AUG": {
           "goalsScored": 149,
@@ -610,7 +1000,13 @@
           "wins": 37,
           "draws": 22,
           "losses": 43,
-          "elo": 1476.7903938452464
+          "elo": 1476.7903938452464,
+          "homeGoalsScored": 86,
+          "homeGoalsConceded": 74,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 99,
+          "awayMatchesPlayed": 51
         },
         "LEV": {
           "goalsScored": 190,
@@ -619,7 +1015,13 @@
           "wins": 62,
           "draws": 17,
           "losses": 23,
-          "elo": 1699.5909219458003
+          "elo": 1699.5909219458003,
+          "homeGoalsScored": 106,
+          "homeGoalsConceded": 46,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 84,
+          "awayGoalsConceded": 61,
+          "awayMatchesPlayed": 51
         },
         "MON": {
           "goalsScored": 145,
@@ -628,7 +1030,13 @@
           "wins": 33,
           "draws": 33,
           "losses": 36,
-          "elo": 1456.1620223046266
+          "elo": 1456.1620223046266,
+          "homeGoalsScored": 79,
+          "homeGoalsConceded": 75,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 66,
+          "awayGoalsConceded": 82,
+          "awayMatchesPlayed": 51
         },
         "MAI": {
           "goalsScored": 155,
@@ -637,7 +1045,13 @@
           "wins": 35,
           "draws": 28,
           "losses": 39,
-          "elo": 1432.8288789975459
+          "elo": 1432.8288789975459,
+          "homeGoalsScored": 82,
+          "homeGoalsConceded": 82,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 73,
+          "awayGoalsConceded": 95,
+          "awayMatchesPlayed": 51
         },
         "HSV": {
           "goalsScored": 129,
@@ -646,7 +1060,13 @@
           "wins": 30,
           "draws": 28,
           "losses": 44,
-          "elo": 1439.7203363284946
+          "elo": 1439.7203363284946,
+          "homeGoalsScored": 77,
+          "homeGoalsConceded": 69,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 52,
+          "awayGoalsConceded": 91,
+          "awayMatchesPlayed": 51
         },
         "RBL": {
           "goalsScored": 192,
@@ -655,7 +1075,13 @@
           "wins": 52,
           "draws": 19,
           "losses": 31,
-          "elo": 1594.7504972327501
+          "elo": 1594.7504972327501,
+          "homeGoalsScored": 116,
+          "homeGoalsConceded": 58,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 76,
+          "awayGoalsConceded": 72,
+          "awayMatchesPlayed": 51
         },
         "WOL": {
           "goalsScored": 150,
@@ -664,7 +1090,13 @@
           "wins": 40,
           "draws": 24,
           "losses": 38,
-          "elo": 1515.6477279636972
+          "elo": 1515.6477279636972,
+          "homeGoalsScored": 87,
+          "homeGoalsConceded": 55,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 84,
+          "awayMatchesPlayed": 51
         },
         "STU": {
           "goalsScored": 170,
@@ -673,7 +1105,13 @@
           "wins": 40,
           "draws": 30,
           "losses": 32,
-          "elo": 1517.5487492250495
+          "elo": 1517.5487492250495,
+          "homeGoalsScored": 86,
+          "homeGoalsConceded": 76,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 84,
+          "awayGoalsConceded": 82,
+          "awayMatchesPlayed": 51
         },
         "STP": {
           "goalsScored": 147,
@@ -682,7 +1120,13 @@
           "wins": 27,
           "draws": 19,
           "losses": 56,
-          "elo": 1447.1054587440083
+          "elo": 1447.1054587440083,
+          "homeGoalsScored": 80,
+          "homeGoalsConceded": 85,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 67,
+          "awayGoalsConceded": 119,
+          "awayMatchesPlayed": 51
         },
         "UNI": {
           "goalsScored": 134,
@@ -691,7 +1135,13 @@
           "wins": 29,
           "draws": 25,
           "losses": 48,
-          "elo": 1436.1254644256132
+          "elo": 1436.1254644256132,
+          "homeGoalsScored": 78,
+          "homeGoalsConceded": 75,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 56,
+          "awayGoalsConceded": 101,
+          "awayMatchesPlayed": 51
         },
         "FCB": {
           "goalsScored": 208,
@@ -700,7 +1150,13 @@
           "wins": 51,
           "draws": 26,
           "losses": 25,
-          "elo": 1625.1856053864437
+          "elo": 1625.1856053864437,
+          "homeGoalsScored": 111,
+          "homeGoalsConceded": 66,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 97,
+          "awayGoalsConceded": 70,
+          "awayMatchesPlayed": 51
         },
         "WER": {
           "goalsScored": 137,
@@ -709,7 +1165,13 @@
           "wins": 30,
           "draws": 26,
           "losses": 46,
-          "elo": 1421.7434992613544
+          "elo": 1421.7434992613544,
+          "homeGoalsScored": 79,
+          "homeGoalsConceded": 72,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 58,
+          "awayGoalsConceded": 99,
+          "awayMatchesPlayed": 51
         },
         "HEI": {
           "goalsScored": 151,
@@ -718,7 +1180,13 @@
           "wins": 31,
           "draws": 16,
           "losses": 55,
-          "elo": 1313.0228386760793
+          "elo": 1313.0228386760793,
+          "homeGoalsScored": 83,
+          "homeGoalsConceded": 83,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 68,
+          "awayGoalsConceded": 124,
+          "awayMatchesPlayed": 51
         }
       }
     },
@@ -732,7 +1200,13 @@
           "wins": 34,
           "draws": 19,
           "losses": 49,
-          "elo": 1435.7404517537161
+          "elo": 1435.7404517537161,
+          "homeGoalsScored": 95,
+          "homeGoalsConceded": 77,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 57,
+          "awayGoalsConceded": 114,
+          "awayMatchesPlayed": 51
         },
         "PSG": {
           "goalsScored": 196,
@@ -741,7 +1215,13 @@
           "wins": 54,
           "draws": 22,
           "losses": 26,
-          "elo": 1598.6175190727827
+          "elo": 1598.6175190727827,
+          "homeGoalsScored": 116,
+          "homeGoalsConceded": 54,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 80,
+          "awayGoalsConceded": 78,
+          "awayMatchesPlayed": 51
         },
         "ASM": {
           "goalsScored": 216,
@@ -750,7 +1230,13 @@
           "wins": 60,
           "draws": 14,
           "losses": 28,
-          "elo": 1579.1820280023323
+          "elo": 1579.1820280023323,
+          "homeGoalsScored": 121,
+          "homeGoalsConceded": 51,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 95,
+          "awayGoalsConceded": 77,
+          "awayMatchesPlayed": 51
         },
         "BRE": {
           "goalsScored": 157,
@@ -759,7 +1245,13 @@
           "wins": 24,
           "draws": 17,
           "losses": 61,
-          "elo": 1363.0122527841545
+          "elo": 1363.0122527841545,
+          "homeGoalsScored": 85,
+          "homeGoalsConceded": 88,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 72,
+          "awayGoalsConceded": 127,
+          "awayMatchesPlayed": 51
         },
         "HAV": {
           "goalsScored": 130,
@@ -768,7 +1260,13 @@
           "wins": 28,
           "draws": 27,
           "losses": 47,
-          "elo": 1418.9643203425442
+          "elo": 1418.9643203425442,
+          "homeGoalsScored": 69,
+          "homeGoalsConceded": 94,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 61,
+          "awayGoalsConceded": 105,
+          "awayMatchesPlayed": 51
         },
         "STR": {
           "goalsScored": 146,
@@ -777,7 +1275,13 @@
           "wins": 28,
           "draws": 26,
           "losses": 48,
-          "elo": 1381.5789196071673
+          "elo": 1381.5789196071673,
+          "homeGoalsScored": 86,
+          "homeGoalsConceded": 76,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 60,
+          "awayGoalsConceded": 108,
+          "awayMatchesPlayed": 51
         },
         "LEN": {
           "goalsScored": 202,
@@ -786,7 +1290,13 @@
           "wins": 50,
           "draws": 28,
           "losses": 24,
-          "elo": 1575.932961843466
+          "elo": 1575.932961843466,
+          "homeGoalsScored": 117,
+          "homeGoalsConceded": 60,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 85,
+          "awayGoalsConceded": 72,
+          "awayMatchesPlayed": 51
         },
         "LIL": {
           "goalsScored": 201,
@@ -795,7 +1305,13 @@
           "wins": 53,
           "draws": 18,
           "losses": 31,
-          "elo": 1515.0909126511401
+          "elo": 1515.0909126511401,
+          "homeGoalsScored": 123,
+          "homeGoalsConceded": 68,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 78,
+          "awayGoalsConceded": 96,
+          "awayMatchesPlayed": 51
         },
         "MET": {
           "goalsScored": 160,
@@ -804,7 +1320,13 @@
           "wins": 29,
           "draws": 26,
           "losses": 47,
-          "elo": 1434.0796825624866
+          "elo": 1434.0796825624866,
+          "homeGoalsScored": 86,
+          "homeGoalsConceded": 99,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 74,
+          "awayGoalsConceded": 119,
+          "awayMatchesPlayed": 51
         },
         "AUX": {
           "goalsScored": 150,
@@ -813,7 +1335,13 @@
           "wins": 33,
           "draws": 25,
           "losses": 44,
-          "elo": 1514.279797637292
+          "elo": 1514.279797637292,
+          "homeGoalsScored": 94,
+          "homeGoalsConceded": 85,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 56,
+          "awayGoalsConceded": 100,
+          "awayMatchesPlayed": 51
         },
         "NIC": {
           "goalsScored": 182,
@@ -822,7 +1350,13 @@
           "wins": 46,
           "draws": 26,
           "losses": 30,
-          "elo": 1533.8306525614564
+          "elo": 1533.8306525614564,
+          "homeGoalsScored": 95,
+          "homeGoalsConceded": 48,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 87,
+          "awayGoalsConceded": 92,
+          "awayMatchesPlayed": 51
         },
         "LYO": {
           "goalsScored": 160,
@@ -831,7 +1365,13 @@
           "wins": 43,
           "draws": 22,
           "losses": 37,
-          "elo": 1525.564047705743
+          "elo": 1525.564047705743,
+          "homeGoalsScored": 97,
+          "homeGoalsConceded": 64,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 80,
+          "awayMatchesPlayed": 51
         },
         "PAR": {
           "goalsScored": 141,
@@ -840,7 +1380,13 @@
           "wins": 30,
           "draws": 24,
           "losses": 48,
-          "elo": 1439.3701048860285
+          "elo": 1439.3701048860285,
+          "homeGoalsScored": 83,
+          "homeGoalsConceded": 84,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 58,
+          "awayGoalsConceded": 107,
+          "awayMatchesPlayed": 51
         },
         "LOR": {
           "goalsScored": 147,
@@ -849,7 +1395,13 @@
           "wins": 32,
           "draws": 26,
           "losses": 44,
-          "elo": 1487.9782354135832
+          "elo": 1487.9782354135832,
+          "homeGoalsScored": 85,
+          "homeGoalsConceded": 73,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 62,
+          "awayGoalsConceded": 89,
+          "awayMatchesPlayed": 51
         },
         "REN": {
           "goalsScored": 160,
@@ -858,7 +1410,13 @@
           "wins": 30,
           "draws": 30,
           "losses": 42,
-          "elo": 1517.3818699901062
+          "elo": 1517.3818699901062,
+          "homeGoalsScored": 88,
+          "homeGoalsConceded": 84,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 72,
+          "awayGoalsConceded": 92,
+          "awayMatchesPlayed": 51
         },
         "MAR": {
           "goalsScored": 193,
@@ -867,7 +1425,13 @@
           "wins": 60,
           "draws": 20,
           "losses": 22,
-          "elo": 1614.0283697466891
+          "elo": 1614.0283697466891,
+          "homeGoalsScored": 103,
+          "homeGoalsConceded": 48,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 90,
+          "awayGoalsConceded": 65,
+          "awayMatchesPlayed": 51
         },
         "TOU": {
           "goalsScored": 188,
@@ -876,7 +1440,13 @@
           "wins": 40,
           "draws": 27,
           "losses": 35,
-          "elo": 1530.8335904838384
+          "elo": 1530.8335904838384,
+          "homeGoalsScored": 104,
+          "homeGoalsConceded": 67,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 84,
+          "awayGoalsConceded": 99,
+          "awayMatchesPlayed": 51
         },
         "NAN": {
           "goalsScored": 165,
@@ -885,7 +1455,13 @@
           "wins": 35,
           "draws": 21,
           "losses": 46,
-          "elo": 1534.5342829554738
+          "elo": 1534.5342829554738,
+          "homeGoalsScored": 89,
+          "homeGoalsConceded": 90,
+          "homeMatchesPlayed": 51,
+          "awayGoalsScored": 76,
+          "awayGoalsConceded": 116,
+          "awayMatchesPlayed": 51
         }
       }
     },
@@ -899,7 +1475,13 @@
           "wins": 42,
           "draws": 21,
           "losses": 19,
-          "elo": 1629.8134324017124
+          "elo": 1629.8134324017124,
+          "homeGoalsScored": 85,
+          "homeGoalsConceded": 38,
+          "homeMatchesPlayed": 40,
+          "awayGoalsScored": 61,
+          "awayGoalsConceded": 57,
+          "awayMatchesPlayed": 42
         },
         "UTR": {
           "goalsScored": 153,
@@ -908,7 +1490,13 @@
           "wins": 38,
           "draws": 15,
           "losses": 29,
-          "elo": 1502.444387796007
+          "elo": 1502.444387796007,
+          "homeGoalsScored": 93,
+          "homeGoalsConceded": 46,
+          "homeMatchesPlayed": 41,
+          "awayGoalsScored": 60,
+          "awayGoalsConceded": 73,
+          "awayMatchesPlayed": 41
         },
         "AZA": {
           "goalsScored": 146,
@@ -917,7 +1505,13 @@
           "wins": 39,
           "draws": 20,
           "losses": 23,
-          "elo": 1609.0022374513119
+          "elo": 1609.0022374513119,
+          "homeGoalsScored": 91,
+          "homeGoalsConceded": 51,
+          "homeMatchesPlayed": 43,
+          "awayGoalsScored": 55,
+          "awayGoalsConceded": 63,
+          "awayMatchesPlayed": 39
         },
         "FOR": {
           "goalsScored": 100,
@@ -926,7 +1520,13 @@
           "wins": 28,
           "draws": 22,
           "losses": 32,
-          "elo": 1503.842709557675
+          "elo": 1503.842709557675,
+          "homeGoalsScored": 60,
+          "homeGoalsConceded": 40,
+          "homeMatchesPlayed": 40,
+          "awayGoalsScored": 40,
+          "awayGoalsConceded": 69,
+          "awayMatchesPlayed": 42
         },
         "FEY": {
           "goalsScored": 150,
@@ -935,7 +1535,13 @@
           "wins": 43,
           "draws": 18,
           "losses": 21,
-          "elo": 1546.9983881683866
+          "elo": 1546.9983881683866,
+          "homeGoalsScored": 98,
+          "homeGoalsConceded": 51,
+          "homeMatchesPlayed": 44,
+          "awayGoalsScored": 52,
+          "awayGoalsConceded": 48,
+          "awayMatchesPlayed": 38
         },
         "EXC": {
           "goalsScored": 117,
@@ -944,7 +1550,13 @@
           "wins": 25,
           "draws": 22,
           "losses": 35,
-          "elo": 1509.1146368444731
+          "elo": 1509.1146368444731,
+          "homeGoalsScored": 57,
+          "homeGoalsConceded": 58,
+          "homeMatchesPlayed": 42,
+          "awayGoalsScored": 60,
+          "awayGoalsConceded": 94,
+          "awayMatchesPlayed": 40
         },
         "GAE": {
           "goalsScored": 106,
@@ -953,7 +1565,13 @@
           "wins": 28,
           "draws": 17,
           "losses": 37,
-          "elo": 1463.7594461210315
+          "elo": 1463.7594461210315,
+          "homeGoalsScored": 68,
+          "homeGoalsConceded": 61,
+          "homeMatchesPlayed": 44,
+          "awayGoalsScored": 38,
+          "awayGoalsConceded": 66,
+          "awayMatchesPlayed": 38
         },
         "PEC": {
           "goalsScored": 113,
@@ -962,7 +1580,13 @@
           "wins": 20,
           "draws": 23,
           "losses": 39,
-          "elo": 1386.2167741439093
+          "elo": 1386.2167741439093,
+          "homeGoalsScored": 61,
+          "homeGoalsConceded": 64,
+          "homeMatchesPlayed": 40,
+          "awayGoalsScored": 52,
+          "awayGoalsConceded": 84,
+          "awayMatchesPlayed": 42
         },
         "HER": {
           "goalsScored": 123,
@@ -971,7 +1595,13 @@
           "wins": 28,
           "draws": 16,
           "losses": 38,
-          "elo": 1508.8202190715094
+          "elo": 1508.8202190715094,
+          "homeGoalsScored": 65,
+          "homeGoalsConceded": 58,
+          "homeMatchesPlayed": 40,
+          "awayGoalsScored": 58,
+          "awayGoalsConceded": 103,
+          "awayMatchesPlayed": 42
         },
         "HEE": {
           "goalsScored": 120,
@@ -980,7 +1610,13 @@
           "wins": 24,
           "draws": 13,
           "losses": 45,
-          "elo": 1398.6283944911581
+          "elo": 1398.6283944911581,
+          "homeGoalsScored": 78,
+          "homeGoalsConceded": 64,
+          "homeMatchesPlayed": 40,
+          "awayGoalsScored": 42,
+          "awayGoalsConceded": 96,
+          "awayMatchesPlayed": 42
         },
         "NAC": {
           "goalsScored": 117,
@@ -989,7 +1625,13 @@
           "wins": 24,
           "draws": 14,
           "losses": 44,
-          "elo": 1395.3405253549313
+          "elo": 1395.3405253549313,
+          "homeGoalsScored": 61,
+          "homeGoalsConceded": 68,
+          "homeMatchesPlayed": 41,
+          "awayGoalsScored": 56,
+          "awayGoalsConceded": 83,
+          "awayMatchesPlayed": 41
         },
         "VOL": {
           "goalsScored": 101,
@@ -998,7 +1640,13 @@
           "wins": 20,
           "draws": 20,
           "losses": 42,
-          "elo": 1401.8222083462138
+          "elo": 1401.8222083462138,
+          "homeGoalsScored": 60,
+          "homeGoalsConceded": 65,
+          "homeMatchesPlayed": 41,
+          "awayGoalsScored": 41,
+          "awayGoalsConceded": 77,
+          "awayMatchesPlayed": 41
         },
         "PSV": {
           "goalsScored": 174,
@@ -1007,7 +1655,13 @@
           "wins": 52,
           "draws": 17,
           "losses": 13,
-          "elo": 1687.7139135521854
+          "elo": 1687.7139135521854,
+          "homeGoalsScored": 107,
+          "homeGoalsConceded": 36,
+          "homeMatchesPlayed": 42,
+          "awayGoalsScored": 67,
+          "awayGoalsConceded": 37,
+          "awayMatchesPlayed": 40
         },
         "TEL": {
           "goalsScored": 121,
@@ -1016,7 +1670,13 @@
           "wins": 24,
           "draws": 18,
           "losses": 40,
-          "elo": 1381.4484344165348
+          "elo": 1381.4484344165348,
+          "homeGoalsScored": 74,
+          "homeGoalsConceded": 66,
+          "homeMatchesPlayed": 41,
+          "awayGoalsScored": 47,
+          "awayGoalsConceded": 96,
+          "awayMatchesPlayed": 41
         },
         "SPA": {
           "goalsScored": 131,
@@ -1025,7 +1685,13 @@
           "wins": 35,
           "draws": 18,
           "losses": 29,
-          "elo": 1525.7113725080549
+          "elo": 1525.7113725080549,
+          "homeGoalsScored": 72,
+          "homeGoalsConceded": 45,
+          "homeMatchesPlayed": 41,
+          "awayGoalsScored": 59,
+          "awayGoalsConceded": 79,
+          "awayMatchesPlayed": 41
         },
         "GRO": {
           "goalsScored": 138,
@@ -1034,7 +1700,13 @@
           "wins": 26,
           "draws": 22,
           "losses": 34,
-          "elo": 1451.4491920686025
+          "elo": 1451.4491920686025,
+          "homeGoalsScored": 81,
+          "homeGoalsConceded": 66,
+          "homeMatchesPlayed": 41,
+          "awayGoalsScored": 57,
+          "awayGoalsConceded": 82,
+          "awayMatchesPlayed": 41
         },
         "TWE": {
           "goalsScored": 143,
@@ -1043,7 +1715,13 @@
           "wins": 46,
           "draws": 17,
           "losses": 19,
-          "elo": 1626.0916759511001
+          "elo": 1626.0916759511001,
+          "homeGoalsScored": 83,
+          "homeGoalsConceded": 35,
+          "homeMatchesPlayed": 39,
+          "awayGoalsScored": 60,
+          "awayGoalsConceded": 62,
+          "awayMatchesPlayed": 43
         },
         "NEC": {
           "goalsScored": 124,
@@ -1052,7 +1730,13 @@
           "wins": 29,
           "draws": 21,
           "losses": 32,
-          "elo": 1471.7820517552032
+          "elo": 1471.7820517552032,
+          "homeGoalsScored": 56,
+          "homeGoalsConceded": 61,
+          "homeMatchesPlayed": 38,
+          "awayGoalsScored": 68,
+          "awayGoalsConceded": 81,
+          "awayMatchesPlayed": 44
         }
       }
     },
@@ -1066,7 +1750,13 @@
           "wins": 31,
           "draws": 17,
           "losses": 50,
-          "elo": 1425.2436379912735
+          "elo": 1425.2436379912735,
+          "homeGoalsScored": 97,
+          "homeGoalsConceded": 93,
+          "homeMatchesPlayed": 48,
+          "awayGoalsScored": 60,
+          "awayGoalsConceded": 102,
+          "awayMatchesPlayed": 50
         },
         "GUI": {
           "goalsScored": 171,
@@ -1075,7 +1765,13 @@
           "wins": 36,
           "draws": 32,
           "losses": 30,
-          "elo": 1525.7979670461673
+          "elo": 1525.7979670461673,
+          "homeGoalsScored": 98,
+          "homeGoalsConceded": 75,
+          "homeMatchesPlayed": 48,
+          "awayGoalsScored": 73,
+          "awayGoalsConceded": 82,
+          "awayMatchesPlayed": 50
         },
         "BEN": {
           "goalsScored": 191,
@@ -1084,7 +1780,13 @@
           "wins": 47,
           "draws": 25,
           "losses": 26,
-          "elo": 1671.0253532995675
+          "elo": 1671.0253532995675,
+          "homeGoalsScored": 110,
+          "homeGoalsConceded": 65,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 81,
+          "awayGoalsConceded": 77,
+          "awayMatchesPlayed": 48
         },
         "ETA": {
           "goalsScored": 147,
@@ -1093,7 +1795,13 @@
           "wins": 29,
           "draws": 27,
           "losses": 42,
-          "elo": 1467.0345009416098
+          "elo": 1467.0345009416098,
+          "homeGoalsScored": 84,
+          "homeGoalsConceded": 82,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 103,
+          "awayMatchesPlayed": 48
         },
         "BRA": {
           "goalsScored": 181,
@@ -1102,7 +1810,13 @@
           "wins": 48,
           "draws": 20,
           "losses": 30,
-          "elo": 1586.4805453766985
+          "elo": 1586.4805453766985,
+          "homeGoalsScored": 102,
+          "homeGoalsConceded": 52,
+          "homeMatchesPlayed": 48,
+          "awayGoalsScored": 79,
+          "awayGoalsConceded": 89,
+          "awayMatchesPlayed": 50
         },
         "GIL": {
           "goalsScored": 143,
@@ -1111,7 +1825,13 @@
           "wins": 27,
           "draws": 28,
           "losses": 43,
-          "elo": 1438.1627746639058
+          "elo": 1438.1627746639058,
+          "homeGoalsScored": 90,
+          "homeGoalsConceded": 82,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 53,
+          "awayGoalsConceded": 112,
+          "awayMatchesPlayed": 49
         },
         "CAS": {
           "goalsScored": 171,
@@ -1120,7 +1840,13 @@
           "wins": 37,
           "draws": 21,
           "losses": 40,
-          "elo": 1510.1724154199867
+          "elo": 1510.1724154199867,
+          "homeGoalsScored": 102,
+          "homeGoalsConceded": 88,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 69,
+          "awayGoalsConceded": 97,
+          "awayMatchesPlayed": 48
         },
         "TON": {
           "goalsScored": 181,
@@ -1129,7 +1855,13 @@
           "wins": 39,
           "draws": 14,
           "losses": 45,
-          "elo": 1465.2375670549864
+          "elo": 1465.2375670549864,
+          "homeGoalsScored": 105,
+          "homeGoalsConceded": 98,
+          "homeMatchesPlayed": 47,
+          "awayGoalsScored": 76,
+          "awayGoalsConceded": 124,
+          "awayMatchesPlayed": 51
         },
         "EST": {
           "goalsScored": 163,
@@ -1138,7 +1870,13 @@
           "wins": 43,
           "draws": 18,
           "losses": 37,
-          "elo": 1467.817416459899
+          "elo": 1467.817416459899,
+          "homeGoalsScored": 100,
+          "homeGoalsConceded": 54,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 63,
+          "awayGoalsConceded": 92,
+          "awayMatchesPlayed": 48
         },
         "SAN": {
           "goalsScored": 170,
@@ -1147,7 +1885,13 @@
           "wins": 40,
           "draws": 22,
           "losses": 36,
-          "elo": 1472.5138803163281
+          "elo": 1472.5138803163281,
+          "homeGoalsScored": 91,
+          "homeGoalsConceded": 53,
+          "homeMatchesPlayed": 48,
+          "awayGoalsScored": 79,
+          "awayGoalsConceded": 93,
+          "awayMatchesPlayed": 50
         },
         "MOR": {
           "goalsScored": 141,
@@ -1156,7 +1900,13 @@
           "wins": 30,
           "draws": 27,
           "losses": 41,
-          "elo": 1473.2095013179542
+          "elo": 1473.2095013179542,
+          "homeGoalsScored": 79,
+          "homeGoalsConceded": 67,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 62,
+          "awayGoalsConceded": 91,
+          "awayMatchesPlayed": 48
         },
         "FAM": {
           "goalsScored": 144,
@@ -1165,7 +1915,13 @@
           "wins": 27,
           "draws": 26,
           "losses": 45,
-          "elo": 1446.5494715290695
+          "elo": 1446.5494715290695,
+          "homeGoalsScored": 73,
+          "homeGoalsConceded": 71,
+          "homeMatchesPlayed": 47,
+          "awayGoalsScored": 71,
+          "awayGoalsConceded": 102,
+          "awayMatchesPlayed": 51
         },
         "NAC": {
           "goalsScored": 154,
@@ -1174,7 +1930,13 @@
           "wins": 38,
           "draws": 19,
           "losses": 41,
-          "elo": 1454.2110199625047
+          "elo": 1454.2110199625047,
+          "homeGoalsScored": 80,
+          "homeGoalsConceded": 80,
+          "homeMatchesPlayed": 48,
+          "awayGoalsScored": 74,
+          "awayGoalsConceded": 114,
+          "awayMatchesPlayed": 50
         },
         "POR": {
           "goalsScored": 199,
@@ -1183,7 +1945,13 @@
           "wins": 56,
           "draws": 24,
           "losses": 18,
-          "elo": 1669.100845746168
+          "elo": 1669.100845746168,
+          "homeGoalsScored": 119,
+          "homeGoalsConceded": 46,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 80,
+          "awayGoalsConceded": 74,
+          "awayMatchesPlayed": 48
         },
         "RIO": {
           "goalsScored": 175,
@@ -1192,7 +1960,13 @@
           "wins": 36,
           "draws": 23,
           "losses": 39,
-          "elo": 1490.9000746966694
+          "elo": 1490.9000746966694,
+          "homeGoalsScored": 96,
+          "homeGoalsConceded": 70,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 79,
+          "awayGoalsConceded": 110,
+          "awayMatchesPlayed": 48
         },
         "ARO": {
           "goalsScored": 126,
@@ -1201,7 +1975,13 @@
           "wins": 33,
           "draws": 25,
           "losses": 40,
-          "elo": 1471.7216889730319
+          "elo": 1471.7216889730319,
+          "homeGoalsScored": 67,
+          "homeGoalsConceded": 52,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 59,
+          "awayGoalsConceded": 87,
+          "awayMatchesPlayed": 48
         },
         "SPO": {
           "goalsScored": 235,
@@ -1210,7 +1990,13 @@
           "wins": 60,
           "draws": 14,
           "losses": 24,
-          "elo": 1624.9704653356835
+          "elo": 1624.9704653356835,
+          "homeGoalsScored": 149,
+          "homeGoalsConceded": 55,
+          "homeMatchesPlayed": 49,
+          "awayGoalsScored": 86,
+          "awayGoalsConceded": 64,
+          "awayMatchesPlayed": 49
         },
         "ALV": {
           "goalsScored": 126,
@@ -1219,10 +2005,16 @@
           "wins": 21,
           "draws": 26,
           "losses": 51,
-          "elo": 1339.8508738684964
+          "elo": 1339.8508738684964,
+          "homeGoalsScored": 76,
+          "homeGoalsConceded": 74,
+          "homeMatchesPlayed": 50,
+          "awayGoalsScored": 50,
+          "awayGoalsConceded": 105,
+          "awayMatchesPlayed": 48
         }
       }
     }
   },
-  "lastUpdated": "2026-05-13T09:30:45.714Z"
+  "lastUpdated": "2026-05-13T10:39:37.831Z"
 }

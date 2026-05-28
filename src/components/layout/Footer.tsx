@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
+import { useTranslation } from "@/lib/i18n/I18nContext";
 
 export function Footer() {
+  const { t } = useTranslation();
   return (
     <footer className="bg-[#0c0c14] border-t border-white/[0.06] py-10 mt-auto">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 space-y-6">
@@ -14,9 +16,9 @@ export function Footer() {
           </div>
           <nav className="flex flex-wrap gap-5 text-xs text-gray-500">
             <Link to="/" className="hover:text-white transition-colors">Home</Link>
-            <Link to="/predictor" className="hover:text-white transition-colors">Predictor</Link>
-            <Link to="/pricing" className="hover:text-white transition-colors">Pricing</Link>
-            <Link to="/history" className="hover:text-white transition-colors">History</Link>
+            <Link to="/predictor" className="hover:text-white transition-colors">{t.nav.predictor}</Link>
+            <Link to="/pricing" className="hover:text-white transition-colors">{t.nav.pricing}</Link>
+            <Link to="/history" className="hover:text-white transition-colors">{t.nav.history}</Link>
           </nav>
         </div>
         <div className="flex flex-wrap gap-3 text-[10px] text-gray-700">

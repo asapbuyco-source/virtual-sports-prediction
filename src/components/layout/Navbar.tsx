@@ -1,19 +1,21 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAppStore } from "@/store/useAppStore";
+import { useTranslation } from "@/lib/i18n/I18nContext";
 import { cn } from "@/utils/cn";
 import { Menu, X } from "lucide-react";
-
-const navItems = [
-  { path: "/dashboard", label: "Dashboard", icon: "📊" },
-  { path: "/predictor", label: "Predictor", icon: "🔮" },
-  { path: "/history", label: "History", icon: "📜" },
-  { path: "/pricing", label: "Pricing", icon: "💎" },
-  { path: "/profile", label: "Profile", icon: "👤" },
-];
 
 export function Navbar() {
   const { user, sidebarOpen, setSidebarOpen } = useAppStore();
   const location = useLocation();
+  const { t, language, setLanguage } = useTranslation();
+
+  const navItems = [
+    { path: "/dashboard", label: t.nav.dashboard, icon: "📊" },
+    { path: "/predictor", label: t.nav.predictor, icon: "🔮" },
+    { path: "/history", label: t.nav.history, icon: "📜" },
+    { path: "/pricing", label: t.nav.pricing, icon: "💎" },
+    { path: "/profile", label: t.nav.profile, icon: "👤" },
+  ];
 
   return (
     <header className="glass border-b border-white/[0.06] px-4 py-3 sticky top-0 z-30">
@@ -53,6 +55,12 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-3">
+          <button
+            onClick={() => setLanguage(language === "en" ? "fr" : "en")}
+            className="px-2 py-1 rounded text-xs font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
+          >
+            {language === "en" ? "FR" : "EN"}
+          </button>
           {user && (
             <span className="text-[11px] text-gray-500 hidden sm:block font-medium">
               {user.email}

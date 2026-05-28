@@ -41,10 +41,10 @@ export function predict(
   away: Team,
   homeForm: FormEntry[],
   awayForm: FormEntry[],
-  matchdayPosition: number,
-  oddsHome?: number,
-  oddsX?: number,
-  oddsAway?: number
+  _matchdayPosition: number,
+  _oddsHome?: number,
+  _oddsX?: number,
+  _oddsAway?: number
 ): MatchPrediction {
   const engine = DataService.getEngine();
   const rawResult = engine.predictMatch(home.league, home.id, away.id);
