@@ -27,7 +27,7 @@ export default function PricingPage() {
         <p className="text-gray-500">Pay in XAF via Mobile Money — MTN & Orange</p>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-4 max-w-4xl mx-auto">
+      <div className="grid md:grid-cols-4 gap-4 max-w-5xl mx-auto">
         {Object.values(PLANS).map((plan) => (
           <div
             key={plan.id}
@@ -49,7 +49,7 @@ export default function PricingPage() {
                 <span className="text-gray-500 text-sm ml-1">XAF</span>
               </div>
               <p className="text-xs text-gray-500 mt-1">
-                {plan.id === "free" ? "5 predictions/month" : plan.id === "pro" ? "50 predictions/month" : "Unlimited"}
+                {plan.id === "free" ? "5 predictions/month" : plan.id === "daily" ? "10 predictions/day" : plan.id === "weekly" ? "30 predictions/week" : plan.id === "monthly" ? "100 predictions/month" : "Unlimited"}
               </p>
             </div>
 

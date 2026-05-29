@@ -9,7 +9,7 @@ interface FirestoreUser {
   email: string;
   displayName: string | null;
   photoURL: string | null;
-  plan: "free" | "pro" | "elite";
+  plan: "free" | "daily" | "weekly" | "monthly" | "elite";
   predictionsUsed: number;
   predictionsLimit: number;
   createdAt: Date;

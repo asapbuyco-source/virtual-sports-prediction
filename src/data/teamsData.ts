@@ -22,6 +22,9 @@ export interface Team {
   league: string;
   color: string;
   emoji: string;
+  over25Rate?: number;
+  bttsRate?: number;
+  currentStreak?: string;
 }
 
 export interface H2HRecord {

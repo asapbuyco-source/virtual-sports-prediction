@@ -21,7 +21,7 @@ const { user } = useAppStore();
       <div className="flex items-center justify-between">
         <h1 className="text-2xl font-extrabold text-white">Prediction History</h1>
         <span className="text-xs text-gray-400">
-          {user?.plan === "elite" ? "Full history" : user?.plan === "pro" ? "30 days" : "5 recent"}
+          {user?.plan === "elite" ? "Full history" : ["weekly", "monthly"].includes(user?.plan ?? "") ? "30 days" : "5 recent"}
         </span>
       </div>
 

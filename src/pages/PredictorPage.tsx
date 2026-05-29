@@ -9,6 +9,39 @@ import type { FormEntry, MatchPrediction } from "@/features/predictor/engine/pre
 import toast from "react-hot-toast";
 import { PLAN_LIMITS } from "@/utils/constants";
 
+function TeamInsight({ team, label }: { team: any; label: string }) {
+  const streakColor = team.currentStreak === "WINNING" ? "text-green-400" : team.currentStreak === "LOSING" ? "text-red-400" : "text-gray-400";
+  const streakIcon = team.currentStreak === "WINNING" ? "🔥" : team.currentStreak === "LOSING" ? "📉" : "➖";
+
+  return (
+    <div className="bg-white/[0.03] border border-white/[0.06] rounded-lg p-3 space-y-2">
+      <div className="flex items-center justify-between">
+        <span className="text-xs text-gray-400">{label}</span>
+        <span className={`text-xs font-bold ${streakColor}`}>{streakIcon} {team.currentStreak}</span>
+      </div>
+      <div className="grid grid-cols-2 gap-2 text-[10px]">
+        <div className="flex justify-between">
+          <span className="text-gray-500">Over 2.5</span>
+          <span className="text-white font-bold">{Math.round((team.over25Rate || 0.5) * 100)}%</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="text-gray-500">BTTS</span>
+          <span className="text-white font-bold">{Math.round((team.bttsRate || 0.5) * 100)}%</span>
+        </div>
+      </div>
+      {team.recentForm && team.recentForm.length > 0 && (
+        <div className="flex gap-1">
+          {team.recentForm.slice(0, 5).map((f: string, i: number) => (
+            <span key={i} className={`w-5 h-5 rounded flex items-center justify-center text-[10px] font-bold ${
+              f === "W" ? "bg-green-600/30 text-green-400" : f === "D" ? "bg-yellow-600/30 text-yellow-400" : "bg-red-600/30 text-red-400"
+            }`}>{f}</span>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 function ProbBar({ label, value, color }: { label: string; value: number; color: string }) {
   return (
     <div className="flex flex-col gap-1">
@@ -91,8 +124,9 @@ export default function PredictorPage() {
 
   const leagues = useMemo(() => DataService.getLeagues(), []);
   const leagueTeams = useMemo(() => DataService.getTeams(predictor.selectedLeague), [predictor.selectedLeague]);
-  const homeTeam = useMemo(() => leagueTeams.find(t => t.id === predictor.homeTeamId) ?? leagueTeams[0], [leagueTeams, predictor.homeTeamId]);
-  const awayTeam = useMemo(() => leagueTeams.find(t => t.id === predictor.awayTeamId) ?? leagueTeams[1], [leagueTeams, predictor.awayTeamId]);
+  const homeTeam = useMemo(() => leagueTeams.find(t => t.id === predictor.homeTeamId) ?? leagueTeams[0] ?? { id: "", name: "Home", shortName: "HOM", emoji: "🏠" }, [leagueTeams, predictor.homeTeamId]);
+  const awayTeam = useMemo(() => leagueTeams.find(t => t.id === predictor.awayTeamId) ?? leagueTeams[1] ?? { id: "", name: "Away", shortName: "AWY", emoji: "✈️" }, [leagueTeams, predictor.awayTeamId]);
+  const h2h = useMemo(() => DataService.getHeadToHead(predictor.homeTeamId, predictor.awayTeamId), [predictor.homeTeamId, predictor.awayTeamId]);
 
   const limit = PLAN_LIMITS[user?.plan ?? "free"] ?? 5;
   const used = user?.predictionsUsed ?? 0;
@@ -213,6 +247,41 @@ export default function PredictorPage() {
               <label className="text-xs text-gray-400 uppercase tracking-wider">📍 Match Position: <span className="text-white font-bold">{predictor.matchdayPos}</span></label>
               <input type="range" min={1} max={10} value={predictor.matchdayPos} onChange={e => updatePredictor({ matchdayPos: parseInt(e.target.value) })} className="w-full accent-green-500" />
             </div>
+          </div>
+
+          {h2h && h2h.totalMatches >= 3 && (
+            <div className="bg-[#111118] border border-green-500/20 rounded-2xl p-4 space-y-3">
+              <h2 className="text-sm font-bold text-green-400 uppercase tracking-widest">📊 Head-to-Head ({h2h.totalMatches} matches)</h2>
+              <div className="grid grid-cols-3 gap-2 text-center">
+                <div className="bg-white/[0.03] rounded-lg p-2">
+                  <div className="text-lg font-black text-green-400">{h2h.homeWins}</div>
+                  <div className="text-[10px] text-gray-500">Home Wins</div>
+                </div>
+                <div className="bg-white/[0.03] rounded-lg p-2">
+                  <div className="text-lg font-black text-yellow-400">{h2h.draws}</div>
+                  <div className="text-[10px] text-gray-500">Draws</div>
+                </div>
+                <div className="bg-white/[0.03] rounded-lg p-2">
+                  <div className="text-lg font-black text-red-400">{h2h.awayWins}</div>
+                  <div className="text-[10px] text-gray-500">Away Wins</div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2 text-[10px]">
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Over 2.5</span>
+                  <span className="text-white font-bold">{Math.round((h2h.over25 / h2h.totalMatches) * 100)}%</span>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-gray-500">BTTS Yes</span>
+                  <span className="text-white font-bold">{Math.round((h2h.bttsYes / h2h.totalMatches) * 100)}%</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-2 gap-3">
+            <TeamInsight team={homeTeam} label={homeTeam.name} />
+            <TeamInsight team={awayTeam} label={awayTeam.name} />
           </div>
 
 <div className="bg-[#111118] border border-white/[0.06] rounded-2xl p-4 space-y-3">

@@ -6,13 +6,24 @@ import * as crypto from "crypto";
 admin.initializeApp();
 
 const PLAN_DURATIONS: Record<string, number> = {
-  pro: 30,
+  daily: 1,
+  weekly: 7,
+  monthly: 30,
   elite: 30,
 };
 
 const PLAN_PRICES: Record<string, number> = {
-  pro: 2500,
+  daily: 350,
+  weekly: 1500,
+  monthly: 3000,
   elite: 6000,
+};
+
+const PLAN_LIMITS: Record<string, number> = {
+  daily: 10,
+  weekly: 30,
+  monthly: 100,
+  elite: 999999,
 };
 
 const FAPSHI_API_KEY = functions.config().fapshi?.api_key || process.env.FAPSHI_API_KEY || "";
@@ -56,7 +67,7 @@ export const initiatePayment = functions.https.onCall(async (data, context) => {
   const { planId, phone } = data;
   const uid = context.auth.uid;
 
-  if (!planId || !["pro", "elite"].includes(planId)) {
+  if (!planId || !["daily", "weekly", "monthly", "elite"].includes(planId)) {
     throw new functions.https.HttpsError("invalid-argument", "Invalid plan ID");
   }
 
@@ -188,7 +199,7 @@ export const fapshiWebhook = functions.https.onRequest(async (req, res) => {
     }),
     db.doc(`users/${uid}`).update({
       plan: planId,
-      predictionsLimit: planId === "pro" ? 50 : 999999,
+      predictionsLimit: PLAN_LIMITS[planId] ?? PLAN_LIMITS.monthly,
       predictionsUsed: 0,
     }),
   ]);

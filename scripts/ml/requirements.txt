@@ -1,0 +1,10 @@
+# ML Training Dependencies
+# Run: pip install -r requirements.txt
+
+# Core ML - uncomment if you have these installed
+# scikit-learn>=1.0.0
+# numpy>=1.21.0
+# xgboost>=1.5.0
+
+# Note: This script uses pure Python implementations
+# No external ML libraries required!

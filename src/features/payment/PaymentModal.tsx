@@ -65,7 +65,9 @@ export function PaymentModal() {
             >
               <p className="font-bold text-white text-sm">{plan.name}</p>
               <p className="text-xl font-black text-gradient mt-1">{plan.price.toLocaleString()} <span className="text-xs text-gray-500 font-normal">XAF</span></p>
-              <p className="text-[11px] text-gray-500 mt-0.5">{plan.predictionsPerMonth === Infinity ? "Unlimited" : plan.predictionsPerMonth + "/mo"}</p>
+              <p className="text-[11px] text-gray-500 mt-0.5">
+                {plan.predictionsPerMonth === Infinity ? "Unlimited" : plan.id === "daily" ? `${plan.predictionsPerMonth}/day` : plan.id === "weekly" ? `${plan.predictionsPerMonth}/week` : `${plan.predictionsPerMonth}/mo`}
+              </p>
             </button>
           ))}
         </div>

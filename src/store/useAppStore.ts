@@ -6,7 +6,7 @@ interface User {
   uid: string;
   email: string;
   displayName: string;
-  plan: "free" | "pro" | "elite";
+  plan: "free" | "daily" | "weekly" | "monthly" | "elite";
   predictionsUsed: number;
   predictionsLimit: number;
 }
