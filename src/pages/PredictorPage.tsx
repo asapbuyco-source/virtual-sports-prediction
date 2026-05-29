@@ -218,9 +218,9 @@ export default function PredictorPage() {
                     updatePredictor({ selectedLeague: l.id, homeTeamId: teams[0].id, awayTeamId: teams[1].id }); 
                     setResult(null); 
                   }}
-                   className={`py-2 px-2 rounded-lg text-xs font-bold transition ${predictor.selectedLeague === l.id ? "bg-green-600 text-white shadow-lg shadow-green-500/20" : "bg-white/[0.04] text-gray-400 hover:bg-white/[0.08] border border-white/[0.06]"}`}>
-                   {l.name}
-                 </button>
+className={`py-2 px-2 rounded-lg text-xs font-bold transition ${predictor.selectedLeague === l.id ? "bg-green-600 text-white shadow-lg shadow-green-500/20" : "bg-white/[0.04] text-gray-400 hover:bg-white/[0.08] border border-white/[0.06]"}`}>
+                    {l.displayName}
+                  </button>
                ))}
             </div>
           </div>

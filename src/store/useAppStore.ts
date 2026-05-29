@@ -49,7 +49,7 @@ export const useAppStore = create<AppStore>()(
       setLoading: (authLoading) => set({ authLoading }),
 
       predictor: {
-        selectedLeague: "EPL",
+        selectedLeague: "English League",
         homeTeamId: "MNC",
         awayTeamId: "LIV",
         homeForm: [],

@@ -54,8 +54,18 @@ export class DataService {
     }
 
     public static getLeagues() {
+        const leagueNames: Record<string, string> = {
+            'English League': 'EPL',
+            'Spanish League': 'LaLiga',
+            'Italian League': 'SerieA',
+            'German League': 'Bundesliga',
+            'French League': 'Ligue 1',
+            'Dutch League': 'Eredivisie',
+            'Portuguese League': 'Liga Nos',
+        };
         return Object.keys(teamStats.leagues).map(id => ({
             id,
+            displayName: leagueNames[id] || id,
             name: id.replace(/([A-Z])/g, ' $1').trim()
         }));
     }
