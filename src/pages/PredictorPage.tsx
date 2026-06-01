@@ -9,6 +9,7 @@ import type { FormEntry, MatchPrediction } from "@/features/predictor/engine/pre
 import toast from "react-hot-toast";
 import { PLAN_LIMITS } from "@/utils/constants";
 import { useLiveSync } from "@/hooks/useLiveSync";
+import { useTranslation } from "@/lib/i18n/I18nContext";
 import { RefreshCw } from "lucide-react";
 
 function TeamInsight({ team, label }: { team: any; label: string }) {
@@ -118,6 +119,7 @@ function CircularProgress({ value, label, color }: { value: number; label: strin
 
 export default function PredictorPage() {
   const { user, predictor, updatePredictor } = useAppStore();
+  const { t } = useTranslation();
   const [activeTab, setActiveTab] = useState<"tips" | "signals" | "stats">("tips");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<MatchPrediction | null>(null);
@@ -189,7 +191,7 @@ export default function PredictorPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-extrabold text-white">Match Predictor</h1>
+        <h1 className="text-2xl font-extrabold text-white">{t.predictor.title}</h1>
         <span className="text-xs text-gray-400">{used} / {limit} predictions used</span>
       </div>
 
@@ -236,21 +238,27 @@ export default function PredictorPage() {
                 )}
              </div>
           </div>
-<div className="bg-surface-1 border border-white/[0.06] rounded-2xl p-4 space-y-3 relative z-[60]">
-             <h2 className="text-sm font-bold text-green-400 uppercase tracking-widest">🏟️ Select League</h2>
-<div className="grid grid-cols-3 gap-2">
-               {leagues.map(l => (
-                 <button key={l.id} onClick={() => { 
-                    const teams = DataService.getTeams(l.id);
-                    updatePredictor({ selectedLeague: l.id, homeTeamId: teams[0].id, awayTeamId: teams[1].id }); 
-                    setResult(null); 
+<div className="bg-[#111118] border border-white/[0.06] rounded-2xl p-4 space-y-3 isolate">
+              <h2 className="text-sm font-bold text-green-400 uppercase tracking-widest">🏟️ Select League</h2>
+ <div className="grid grid-cols-3 gap-2">
+                {leagues.map(l => {
+                  const teams = DataService.getTeams(l.id);
+                  return (
+                  <button key={l.id} onClick={() => {
+                     const firstTeam = teams[0];
+                     const secondTeam = teams[1];
+                     if (firstTeam && secondTeam) {
+                       updatePredictor({ selectedLeague: l.id, homeTeamId: firstTeam.id, awayTeamId: secondTeam.id });
+                       setResult(null);
+                     }
                   }}
-className={`py-2 px-2 rounded-lg text-xs font-bold transition ${predictor.selectedLeague === l.id ? "bg-green-600 text-white shadow-lg shadow-green-500/20" : "bg-white/[0.04] text-gray-400 hover:bg-white/[0.08] border border-white/[0.06]"}`}>
-                    {l.displayName}
+ className={`py-2 px-2 rounded-lg text-xs font-bold transition cursor-pointer ${predictor.selectedLeague === l.id ? "bg-green-600 text-white shadow-lg shadow-green-500/20" : "bg-white/[0.04] text-gray-400 hover:bg-green-600/20 hover:text-green-300 border border-white/[0.06]"}`}>
+                     {l.displayName}
                   </button>
-               ))}
-            </div>
-          </div>
+                  );
+                })}
+             </div>
+           </div>
 
 <div className="bg-surface-1 border border-white/[0.06] rounded-2xl p-4 space-y-4 relative z-[60]">
              <h2 className="text-sm font-bold text-green-400 uppercase tracking-widest">🆚 Match Setup</h2>
@@ -344,8 +352,8 @@ className={`py-2 px-2 rounded-lg text-xs font-bold transition ${predictor.select
              <div className="bg-surface-1 border border-white/[0.06] rounded-2xl p-10 flex flex-col items-center justify-center text-center gap-4 min-h-[400px] relative overflow-hidden">
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 rounded-full bg-green-500/5 blur-[80px] pointer-events-none" />
                <div className="text-6xl relative z-10">🔮</div>
-               <h3 className="text-xl font-bold text-white relative z-10">Ready to Analyse</h3>
-               <p className="text-gray-400 text-sm max-w-xs relative z-10">Select teams, enter form data and odds, then hit Predict Match.</p>
+<h3 className="text-xl font-bold text-white relative z-10">{t.predictor.readyToAnalyze}</h3>
+                <p className="text-gray-400 text-sm max-w-xs relative z-10">{t.predictor.selectTeams}</p>
              </div>
            )}
 

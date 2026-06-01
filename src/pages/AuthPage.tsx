@@ -3,56 +3,119 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { signInWithEmailAndPassword, createUserWithEmailAndPassword, signInWithPopup, sendPasswordResetEmail, signInWithRedirect } from "firebase/auth";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  sendPasswordResetEmail,
+  signInWithRedirect,
+} from "firebase/auth";
 import { auth, googleProvider } from "@/lib/firebase";
 import toast from "react-hot-toast";
 import { APP_NAME, APP_TAGLINE } from "@/utils/constants";
 
-const schema = z.object({
-  email: z.string().email("Invalid email"),
-  password: z.string().min(8, "Min 8 characters").regex(/[A-Z]/, "Need uppercase").regex(/[0-9]/, "Need number"),
-  name: z.string().optional(),
+const loginSchema = z.object({
+  email: z.string().min(1, "Email is required").email("Invalid email address"),
+  password: z.string().min(1, "Password is required"),
 });
 
-type AuthForm = z.infer<typeof schema>;
+const registerSchema = z.object({
+  name: z.string().optional(),
+  email: z
+    .string()
+    .min(1, "Email is required")
+    .email("Invalid email address"),
+  password: z
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .regex(/[A-Z]/, "Must contain at least one uppercase letter")
+    .regex(/[0-9]/, "Must contain at least one number"),
+});
+
+type LoginForm = z.infer<typeof loginSchema>;
+type RegisterForm = z.infer<typeof registerSchema>;
+
+function getAuthErrorMessage(code: string): string {
+  const messages: Record<string, string> = {
+    "auth/user-not-found": "No account found with this email address.",
+    "auth/wrong-password": "Incorrect password. Please try again.",
+    "auth/email-already-in-use": "An account with this email already exists.",
+    "auth/weak-password": "Password is too weak. Use at least 8 characters with uppercase and numbers.",
+    "auth/invalid-email": "Invalid email address.",
+    "auth/user-disabled": "This account has been disabled.",
+    "auth/too-many-requests": "Too many failed attempts. Please try again later or reset your password.",
+    "auth/network-request-failed": "Network error. Check your connection.",
+    "auth/popup-blocked": "Popup was blocked. Please allow popups for this site.",
+    "auth/popup-closed-by-user": "Sign-in popup was closed.",
+    "auth/cancelled-popup-request": "Sign-in was cancelled.",
+    "auth/unauthorized-domain": "This domain is not authorized for OAuth sign-in.",
+    "auth/invalid-credential": "Invalid credentials. Please check your email and password.",
+    "auth/requires-recent-sign-in": "Please sign in again before changing your password.",
+    "auth/invalid-verification-code": "Invalid verification code.",
+    "auth/invalid-phone-number": "Invalid phone number.",
+  };
+  return messages[code] || "Sign-in failed. Please try again.";
+}
 
 export default function AuthPage() {
   const [isLogin, setIsLogin] = useState(true);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
-  const { register, handleSubmit, getValues, formState: { errors } } = useForm<AuthForm>({
-    resolver: zodResolver(schema),
+  const loginForm = useForm<LoginForm>({
+    resolver: zodResolver(loginSchema),
   });
 
-  const onSubmit = async (data: AuthForm) => {
+  const registerForm = useForm<RegisterForm>({
+    resolver: zodResolver(registerSchema),
+  });
+
+  const { register: registerLogin, handleSubmit: handleLoginSubmit, formState: { errors: loginErrors } } = loginForm;
+  const { register: registerRegister, handleSubmit: handleRegisterSubmit, formState: { errors: registerErrors } } = registerForm;
+
+  const handleLogin = async (data: LoginForm) => {
     setLoading(true);
     try {
-      if (isLogin) {
-        await signInWithEmailAndPassword(auth, data.email, data.password);
-        toast.success("Welcome back!");
-      } else {
-        await createUserWithEmailAndPassword(auth, data.email, data.password);
-        toast.success("Account created!");
-      }
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      toast.success("Welcome back!");
       navigate("/dashboard");
     } catch (err: any) {
-      toast.error(err.message || "Auth failed");
+      const code = err.code || "";
+      toast.error(getAuthErrorMessage(code));
+      console.error("Login error:", code, err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleRegister = async (data: RegisterForm) => {
+    setLoading(true);
+    try {
+      await createUserWithEmailAndPassword(auth, data.email, data.password);
+      toast.success("Account created! Welcome!");
+      navigate("/dashboard");
+    } catch (err: any) {
+      const code = err.code || "";
+      toast.error(getAuthErrorMessage(code));
+      console.error("Register error:", code, err.message);
     } finally {
       setLoading(false);
     }
   };
 
   const handleForgotPassword = async (email: string) => {
-    if (!email) {
-      toast.error("Enter your email first");
+    if (!email || !email.includes("@")) {
+      toast.error("Please enter a valid email address first");
       return;
     }
+    setLoading(true);
     try {
       await sendPasswordResetEmail(auth, email);
-      toast.success("Password reset email sent!");
+      toast.success("Password reset email sent! Check your inbox.");
     } catch (err: any) {
-      toast.error(err.message);
+      toast.error(getAuthErrorMessage(err.code || ""));
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -63,14 +126,20 @@ export default function AuthPage() {
       toast.success("Signed in with Google!");
       navigate("/dashboard");
     } catch (err: any) {
-      if (err.code === "auth/popup-blocked" || err.code === "auth/popup-closed-by-user") {
+      const code = err.code || "";
+      if (
+        code === "auth/popup-blocked" ||
+        code === "auth/popup-closed-by-user" ||
+        code === "auth/cancelled-popup-request"
+      ) {
         try {
           await signInWithRedirect(auth, googleProvider);
         } catch {
-          toast.error("Redirect sign-in also failed");
+          toast.error(getAuthErrorMessage(code));
         }
       } else {
-        toast.error(err.message);
+        toast.error(getAuthErrorMessage(code));
+        console.error("Google sign-in error:", code, err.message);
       }
     } finally {
       setLoading(false);
@@ -121,51 +190,87 @@ export default function AuthPage() {
             </button>
           </div>
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-            {!isLogin && (
+          {isLogin ? (
+            <form onSubmit={handleLoginSubmit(handleLogin)} className="space-y-4">
               <div>
-                <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Name</label>
+                <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Email</label>
                 <input
-                  {...register("name")}
+                  {...registerLogin("email")}
+                  type="email"
+                  autoComplete="email"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500/50 transition-colors mt-1"
+                  placeholder="you@example.com"
+                />
+                {loginErrors.email && <p className="text-xs text-red-400 mt-1">{loginErrors.email.message}</p>}
+              </div>
+              <div>
+                <div className="flex justify-between items-center">
+                  <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Password</label>
+                  <button type="button" onClick={() => handleForgotPassword(loginForm.getValues("email"))} className="text-[11px] text-green-400 hover:text-green-300 transition-colors">
+                    Forgot Password?
+                  </button>
+                </div>
+                <input
+                  {...registerLogin("password")}
+                  type="password"
+                  autoComplete={isLogin ? "current-password" : "new-password"}
+                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500/50 transition-colors mt-1"
+                  placeholder="••••••••"
+                />
+                {loginErrors.password && <p className="text-xs text-red-400 mt-1">{loginErrors.password.message}</p>}
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 text-white font-bold text-sm shadow-lg shadow-green-900/30 disabled:opacity-40 transition-all duration-300"
+              >
+                {loading ? "Signing in..." : "Sign In"}
+              </button>
+            </form>
+          ) : (
+            <form onSubmit={handleRegisterSubmit(handleRegister)} className="space-y-4">
+              <div>
+                <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Name (optional)</label>
+                <input
+                  {...registerRegister("name")}
+                  type="text"
+                  autoComplete="name"
                   className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500/50 transition-colors mt-1"
                   placeholder="Your name"
                 />
               </div>
-            )}
-            <div>
-              <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Email</label>
-              <input
-                {...register("email")}
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500/50 transition-colors mt-1"
-                placeholder="you@example.com"
-              />
-              {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email.message}</p>}
-            </div>
-            <div>
-              <div className="flex justify-between items-center">
-                <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Password</label>
-                {isLogin && (
-                  <button type="button" onClick={() => handleForgotPassword(getValues("email"))} className="text-[11px] text-green-400 hover:text-green-300 transition-colors">
-                    Forgot Password?
-                  </button>
-                )}
+              <div>
+                <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Email</label>
+                <input
+                  {...registerRegister("email")}
+                  type="email"
+                  autoComplete="email"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500/50 transition-colors mt-1"
+                  placeholder="you@example.com"
+                />
+                {registerErrors.email && <p className="text-xs text-red-400 mt-1">{registerErrors.email.message}</p>}
               </div>
-              <input
-                {...register("password")}
-                type="password"
-                className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500/50 transition-colors mt-1"
-                placeholder="••••••••"
-              />
-              {errors.password && <p className="text-xs text-red-400 mt-1">{errors.password.message}</p>}
-            </div>
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 text-white font-bold text-sm shadow-lg shadow-green-900/30 disabled:opacity-40 transition-all duration-300"
-            >
-              {loading ? "Processing..." : isLogin ? "Sign In" : "Create Account"}
-            </button>
-          </form>
+              <div>
+                <label className="text-[11px] text-gray-500 font-medium uppercase tracking-wider">Password</label>
+                <input
+                  {...registerRegister("password")}
+                  type="password"
+                  autoComplete="new-password"
+                  className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl px-4 py-3 text-white text-sm focus:outline-none focus:border-green-500/50 transition-colors mt-1"
+                  placeholder="••••••••"
+                />
+                {registerErrors.password && <p className="text-xs text-red-400 mt-1">{registerErrors.password.message}</p>}
+                <p className="text-[10px] text-gray-600 mt-1">Min 8 chars with uppercase letter and number</p>
+              </div>
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-full py-3 rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 text-white font-bold text-sm shadow-lg shadow-green-900/30 disabled:opacity-40 transition-all duration-300"
+              >
+                {loading ? "Creating account..." : "Create Account"}
+              </button>
+            </form>
+          )}
 
           <div className="relative">
             <div className="absolute inset-0 flex items-center">

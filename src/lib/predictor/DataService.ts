@@ -1,9 +1,20 @@
 import teamStats from '../../../data/team_stats.json';
 import liveSyncData from '../../../data/live_sync.json';
 import { PredictorEngine } from './Engine';
+import { TEAM_NAMES } from './teamNames';
 import type { Team, TeamCategory } from '../../data/teamsData';
 
 const liveSync = liveSyncData || { upcoming: [], recentHistory: [], lastUpdated: null };
+
+export const LEAGUE_ALIAS_MAP: Record<string, string> = {
+  'English League': 'English League',
+  'Spanish League': 'Spanish League',
+  'Italian League': 'Italian League',
+  'German League': 'German League',
+  'French League': 'French League',
+  'Dutch League': 'Dutch League',
+  'Portuguese League': 'Portuguese League',
+};
 
 export class DataService {
     private static engine: PredictorEngine | null = null;
