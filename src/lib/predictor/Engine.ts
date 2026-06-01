@@ -1,4 +1,6 @@
 import mlModel from '../../../data/ml_models/simplified_model.json';
+import { calcFormMultiplier } from '@/features/predictor/engine/formAnalysis';
+import type { FormEntry } from '@/features/predictor/engine/predictor';
 
 /**
  * Poisson Distribution Formula
@@ -171,7 +173,17 @@ export class PredictorEngine {
         };
     }
 
-    public predictMatch(leagueName: string, homeTeam: string, awayTeam: string): PredictionResult | null {
+    public predictMatch(
+      leagueName: string,
+      homeTeam: string,
+      awayTeam: string,
+      homeForm: FormEntry[] = [],
+      awayForm: FormEntry[] = [],
+      _matchdayPosition = 1,
+      oddsHome?: number,
+      oddsX?: number,
+      oddsAway?: number
+    ): PredictionResult | null {
         const league = this.stats.leagues[leagueName];
         if (!league) return null;
 
@@ -218,6 +230,22 @@ export class PredictorEngine {
         } else if (away.currentStreak === 'LOSING') {
             awayMomentum *= 0.94;
             momentumNote += `${awayTeam} is on a losing streak. `;
+        }
+
+        if (homeForm.length > 0) {
+            const homeFormMult = calcFormMultiplier(homeForm);
+            homeMomentum *= homeFormMult.attackMult;
+            if (homeFormMult.momentum !== 0) {
+                momentumNote += `${homeTeam} recent form: ${homeForm.slice(-3).map(f => f.result).join('')}. `;
+            }
+        }
+
+        if (awayForm.length > 0) {
+            const awayFormMult = calcFormMultiplier(awayForm);
+            awayMomentum *= awayFormMult.attackMult;
+            if (awayFormMult.momentum !== 0) {
+                momentumNote += `${awayTeam} recent form: ${awayForm.slice(-3).map(f => f.result).join('')}. `;
+            }
         }
 
         const homeAttack = ((home.avgGoalsScored || home.goalsScored / home.matchesPlayed) / leagueAvg) * homeMomentum;
@@ -280,6 +308,25 @@ export class PredictorEngine {
         const eloImpact = eloDiff / 1000;
         homeWinProb = Math.min(0.92, Math.max(0.08, homeWinProb + (eloImpact * 0.06)));
         awayWinProb = Math.min(0.92, Math.max(0.08, awayWinProb - (eloImpact * 0.06)));
+
+        if (oddsHome && oddsHome > 1 && oddsX && oddsX > 1 && oddsAway && oddsAway > 1) {
+            const impliedHome = 1 / oddsHome;
+            const impliedDraw = 1 / oddsX;
+            const impliedAway = 1 / oddsAway;
+            const impliedTotal = impliedHome + impliedDraw + impliedAway;
+            const fairHome = impliedHome / impliedTotal;
+            const fairDraw = impliedDraw / impliedTotal;
+            const fairAway = impliedAway / impliedTotal;
+
+            const homeValue = homeWinProb - fairHome;
+            const drawValue = drawProb - fairDraw;
+            const awayValue = awayWinProb - fairAway;
+
+            const maxValue = Math.max(homeValue, drawValue, awayValue);
+            if (maxValue > 0.05) {
+                momentumNote += `Value detected: ${maxValue > 0.15 ? 'STRONG' : maxValue > 0.1 ? 'GOOD' : 'FAIR'} value on ${maxValue === homeValue ? 'HOME' : maxValue === awayValue ? 'AWAY' : 'DRAW'} (+${(maxValue * 100).toFixed(1)}%). `;
+            }
+        }
 
         const total = homeWinProb + drawProb + awayWinProb;
         homeWinProb /= total;

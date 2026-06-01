@@ -6,6 +6,7 @@ export const translations = {
             history: "History",
             pricing: "Pricing",
             profile: "Profile",
+            subscription: "Subscription",
         },
         common: {
             loading: "Loading...",
@@ -97,6 +98,7 @@ export const translations = {
             history: "Historique",
             pricing: "Tarifs",
             profile: "Profil",
+            subscription: "Abonnement",
         },
         common: {
             loading: "Chargement...",

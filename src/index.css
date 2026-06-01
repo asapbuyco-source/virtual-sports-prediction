@@ -1,5 +1,14 @@
 @import "tailwindcss";
 
+@theme {
+  --color-surface-0: #0a0a0f;
+  --color-surface-1: #111118;
+  --color-surface-2: #18181f;
+  --color-surface-3: #1e1e27;
+  --color-surface-4: #0c0c14;
+  --color-surface-5: #1a1a24;
+}
+
 @layer base {
   :root {
     --accent: #22c55e;

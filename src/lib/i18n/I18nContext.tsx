@@ -1,49 +1,46 @@
 import { createContext, useContext, useState, useCallback, type ReactNode } from "react";
 import { translations, type Language, type TranslationKeys } from "./translations";
+import { persist } from "zustand/middleware";
+import { create } from "zustand";
 
 interface I18nContextType {
-    language: Language;
-    setLanguage: (lang: Language) => void;
-    t: TranslationKeys;
+  language: Language;
+  setLanguage: (lang: Language) => void;
+  t: TranslationKeys;
+  toggleLanguage: () => void;
 }
 
 const I18nContext = createContext<I18nContextType | null>(null);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-    const [language, setLanguageState] = useState<Language>("en");
+  const [language, setLanguageState] = useState<Language>("en");
 
-    const setLanguage = useCallback((lang: Language) => {
-        setLanguageState(lang);
-    }, []);
+  const setLanguage = useCallback((lang: Language) => {
+    setLanguageState(lang);
+  }, []);
 
-    const t = translations[language];
+  const toggleLanguage = useCallback(() => {
+    setLanguageState((prev) => (prev === "en" ? "fr" : "en"));
+  }, []);
 
-    return (
-        <I18nContext.Provider value={{ language, setLanguage, t }}>
-            {children}
-        </I18nContext.Provider>
-    );
+  const t = translations[language];
+
+  return (
+    <I18nContext.Provider value={{ language, setLanguage, toggleLanguage, t }}>
+      {children}
+    </I18nContext.Provider>
+  );
 }
 
 export function useI18n() {
-    const context = useContext(I18nContext);
-    if (!context) {
-        throw new Error("useI18n must be used within an I18nProvider");
-    }
-    return context;
+  const context = useContext(I18nContext);
+  if (!context) {
+    throw new Error("useI18n must be used within an I18nProvider");
+  }
+  return context;
 }
 
 export function useTranslation() {
-    const { language, setLanguage, t } = useI18n();
-
-    const toggleLanguage = useCallback(() => {
-        setLanguage(language === "en" ? "fr" : "en");
-    }, [language, setLanguage]);
-
-    return {
-        language,
-        setLanguage,
-        toggleLanguage,
-        t,
-    };
+  const context = useI18n();
+  return context;
 }

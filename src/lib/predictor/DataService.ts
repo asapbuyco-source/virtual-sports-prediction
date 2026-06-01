@@ -1,26 +1,9 @@
-import { TEAM_NAMES } from './teamNames';
 import teamStats from '../../../data/team_stats.json';
+import liveSyncData from '../../../data/live_sync.json';
 import { PredictorEngine } from './Engine';
 import type { Team, TeamCategory } from '../../data/teamsData';
 
-function loadLiveSync() {
-    try {
-        return require('../../../data/live_sync.json');
-    } catch {
-        return { upcoming: [], recentHistory: [], lastUpdated: null };
-    }
-}
-
-function loadTeamStats() {
-    try {
-        return require('../../../data/team_stats.json');
-    } catch {
-        return { leagues: {}, headToHead: {}, lastUpdated: null };
-    }
-}
-
-const liveSync = loadLiveSync();
-const teamStats = loadTeamStats();
+const liveSync = liveSyncData || { upcoming: [], recentHistory: [], lastUpdated: null };
 
 export class DataService {
     private static engine: PredictorEngine | null = null;

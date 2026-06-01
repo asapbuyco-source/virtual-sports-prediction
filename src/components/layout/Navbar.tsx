@@ -13,7 +13,8 @@ export function Navbar() {
     { path: "/dashboard", label: t.nav.dashboard, icon: "📊" },
     { path: "/predictor", label: t.nav.predictor, icon: "🔮" },
     { path: "/history", label: t.nav.history, icon: "📜" },
-    { path: "/pricing", label: t.nav.pricing, icon: "💎" },
+    { path: "/subscription", label: "Subscription", icon: "💎" },
+    { path: "/pricing", label: t.nav.pricing, icon: "💰" },
     { path: "/profile", label: t.nav.profile, icon: "👤" },
   ];
 
@@ -30,7 +31,7 @@ export function Navbar() {
             </div>
             <div>
               <h1 className="text-base font-black tracking-tight text-white leading-none">Vantage AI</h1>
-              <p className="text-[9px] text-green-400/80 font-semibold tracking-[0.2em] uppercase leading-none mt-0.5">
+              <p className="text-[10px] text-green-400/80 font-semibold tracking-[0.2em] uppercase leading-none mt-0.5">
                 BetPawa Virtual
               </p>
             </div>
@@ -57,18 +58,18 @@ export function Navbar() {
         <div className="flex items-center gap-3">
           <button
             onClick={() => setLanguage(language === "en" ? "fr" : "en")}
-            className="px-2 py-1 rounded text-xs font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
+            className="px-3 py-1.5 rounded text-xs font-bold bg-white/5 border border-white/10 hover:bg-white/10 transition"
           >
             {language === "en" ? "FR" : "EN"}
           </button>
           {user && (
-            <span className="text-[11px] text-gray-500 hidden sm:block font-medium">
+            <span className="text-xs text-gray-400 hidden sm:block font-medium">
               {user.email}
             </span>
           )}
-          <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-green-500/10 border border-green-500/20">
+          <div className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-green-500/10 border border-green-500/20">
             <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-            <span className="text-[10px] font-semibold text-green-400">LIVE</span>
+            <span className="text-xs font-semibold text-green-400">LIVE</span>
           </div>
         </div>
       </div>

@@ -31,6 +31,18 @@ const FAPSHI_BASE_URL = functions.config().fapshi?.base_url || process.env.FAPSH
 const FAPSHI_WEBHOOK_SECRET = functions.config().fapshi?.webhook_secret || process.env.FAPSHI_WEBHOOK_SECRET || "";
 const APP_URL = functions.config().app?.url || process.env.APP_URL || "https://vflpredictor.cm";
 
+interface RetryQueueEntry {
+  uid: string;
+  planId: string;
+  transId: string;
+  externalId: string;
+  amount: number;
+  attempts: number;
+  createdAt: admin.firestore.Timestamp;
+  lastAttemptAt: admin.firestore.Timestamp;
+  status: "pending" | "completed" | "failed";
+}
+
 async function verifyFapshiTransaction(transId: string): Promise<{ valid: boolean; status: string; amount: number }> {
   try {
     const response = await axios.default.get(`${FAPSHI_BASE_URL}/payment-status/${transId}`, {
@@ -57,6 +69,49 @@ function verifyWebhookSignature(body: string, signature: string, secret: string)
   } catch {
     return false;
   }
+}
+
+async function activateSubscription(
+  uid: string,
+  planId: string,
+  transId: string,
+  amount: number
+): Promise<void> {
+  const db = admin.firestore();
+  const now = admin.firestore.Timestamp.now();
+  const endDate = new Date();
+  endDate.setDate(endDate.getDate() + (PLAN_DURATIONS[planId] ?? 30));
+
+  await Promise.all([
+    db.doc(`subscriptions/${uid}`).set({
+      plan: planId,
+      status: "active",
+      fapshiTransactionId: transId,
+      startDate: now,
+      endDate: admin.firestore.Timestamp.fromDate(endDate),
+      amountPaid: amount,
+      currency: "XAF",
+    }),
+    db.doc(`users/${uid}`).update({
+      plan: planId,
+      predictionsLimit: PLAN_LIMITS[planId] ?? PLAN_LIMITS.monthly,
+      predictionsUsed: 0,
+    }),
+  ]);
+
+  console.log(`Activated ${planId} for user ${uid}`);
+}
+
+async function queueForRetry(entry: Omit<RetryQueueEntry, "attempts" | "createdAt" | "lastAttemptAt" | "status">): Promise<void> {
+  const db = admin.firestore();
+  await db.collection("payments/retryQueue/entries").add({
+    ...entry,
+    attempts: 0,
+    createdAt: admin.firestore.Timestamp.now(),
+    lastAttemptAt: admin.firestore.Timestamp.now(),
+    status: "pending",
+  });
+  console.warn(`Queued failed payment for retry: ${entry.transId}`);
 }
 
 export const initiatePayment = functions.https.onCall(async (data, context) => {
@@ -162,50 +217,79 @@ export const fapshiWebhook = functions.https.onRequest(async (req, res) => {
     return;
   }
 
-  const transValid = await verifyFapshiTransaction(transId);
-  if (!transValid.valid || transValid.status !== "SUCCESSFUL") {
-    console.error("Fapshi webhook: invalid transId or status", transId, transValid.status);
-    res.status(401).send("invalid_transaction");
-    return;
-  }
+  try {
+    const transValid = await verifyFapshiTransaction(transId);
+    if (!transValid.valid || transValid.status !== "SUCCESSFUL") {
+      console.error("Fapshi webhook: invalid transId or status", transId, transValid.status);
+      await queueForRetry({ uid, planId, transId, externalId, amount });
+      res.status(202).send("queued_for_retry");
+      return;
+    }
 
-  const db = admin.firestore();
-  const userSnap = await db.doc(`users/${uid}`).get();
-  if (!userSnap.exists) {
-    console.error("Fapshi webhook: user not found", uid);
-    res.status(404).send("user_not_found");
-    return;
-  }
-
-  const userData = userSnap.data();
-  if (userData?.plan === planId) {
+    await activateSubscription(uid, planId, transId, amount);
     res.status(200).send("ok");
-    return;
+  } catch (err) {
+    console.error("Fapshi webhook: activation failed", err);
+    await queueForRetry({ uid, planId, transId, externalId, amount });
+    res.status(202).send("queued_for_retry");
   }
-
-  const now = admin.firestore.Timestamp.now();
-  const endDate = new Date();
-  endDate.setDate(endDate.getDate() + (PLAN_DURATIONS[planId] ?? 30));
-
-  await Promise.all([
-    db.doc(`subscriptions/${uid}`).set({
-      plan: planId,
-      status: "active",
-      fapshiTransactionId: transId,
-      startDate: now,
-      endDate: admin.firestore.Timestamp.fromDate(endDate),
-      amountPaid: amount,
-      currency: "XAF",
-    }),
-    db.doc(`users/${uid}`).update({
-      plan: planId,
-      predictionsLimit: PLAN_LIMITS[planId] ?? PLAN_LIMITS.monthly,
-      predictionsUsed: 0,
-    }),
-  ]);
-
-  res.status(200).send("ok");
 });
+
+export const retryFailedPayments = functions.pubsub
+  .schedule("every 30 minutes")
+  .timeZone("Africa/Douala")
+  .onRun(async () => {
+    const db = admin.firestore();
+    const now = admin.firestore.Timestamp.now();
+    const thirtyMinutesAgo = new Date(Date.now() - 30 * 60 * 1000);
+
+    const stale = await db
+      .collection("payments/retryQueue/entries")
+      .where("status", "==", "pending")
+      .where("lastAttemptAt", "<", admin.firestore.Timestamp.fromDate(thirtyMinutesAgo))
+      .limit(20)
+      .get();
+
+    if (stale.empty) {
+      console.log("No pending payment retries");
+      return;
+    }
+
+    const batch = db.batch();
+    for (const docSnap of stale.docs) {
+      const entry = docSnap.data() as RetryQueueEntry;
+
+      if (entry.attempts >= 5) {
+        batch.update(docSnap.ref, { status: "failed" });
+        console.warn(`Dropping retry for ${entry.transId} after 5 attempts`);
+        continue;
+      }
+
+      try {
+        const transValid = await verifyFapshiTransaction(entry.transId);
+        if (transValid.valid && transValid.status === "SUCCESSFUL") {
+          await activateSubscription(entry.uid, entry.planId, entry.transId, entry.amount);
+          batch.update(docSnap.ref, { status: "completed" });
+          console.log(`Retry succeeded for ${entry.transId}`);
+        } else {
+          batch.update(docSnap.ref, {
+            attempts: admin.firestore.FieldValue.increment(1),
+            lastAttemptAt: now,
+            status: "pending",
+          });
+        }
+      } catch (err) {
+        console.error(`Retry attempt failed for ${entry.transId}:`, err);
+        batch.update(docSnap.ref, {
+          attempts: admin.firestore.FieldValue.increment(1),
+          lastAttemptAt: now,
+        });
+      }
+    }
+
+    await batch.commit();
+    console.log(`Processed ${stale.size} retry queue entries`);
+  });
 
 export const resetMonthlyPredictions = functions.pubsub
   .schedule("0 0 1 * *")
@@ -217,6 +301,25 @@ export const resetMonthlyPredictions = functions.pubsub
     snap.docs.forEach((d) => batch.update(d.ref, { predictionsUsed: 0 }));
     await batch.commit();
     console.log(`Reset predictions for ${snap.size} users`);
+  });
+
+export const resetDailyPredictions = functions.pubsub
+  .schedule("0 0 * * *")
+  .timeZone("Africa/Douala")
+  .onRun(async () => {
+    const db = admin.firestore();
+    const snap = await db
+      .collection("users")
+      .where("plan", "==", "daily")
+      .get();
+    if (snap.empty) {
+      console.log("No daily plan users to reset");
+      return;
+    }
+    const batch = db.batch();
+    snap.docs.forEach((d) => batch.update(d.ref, { predictionsUsed: 0 }));
+    await batch.commit();
+    console.log(`Reset daily predictions for ${snap.size} users`);
   });
 
 export const onUserCreate = functions.auth.user().onCreate(async (user) => {
@@ -231,4 +334,22 @@ export const onUserCreate = functions.auth.user().onCreate(async (user) => {
     createdAt: admin.firestore.Timestamp.now(),
     lastActiveAt: admin.firestore.Timestamp.now(),
   });
+});
+
+export const logAppError = functions.https.onCall(async (data, context) => {
+  if (!context.auth) {
+    throw new functions.https.HttpsError("unauthenticated", "Must be authenticated");
+  }
+  const { message, stack, errorId, component } = data;
+  const db = admin.firestore();
+  await db.collection("errors").add({
+    message,
+    stack,
+    errorId,
+    component,
+    uid: context.auth.uid,
+    timestamp: admin.firestore.Timestamp.now(),
+    userAgent: context.rawRequest.headers["user-agent"],
+  });
+  return { logged: true };
 });

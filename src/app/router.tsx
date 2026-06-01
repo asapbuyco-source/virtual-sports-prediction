@@ -13,6 +13,7 @@ const HistoryPage = lazy(() => import("@/pages/HistoryPage"));
 const ProfilePage = lazy(() => import("@/pages/ProfilePage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 const PaymentCallbackPage = lazy(() => import("@/pages/PaymentCallbackPage"));
+const SubscriptionPage = lazy(() => import("@/pages/SubscriptionPage"));
 
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: "/predictor", element: <ErrorBoundary><PredictorPage /></ErrorBoundary> },
       { path: "/history", element: <ErrorBoundary><HistoryPage /></ErrorBoundary> },
       { path: "/profile", element: <ProfilePage /> },
+      { path: "/subscription", element: <ErrorBoundary><SubscriptionPage /></ErrorBoundary> },
     ],
   },
   { path: "*", element: <NotFoundPage /> },

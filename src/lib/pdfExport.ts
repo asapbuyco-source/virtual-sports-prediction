@@ -1,0 +1,189 @@
+import { jsPDF } from "jspdf";
+import type { MatchPrediction, BetTip } from "@/features/predictor/engine/predictor";
+
+interface PredictionPDFOptions {
+  homeTeam: string;
+  awayTeam: string;
+  league: string;
+  matchday: number;
+  result: MatchPrediction;
+  userPlan: string;
+}
+
+export function generatePredictionPDF({
+  homeTeam,
+  awayTeam,
+  league,
+  matchday,
+  result,
+}: PredictionPDFOptions): jsPDF {
+  const doc = new jsPDF();
+  const pageWidth = doc.internal.pageSize.getWidth();
+  const margin = 20;
+  let y = 20;
+
+  doc.setFillColor(10, 10, 15);
+  doc.rect(0, 0, pageWidth, 297, "F");
+
+  doc.setTextColor(34, 197, 94);
+  doc.setFontSize(24);
+  doc.setFont("helvetica", "bold");
+  doc.text("VANTAGE AI", margin, y);
+
+  doc.setTextColor(100, 100, 100);
+  doc.setFontSize(9);
+  doc.text(`Prediction Report — ${league} · Matchday ${matchday}`, margin, y + 8);
+
+  y += 20;
+  doc.setDrawColor(34, 197, 94);
+  doc.setLineWidth(0.5);
+  doc.line(margin, y, pageWidth - margin, y);
+
+  y += 12;
+  doc.setTextColor(255, 255, 255);
+  doc.setFontSize(18);
+  doc.setFont("helvetica", "bold");
+  doc.text(`${homeTeam} vs ${awayTeam}`, pageWidth / 2, y, { align: "center" });
+
+  y += 8;
+  doc.setTextColor(34, 197, 94);
+  doc.setFontSize(28);
+  doc.setFont("helvetica", "bold");
+  doc.text(result.predictedScore, pageWidth / 2, y + 8, { align: "center" });
+
+  doc.setTextColor(150, 150, 150);
+  doc.setFontSize(9);
+  doc.text(`Confidence: ${result.confidence}%  |  xG: ${result.expectedGoals}`, pageWidth / 2, y + 14, {
+    align: "center",
+  });
+
+  y += 26;
+  doc.setTextColor(100, 100, 100);
+  doc.setFontSize(10);
+  doc.setFont("helvetica", "normal");
+  doc.text("Match Probabilities", margin, y);
+
+  y += 8;
+  const probBarWidth = (pageWidth - margin * 2) / 3 - 4;
+  const probs = [
+    { label: homeTeam, value: result.homeWinProb, color: [34, 197, 94] },
+    { label: "Draw", value: result.drawProb, color: [234, 179, 8] },
+    { label: awayTeam, value: result.awayWinProb, color: [239, 68, 68] },
+  ];
+
+  probs.forEach((p, i) => {
+    const x = margin + i * (probBarWidth + 4);
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "bold");
+    doc.text(p.label, x, y);
+    doc.setTextColor(...(p.color as [number, number, number]));
+    doc.text(`${p.value}%`, x + probBarWidth, y, { align: "right" });
+    y += 4;
+    doc.setFillColor(40, 40, 50);
+    doc.roundedRect(x, y, probBarWidth, 6, 1, 1, "F");
+    doc.setFillColor(...(p.color as [number, number, number]));
+    doc.roundedRect(x, y, (probBarWidth * p.value) / 100, 6, 1, 1, "F");
+    y += 12;
+  });
+
+  y += 4;
+  doc.setDrawColor(30, 30, 40);
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 12;
+
+  doc.setTextColor(100, 100, 100);
+  doc.setFontSize(10);
+  doc.text("Goal Markets", margin, y);
+  y += 8;
+  const goalMarkets = [
+    { label: "Over 1.5", value: result.over15Prob },
+    { label: "Over 2.5", value: result.over25Prob },
+    { label: "Over 3.5", value: result.over35Prob },
+    { label: "BTTS", value: result.bttsProb },
+  ];
+  goalMarkets.forEach((m) => {
+    doc.setTextColor(180, 180, 180);
+    doc.setFontSize(9);
+    doc.text(m.label, margin, y);
+    doc.setTextColor(255, 255, 255);
+    doc.text(`${m.value}%`, pageWidth - margin, y, { align: "right" });
+    y += 7;
+  });
+
+  y += 4;
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 12;
+
+  doc.setTextColor(100, 100, 100);
+  doc.setFontSize(10);
+  doc.text("Bet Tips", margin, y);
+  y += 8;
+
+  result.tips.forEach((tip: BetTip) => {
+    const tagColor =
+      tip.tag === "SAFE" ? [34, 197, 94] : tip.tag === "VALUE" ? [234, 179, 8] : [239, 68, 68];
+    doc.setTextColor(...(tagColor as [number, number, number]));
+    doc.setFontSize(9);
+    doc.setFont("helvetica", "bold");
+    doc.text(tip.tag, margin, y);
+    doc.setTextColor(255, 255, 255);
+    doc.setFont("helvetica", "bold");
+    doc.text(tip.pick, margin + 20, y);
+    doc.setTextColor(150, 150, 150);
+    doc.setFont("helvetica", "normal");
+    doc.text(`${tip.confidence}%`, pageWidth - margin, y, { align: "right" });
+    y += 5;
+    doc.setTextColor(100, 100, 100);
+    doc.setFontSize(8);
+    const lines = doc.splitTextToSize(tip.reasoning, pageWidth - margin * 2);
+    doc.text(lines, margin, y);
+    y += lines.length * 5 + 6;
+  });
+
+  y += 4;
+  doc.line(margin, y, pageWidth - margin, y);
+  y += 10;
+
+  const signals = result.signals;
+  if (signals.length > 0) {
+    doc.setTextColor(100, 100, 100);
+    doc.setFontSize(10);
+    doc.text("Algo Signals", margin, y);
+    y += 8;
+    signals.forEach((signal) => {
+      doc.setTextColor(150, 150, 150);
+      doc.setFontSize(8);
+      const lines = doc.splitTextToSize(`• ${signal}`, pageWidth - margin * 2);
+      doc.text(lines, margin, y);
+      y += lines.length * 5;
+    });
+    y += 6;
+  }
+
+  doc.setFillColor(10, 10, 15);
+  doc.rect(0, 265, pageWidth, 32, "F");
+  doc.setTextColor(60, 60, 60);
+  doc.setFontSize(7);
+  doc.text(
+    "Generated by Vantage AI · Virtual football outcomes are computer-generated.",
+    pageWidth / 2,
+    275,
+    { align: "center" }
+  );
+  doc.text(
+    "Past prediction accuracy does not guarantee future results. Bet responsibly.",
+    pageWidth / 2,
+    280,
+    { align: "center" }
+  );
+  doc.text(new Date().toLocaleDateString(), pageWidth / 2, 285, { align: "center" });
+
+  return doc;
+}
+
+export function downloadPredictionPDF(options: PredictionPDFOptions) {
+  const doc = generatePredictionPDF(options);
+  const filename = `vantage-ai-${options.league.replace(/\s+/g, "-").toLowerCase()}-${Date.now()}.pdf`;
+  doc.save(filename);
+}

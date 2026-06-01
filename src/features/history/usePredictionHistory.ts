@@ -1,5 +1,14 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { collection, addDoc, query, orderBy, getDocs, doc as firestoreDoc, getDoc } from "firebase/firestore";
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
+  getDocs,
+  doc as firestoreDoc,
+  getDoc,
+  serverTimestamp,
+} from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { useAppStore } from "@/store/useAppStore";
 import type { MatchPrediction } from "@/features/predictor/engine/predictor";
@@ -36,9 +45,17 @@ export function usePredictionHistory() {
         orderBy("savedAt", "desc")
       );
       const snap = await getDocs(q);
-      return snap.docs.map(d => ({ id: d.id, ...d.data() })) as SavedPrediction[];
+      return snap.docs.map((d) => {
+        const data = d.data();
+        return {
+          id: d.id,
+          ...data,
+          savedAt: data.savedAt?.toDate?.() ?? new Date(data.savedAt ?? Date.now()),
+        } as SavedPrediction;
+      });
     },
     enabled: !!user,
+    staleTime: 30000,
   });
 }
 
@@ -51,19 +68,57 @@ export function useSavePrediction() {
       if (!user) throw new Error("Not authenticated");
       const ref = await addDoc(collection(db, "users", user.uid, "predictions"), {
         ...data,
-        savedAt: new Date(),
+        savedAt: serverTimestamp(),
       });
       return ref.id;
     },
-    onSuccess: async () => {
+    onSuccess: async (_data, _vars, _ctx) => {
       queryClient.invalidateQueries({ queryKey: ["predictions", user?.uid] });
       if (user) {
         const snap = await getDoc(firestoreDoc(db, "users", user.uid));
         if (snap.exists()) {
           const data = snap.data();
-          setUser({ ...user, predictionsUsed: data.predictionsUsed ?? user.predictionsUsed, predictionsLimit: data.predictionsLimit ?? user.predictionsLimit });
+          setUser({
+            ...user,
+            predictionsUsed: data.predictionsUsed ?? user.predictionsUsed,
+            predictionsLimit: data.predictionsLimit ?? user.predictionsLimit,
+          });
         }
       }
     },
+    onError: (error: Error) => {
+      if (
+        error.message.includes("permission") ||
+        error.message.includes("denied") ||
+        error.message.includes("NOT_FOUND") ||
+        error.message.includes("limit")
+      ) {
+        throw new Error(
+          "Prediction limit reached. Upgrade your plan for more predictions."
+        );
+      }
+      throw error;
+    },
+  });
+}
+
+export function useSubscription() {
+  const { user } = useAppStore();
+
+  return useQuery({
+    queryKey: ["subscription", user?.uid],
+    queryFn: async () => {
+      if (!user) return null;
+      const snap = await getDoc(firestoreDoc(db, "subscriptions", user.uid));
+      if (!snap.exists()) return null;
+      const data = snap.data();
+      return {
+        ...data,
+        startDate: data.startDate?.toDate?.() ?? null,
+        endDate: data.endDate?.toDate?.() ?? null,
+      };
+    },
+    enabled: !!user && user.plan !== "free",
+    staleTime: 60000,
   });
 }

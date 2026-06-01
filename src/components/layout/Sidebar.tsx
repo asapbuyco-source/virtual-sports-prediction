@@ -10,7 +10,8 @@ const navItems = [
   { path: "/dashboard", label: "Dashboard", icon: "📊" },
   { path: "/predictor", label: "Predictor", icon: "🔮" },
   { path: "/history", label: "History", icon: "📜" },
-  { path: "/pricing", label: "Pricing", icon: "💎" },
+  { path: "/subscription", label: "Subscription", icon: "💎" },
+  { path: "/pricing", label: "Pricing", icon: "💰" },
   { path: "/profile", label: "Profile", icon: "👤" },
 ];
 
@@ -33,22 +34,22 @@ export function Sidebar() {
       )}
 
       <aside className={cn(
-        "fixed left-0 top-0 h-full w-[260px] bg-[#0c0c14] border-r border-white/[0.06] z-50 transform transition-transform duration-300 ease-out lg:translate-x-0 lg:static lg:z-auto flex flex-col",
+        "fixed left-0 top-0 h-full w-[260px] bg-surface-4 border-r border-white/[0.06] z-50 transform transition-transform duration-300 ease-out lg:translate-x-0 lg:static lg:z-auto flex flex-col",
         sidebarOpen ? "translate-x-0" : "-translate-x-full"
       )}>
         <div className="p-4 border-b border-white/[0.06]">
           <div className="flex items-center justify-between mb-4">
             <Link to="/" className="flex items-center gap-2.5" onClick={() => setSidebarOpen(false)}>
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-[10px] font-black text-white">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-xs font-black text-white">
                 VA
               </div>
               <div>
                 <p className="text-sm font-bold text-white leading-none">Vantage AI</p>
-                <p className="text-[9px] text-green-400/70 font-medium tracking-[0.15em] uppercase">Analysis Engine</p>
+                <p className="text-[10px] text-green-400/70 font-medium tracking-[0.15em] uppercase">Analysis Engine</p>
               </div>
             </Link>
-            <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-gray-500 hover:text-white p-1">
-              <X size={16} />
+            <button onClick={() => setSidebarOpen(false)} className="lg:hidden text-gray-400 hover:text-white p-2 -mr-1">
+              <X size={20} />
             </button>
           </div>
 
@@ -58,16 +59,16 @@ export function Sidebar() {
             </div>
             <div className="flex-1 min-w-0">
               <p className="text-sm font-semibold text-white truncate">{user?.displayName ?? "User"}</p>
-              <p className="text-[11px] text-gray-500 truncate">{user?.email}</p>
+              <p className="text-xs text-gray-400 truncate">{user?.email}</p>
             </div>
           </div>
         </div>
 
         {user?.plan === "free" && (
           <div className="px-4 py-3 border-b border-white/[0.06]">
-            <div className="flex justify-between text-[11px] mb-1.5">
-              <span className="text-gray-500">Predictions</span>
-              <span className="text-gray-400 font-medium">{used} / {limit}</span>
+            <div className="flex justify-between text-xs mb-1.5">
+              <span className="text-gray-400">Predictions</span>
+              <span className="text-gray-300 font-medium">{used} / {limit}</span>
             </div>
             <div className="w-full bg-white/[0.06] rounded-full h-1.5 overflow-hidden">
               <div
@@ -75,8 +76,8 @@ export function Sidebar() {
                 style={{ width: `${percent}%` }}
               />
             </div>
-            <Link to="/pricing" onClick={() => setSidebarOpen(false)} className="mt-2 flex items-center gap-1.5 text-[11px] font-semibold text-green-400 hover:text-green-300 transition-colors">
-              <Zap size={12} />
+            <Link to="/pricing" onClick={() => setSidebarOpen(false)} className="mt-2 flex items-center gap-1.5 text-xs font-semibold text-green-400 hover:text-green-300 transition-colors">
+              <Zap size={14} />
               Upgrade for more
             </Link>
           </div>
@@ -89,10 +90,10 @@ export function Sidebar() {
               to={item.path}
               onClick={() => setSidebarOpen(false)}
               className={cn(
-                "flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-all duration-200",
+                "flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200",
                 location.pathname === item.path
                   ? "bg-green-500/10 text-green-400 shadow-sm shadow-green-500/5"
-                  : "text-gray-500 hover:text-white hover:bg-white/[0.04]"
+                  : "text-gray-400 hover:text-white hover:bg-white/[0.04]"
               )}
             >
               <span className="text-sm">{item.icon}</span>
@@ -104,9 +105,9 @@ export function Sidebar() {
         <div className="p-3 border-t border-white/[0.06]">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-[13px] font-medium text-gray-500 hover:text-red-400 hover:bg-red-500/10 w-full transition-all duration-200"
+            className="flex items-center gap-2.5 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-red-400 hover:bg-red-500/10 w-full transition-all duration-200"
           >
-            <LogOut size={15} />
+            <LogOut size={16} />
             Sign Out
           </button>
         </div>

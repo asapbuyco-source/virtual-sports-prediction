@@ -50,7 +50,7 @@ export const useAppStore = create<AppStore>()(
 
       predictor: {
         selectedLeague: "English League",
-        homeTeamId: "MNC",
+        homeTeamId: "MCI",
         awayTeamId: "LIV",
         homeForm: [],
         awayForm: [],
