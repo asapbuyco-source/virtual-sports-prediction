@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import { CheckCircle, XCircle } from "lucide-react";
+import { CheckCircle, XCircle, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "@/lib/firebase";
@@ -11,6 +11,7 @@ export default function PaymentCallbackPage() {
   const [searchParams] = useSearchParams();
   const transId = searchParams.get("transId") || "";
   const [status, setStatus] = useState<"checking" | "success" | "failed">("checking");
+  const [checking, setChecking] = useState(false);
 
   useEffect(() => {
     if (!user || !transId) {
@@ -32,6 +33,30 @@ export default function PaymentCallbackPage() {
     const timeout = setTimeout(() => setStatus("failed"), 120000);
     return () => { unsub(); clearTimeout(timeout); };
   }, [user, transId, setUser]);
+
+  const handleManualCheck = () => {
+    if (!user) return;
+    setChecking(true);
+    const checkUser = async () => {
+      try {
+        const { getDoc } = await import("firebase/firestore");
+        const snap = await getDoc(doc(db, "users", user.uid));
+        const data = snap.data();
+        if (data?.plan && data.plan !== "free") {
+          setStatus("success");
+          setUser({ ...user, plan: data.plan, predictionsLimit: data.predictionsLimit, predictionsUsed: data.predictionsUsed });
+          toast.success(`Plan activated: ${data.plan.toUpperCase()}!`);
+        } else {
+          toast.error("Payment not yet confirmed. Please wait a few minutes.");
+        }
+      } catch {
+        toast.error("Failed to check payment status.");
+      } finally {
+        setChecking(false);
+      }
+    };
+    checkUser();
+  };
 
   return (
     <div className="min-h-screen bg-[#0a0a0f] flex items-center justify-center p-4">
@@ -79,6 +104,14 @@ export default function PaymentCallbackPage() {
                   Try Again
                 </a>
               </div>
+              <button
+                onClick={handleManualCheck}
+                disabled={checking}
+                className="mt-3 px-5 py-2 rounded-xl bg-white/[0.06] hover:bg-white/[0.1] border border-white/[0.08] text-gray-400 hover:text-white text-xs font-bold transition flex items-center gap-2 mx-auto"
+              >
+                <RefreshCw size={14} className={checking ? "animate-spin" : ""} />
+                {checking ? "Checking..." : "Check payment status"}
+              </button>
             </div>
           </>
         )}

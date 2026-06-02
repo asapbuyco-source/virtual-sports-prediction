@@ -1,6 +1,6 @@
-import * as functions from "firebase-functions";
+import functions from "firebase-functions";
 import * as admin from "firebase-admin";
-import * as axios from "axios";
+import axios from "axios";
 import * as crypto from "crypto";
 
 admin.initializeApp();
@@ -26,10 +26,21 @@ const PLAN_LIMITS: Record<string, number> = {
   elite: 999999,
 };
 
-const FAPSHI_API_KEY = functions.config().fapshi?.api_key || process.env.FAPSHI_API_KEY || "";
-const FAPSHI_BASE_URL = functions.config().fapshi?.base_url || process.env.FAPSHI_BASE_URL || "https://api.fapshi.com";
-const FAPSHI_WEBHOOK_SECRET = functions.config().fapshi?.webhook_secret || process.env.FAPSHI_WEBHOOK_SECRET || "";
-const APP_URL = functions.config().app?.url || process.env.APP_URL || "https://vflpredictor.cm";
+const getFapshiConfig = () => {
+  const cfg = functions.config();
+  return {
+    apiKey: cfg.fapshi?.api_key || process.env.FAPSHI_API_KEY || "",
+    baseUrl: cfg.fapshi?.base_url || process.env.FAPSHI_BASE_URL || "https://api.fapshi.com",
+    webhookSecret: cfg.fapshi?.webhook_secret || process.env.FAPSHI_WEBHOOK_SECRET || "",
+  };
+};
+
+const getAppConfig = () => {
+  const cfg = functions.config();
+  return {
+    url: cfg.app?.url || process.env.APP_URL || "https://vflpredictor.cm",
+  };
+};
 
 interface RetryQueueEntry {
   uid: string;
@@ -45,8 +56,9 @@ interface RetryQueueEntry {
 
 async function verifyFapshiTransaction(transId: string): Promise<{ valid: boolean; status: string; amount: number }> {
   try {
-    const response = await axios.default.get(`${FAPSHI_BASE_URL}/payment-status/${transId}`, {
-      headers: { apiuser: FAPSHI_API_KEY },
+    const cfg = getFapshiConfig();
+    const response = await axios.get(`${cfg.baseUrl}/payment-status/${transId}`, {
+      headers: { apiuser: cfg.apiKey },
     });
     return {
       valid: true,
@@ -82,8 +94,16 @@ async function activateSubscription(
   const endDate = new Date();
   endDate.setDate(endDate.getDate() + (PLAN_DURATIONS[planId] ?? 30));
 
-  await Promise.all([
-    db.doc(`subscriptions/${uid}`).set({
+  await db.runTransaction(async (tx) => {
+    const subRef = db.doc(`subscriptions/${uid}`);
+    const subSnap = await tx.get(subRef);
+
+    if (subSnap.exists && subSnap.data()?.fapshiTransactionId === transId) {
+      console.log(`Duplicate webhook ignored`);
+      return;
+    }
+
+    tx.set(subRef, {
       plan: planId,
       status: "active",
       fapshiTransactionId: transId,
@@ -91,15 +111,16 @@ async function activateSubscription(
       endDate: admin.firestore.Timestamp.fromDate(endDate),
       amountPaid: amount,
       currency: "XAF",
-    }),
-    db.doc(`users/${uid}`).update({
+    });
+
+    tx.update(db.doc(`users/${uid}`), {
       plan: planId,
       predictionsLimit: PLAN_LIMITS[planId] ?? PLAN_LIMITS.monthly,
       predictionsUsed: 0,
-    }),
-  ]);
+    });
+  });
 
-  console.log(`Activated ${planId} for user ${uid}`);
+  console.log(`Activated ${planId} for user [uid]`);
 }
 
 async function queueForRetry(entry: Omit<RetryQueueEntry, "attempts" | "createdAt" | "lastAttemptAt" | "status">): Promise<void> {
@@ -111,7 +132,7 @@ async function queueForRetry(entry: Omit<RetryQueueEntry, "attempts" | "createdA
     lastAttemptAt: admin.firestore.Timestamp.now(),
     status: "pending",
   });
-  console.warn(`Queued failed payment for retry: ${entry.transId}`);
+  console.warn(`Queued failed payment for retry`);
 }
 
 export const initiatePayment = functions.https.onCall(async (data, context) => {
@@ -119,30 +140,36 @@ export const initiatePayment = functions.https.onCall(async (data, context) => {
     throw new functions.https.HttpsError("unauthenticated", "User must be authenticated");
   }
 
-  const { planId, phone } = data;
+  const { planId, phone } = data as { planId: string; phone?: string };
   const uid = context.auth.uid;
 
   if (!planId || !["daily", "weekly", "monthly", "elite"].includes(planId)) {
     throw new functions.https.HttpsError("invalid-argument", "Invalid plan ID");
   }
 
+  if (phone && !/^\d{8,9}$/.test(phone)) {
+    throw new functions.https.HttpsError("invalid-argument", "Invalid phone number format");
+  }
+
   const price = PLAN_PRICES[planId];
   const externalId = `${uid}:${planId}:${Date.now()}`;
+  const cfg = getFapshiConfig();
+  const appCfg = getAppConfig();
 
   try {
-    const response = await axios.default.post(
-      `${FAPSHI_BASE_URL}/initiate-pay`,
+    const response = await axios.post(
+      `${cfg.baseUrl}/initiate-pay`,
       {
         amount: price,
         phone: phone || undefined,
-        redirectUrl: `${APP_URL}/payment-callback?transId=${externalId}`,
+        redirectUrl: `${appCfg.url}/payment-callback?transId=${externalId}`,
         userId: uid,
         externalId,
         message: `Vantage AI ${planId.charAt(0).toUpperCase() + planId.slice(1)} Plan`,
       },
       {
         headers: {
-          apiuser: FAPSHI_API_KEY,
+          apiuser: cfg.apiKey,
           "Content-Type": "application/json",
         },
       }
@@ -152,8 +179,9 @@ export const initiatePayment = functions.https.onCall(async (data, context) => {
       transId: response.data.transId,
       link: response.data.link,
     };
-  } catch (error: any) {
-    console.error("Fapshi payment initiation failed:", error.message);
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : "Unknown error";
+    console.error("Fapshi payment initiation failed:", msg);
     throw new functions.https.HttpsError("internal", "Payment initiation failed");
   }
 });
@@ -163,34 +191,37 @@ export const onPredictionCreated = functions.firestore
   .onCreate(async (snap, context) => {
     const { uid } = context.params;
     const db = admin.firestore();
-
     const userRef = db.doc(`users/${uid}`);
-    const userSnap = await userRef.get();
 
-    if (!userSnap.exists) return;
+    await db.runTransaction(async (tx) => {
+      const userSnap = await tx.get(userRef);
+      if (!userSnap.exists) return;
 
-    const userData = userSnap.data();
-    const used = userData?.predictionsUsed || 0;
-    const limit = userData?.predictionsLimit || 5;
+      const userData = userSnap.data();
+      const used = userData?.predictionsUsed || 0;
+      const limit = userData?.predictionsLimit || 5;
 
-    if (used >= limit) {
-      await snap.ref.delete();
-      console.log(`Prediction deleted for user ${uid}: limit exceeded (${used}/${limit})`);
-      return;
-    }
+      if (used >= limit) {
+        tx.delete(snap.ref);
+        console.log(`Prediction deleted: limit exceeded (${used}/${limit})`);
+        return;
+      }
 
-    await userRef.update({
-      predictionsUsed: admin.firestore.FieldValue.increment(1),
+      tx.update(userRef, {
+        predictionsUsed: admin.firestore.FieldValue.increment(1),
+      });
+      console.log(`Incremented predictions: ${used + 1}/${limit}`);
     });
-    console.log(`Incremented predictions for user ${uid}: ${used + 1}/${limit}`);
   });
 
 export const fapshiWebhook = functions.https.onRequest(async (req, res) => {
   const signature = req.headers["x-fapshi-signature"] as string;
-  const rawBody = JSON.stringify(req.body);
-  const { transId, status, amount, externalId } = req.body;
+  const rawBody = (req as any).rawBody as string | undefined;
+  const bodyString = rawBody || JSON.stringify(req.body);
+  const { status, amount, externalId } = req.body;
+  const cfg = getFapshiConfig();
 
-  if (!verifyWebhookSignature(rawBody, signature, FAPSHI_WEBHOOK_SECRET)) {
+  if (!verifyWebhookSignature(bodyString, signature, cfg.webhookSecret)) {
     console.error("Fapshi webhook: HMAC signature mismatch");
     res.status(401).send("unauthorized");
     return;
@@ -203,7 +234,7 @@ export const fapshiWebhook = functions.https.onRequest(async (req, res) => {
 
   const parts = externalId.split(":");
   if (parts.length < 2) {
-    console.error("Fapshi webhook: malformed externalId", externalId);
+    console.error("Fapshi webhook: malformed externalId");
     res.status(400).send("bad_request");
     return;
   }
@@ -212,25 +243,25 @@ export const fapshiWebhook = functions.https.onRequest(async (req, res) => {
 
   const expectedPrice = PLAN_PRICES[planId];
   if (expectedPrice && amount < expectedPrice) {
-    console.error("Fapshi webhook: amount mismatch", amount, "expected", expectedPrice);
+    console.error("Fapshi webhook: amount mismatch");
     res.status(400).send("amount_mismatch");
     return;
   }
 
   try {
-    const transValid = await verifyFapshiTransaction(transId);
+    const transValid = await verifyFapshiTransaction(req.body.transId as string);
     if (!transValid.valid || transValid.status !== "SUCCESSFUL") {
-      console.error("Fapshi webhook: invalid transId or status", transId, transValid.status);
-      await queueForRetry({ uid, planId, transId, externalId, amount });
+      console.error("Fapshi webhook: invalid transId or status");
+      await queueForRetry({ uid, planId, transId: req.body.transId as string, externalId, amount });
       res.status(202).send("queued_for_retry");
       return;
     }
 
-    await activateSubscription(uid, planId, transId, amount);
+    await activateSubscription(uid, planId, req.body.transId as string, amount);
     res.status(200).send("ok");
   } catch (err) {
-    console.error("Fapshi webhook: activation failed", err);
-    await queueForRetry({ uid, planId, transId, externalId, amount });
+    console.error("Fapshi webhook: activation failed");
+    await queueForRetry({ uid, planId, transId: req.body.transId as string, externalId, amount });
     res.status(202).send("queued_for_retry");
   }
 });
@@ -261,7 +292,7 @@ export const retryFailedPayments = functions.pubsub
 
       if (entry.attempts >= 5) {
         batch.update(docSnap.ref, { status: "failed" });
-        console.warn(`Dropping retry for ${entry.transId} after 5 attempts`);
+        console.warn(`Dropping retry after 5 attempts`);
         continue;
       }
 
@@ -270,16 +301,14 @@ export const retryFailedPayments = functions.pubsub
         if (transValid.valid && transValid.status === "SUCCESSFUL") {
           await activateSubscription(entry.uid, entry.planId, entry.transId, entry.amount);
           batch.update(docSnap.ref, { status: "completed" });
-          console.log(`Retry succeeded for ${entry.transId}`);
+          console.log(`Retry succeeded`);
         } else {
           batch.update(docSnap.ref, {
             attempts: admin.firestore.FieldValue.increment(1),
             lastAttemptAt: now,
-            status: "pending",
           });
         }
-      } catch (err) {
-        console.error(`Retry attempt failed for ${entry.transId}:`, err);
+      } catch {
         batch.update(docSnap.ref, {
           attempts: admin.firestore.FieldValue.increment(1),
           lastAttemptAt: now,
@@ -291,16 +320,73 @@ export const retryFailedPayments = functions.pubsub
     console.log(`Processed ${stale.size} retry queue entries`);
   });
 
+export const checkExpiredSubscriptions = functions.pubsub
+  .schedule("every 60 minutes")
+  .timeZone("Africa/Douala")
+  .onRun(async () => {
+    const db = admin.firestore();
+    const now = admin.firestore.Timestamp.now();
+
+    const expired = await db
+      .collection("subscriptions")
+      .where("status", "==", "active")
+      .where("endDate", "<", now)
+      .get();
+
+    if (expired.empty) {
+      console.log("No expired subscriptions");
+      return;
+    }
+
+    const batch = db.batch();
+    for (const docSnap of expired.docs) {
+      const uid = docSnap.id;
+      batch.update(docSnap.ref, { status: "expired" });
+      batch.update(db.doc(`users/${uid}`), {
+        plan: "free",
+        predictionsLimit: 5,
+      });
+    }
+
+    await batch.commit();
+    console.log(`Downgraded ${expired.size} expired subscriptions`);
+  });
+
+export const resetWeeklyPredictions = functions.pubsub
+  .schedule("0 0 * * 0")
+  .timeZone("Africa/Douala")
+  .onRun(async () => {
+    const db = admin.firestore();
+    const snap = await db
+      .collection("users")
+      .where("plan", "==", "weekly")
+      .get();
+
+    if (snap.empty) {
+      console.log("No weekly plan users to reset");
+      return;
+    }
+
+    const batch = db.batch();
+    snap.docs.forEach((d) => batch.update(d.ref, { predictionsUsed: 0 }));
+    await batch.commit();
+    console.log(`Reset weekly predictions for ${snap.size} users`);
+  });
+
 export const resetMonthlyPredictions = functions.pubsub
   .schedule("0 0 1 * *")
   .timeZone("Africa/Douala")
   .onRun(async () => {
     const db = admin.firestore();
-    const snap = await db.collection("users").get();
+    const snap = await db
+      .collection("users")
+      .where("plan", "in", ["monthly", "elite", "free"])
+      .get();
+
     const batch = db.batch();
     snap.docs.forEach((d) => batch.update(d.ref, { predictionsUsed: 0 }));
     await batch.commit();
-    console.log(`Reset predictions for ${snap.size} users`);
+    console.log(`Reset monthly predictions for ${snap.size} users`);
   });
 
 export const resetDailyPredictions = functions.pubsub
@@ -312,10 +398,12 @@ export const resetDailyPredictions = functions.pubsub
       .collection("users")
       .where("plan", "==", "daily")
       .get();
+
     if (snap.empty) {
       console.log("No daily plan users to reset");
       return;
     }
+
     const batch = db.batch();
     snap.docs.forEach((d) => batch.update(d.ref, { predictionsUsed: 0 }));
     await batch.commit();
@@ -325,9 +413,9 @@ export const resetDailyPredictions = functions.pubsub
 export const onUserCreate = functions.auth.user().onCreate(async (user) => {
   const db = admin.firestore();
   await db.doc(`users/${user.uid}`).set({
-    email: user.email,
-    displayName: user.displayName,
-    photoURL: user.photoURL,
+    email: user.email || "",
+    displayName: user.displayName || "User",
+    photoURL: user.photoURL || null,
     plan: "free",
     predictionsUsed: 0,
     predictionsLimit: 5,
@@ -340,13 +428,18 @@ export const logAppError = functions.https.onCall(async (data, context) => {
   if (!context.auth) {
     throw new functions.https.HttpsError("unauthenticated", "Must be authenticated");
   }
-  const { message, stack, errorId, component } = data;
+  const { message, stack, errorId, component } = data as { message: string; stack?: string; errorId?: string; component?: string };
+
+  if (!message || typeof message !== "string" || message.length > 2000) {
+    throw new functions.https.HttpsError("invalid-argument", "Invalid error message");
+  }
+
   const db = admin.firestore();
   await db.collection("errors").add({
-    message,
-    stack,
-    errorId,
-    component,
+    message: message.substring(0, 2000),
+    stack: stack?.substring(0, 5000),
+    errorId: errorId || null,
+    component: component || null,
     uid: context.auth.uid,
     timestamp: admin.firestore.Timestamp.now(),
     userAgent: context.rawRequest.headers["user-agent"],

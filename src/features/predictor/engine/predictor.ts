@@ -118,7 +118,7 @@ export function predict(
     over35Prob: Math.round((rawResult.over25Prob - 0.2) * 100), // Estimation
     bttsProb: Math.round(rawResult.bttsProb * 100),
     expectedGoals: rawResult.predictedScore.home + rawResult.predictedScore.away,
-    confidence: rawResult.confidence,
+    confidence: Math.min(rawResult.confidence, 75), // Capped at 75% for display
     valueRating: rawResult.confidence > 75 ? "HIGH" : "MEDIUM",
     signals,
     tips,

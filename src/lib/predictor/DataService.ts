@@ -6,6 +6,8 @@ import type { Team, TeamCategory } from '../../data/teamsData';
 
 const liveSync = liveSyncData || { upcoming: [], recentHistory: [], lastUpdated: null };
 
+const hasData = teamStats?.leagues && Object.keys(teamStats.leagues).length > 0;
+
 export const LEAGUE_ALIAS_MAP: Record<string, string> = {
   'English League': 'English League',
   'Spanish League': 'Spanish League',
@@ -20,10 +22,17 @@ export class DataService {
     private static engine: PredictorEngine | null = null;
 
     public static getEngine(): PredictorEngine {
+        if (!hasData) {
+            throw new Error("TEAM_STATS_NOT_LOADED");
+        }
         if (!this.engine) {
             this.engine = new PredictorEngine(teamStats, liveSync);
         }
         return this.engine;
+    }
+
+    public static hasValidData(): boolean {
+        return hasData;
     }
 
     public static getHeadToHead(team1: string, team2: string) {
@@ -57,6 +66,7 @@ export class DataService {
             'Dutch League': 'Eredivisie',
             'Portuguese League': 'Liga Nos',
         };
+        if (!hasData) return [];
         return Object.keys(teamStats.leagues).map(id => ({
             id,
             displayName: leagueNames[id] || id,
@@ -65,6 +75,7 @@ export class DataService {
     }
 
     public static getTeams(leagueId: string): Team[] {
+        if (!hasData) return [];
         const league = (teamStats.leagues as any)[leagueId];
         if (!league) return [];
 

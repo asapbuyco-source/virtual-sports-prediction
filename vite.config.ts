@@ -16,11 +16,15 @@ export default defineConfig({
       output: {
         manualChunks: {
           "react-vendor": ["react", "react-dom", "react-router-dom"],
-          "firebase-vendor": ["firebase/app", "firebase/auth", "firebase/firestore", "firebase/analytics", "firebase/functions"],
-          "ui-vendor": ["framer-motion", "lucide-react", "clsx", "tailwind-merge"],
+          "firebase-auth": ["firebase/auth"],
+          "firebase-firestore": ["firebase/firestore"],
+          "firebase-functions": ["firebase/functions"],
+          "firebase-analytics": ["firebase/analytics"],
+          "firebase-app": ["firebase/app"],
+          "ui-vendor": ["lucide-react", "clsx", "tailwind-merge"],
           "form-vendor": ["react-hook-form", "@hookform/resolvers", "zod"],
           "query-vendor": ["@tanstack/react-query"],
-          "charts-vendor": [],
+          "framer-motion": ["framer-motion"],
         },
       },
     },

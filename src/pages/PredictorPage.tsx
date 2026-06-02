@@ -1,4 +1,4 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import { useAppStore } from "@/store/useAppStore";
 import { DataService } from "@/lib/predictor/DataService";
 import { PredictionSkeleton } from "@/components/skeleton/PredictionSkeleton";
@@ -123,6 +123,8 @@ export default function PredictorPage() {
   const [activeTab, setActiveTab] = useState<"tips" | "signals" | "stats">("tips");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<MatchPrediction | null>(null);
+  const [dataError, setDataError] = useState<string | null>(null);
+  const lastPredictTime = useRef<number>(0);
 
   const { mutate: savePrediction, isPending: isSaving } = useSavePrediction();
   const { lastUpdated, syncing, refresh } = useLiveSync({ intervalMs: 60000 });
@@ -133,26 +135,43 @@ export default function PredictorPage() {
   const awayTeam = useMemo(() => leagueTeams.find(t => t.id === predictor.awayTeamId) ?? leagueTeams[1] ?? { id: "", name: "Away", shortName: "AWY", emoji: "✈️" }, [leagueTeams, predictor.awayTeamId]);
   const h2h = useMemo(() => DataService.getHeadToHead(predictor.homeTeamId, predictor.awayTeamId), [predictor.homeTeamId, predictor.awayTeamId]);
 
+  useEffect(() => {
+    if (leagues.length === 0 && !DataService.hasValidData()) {
+      setDataError("Team data failed to load. Please refresh the page or contact support.");
+    } else {
+      setDataError(null);
+    }
+  }, [leagues]);
+
   const limit = PLAN_LIMITS[user?.plan ?? "free"] ?? 5;
   const used = user?.predictionsUsed ?? 0;
   const canPredict = used < limit;
 
   const handlePredict = () => {
     if (predictor.homeTeamId === predictor.awayTeamId) return;
+    const now = Date.now();
+    if (now - lastPredictTime.current < 3000) return;
+    lastPredictTime.current = now;
     setLoading(true);
     setTimeout(() => {
-      const pred = predict(
-        homeTeam,
-        awayTeam,
-        predictor.homeForm,
-        predictor.awayForm,
-        predictor.matchdayPos,
-        predictor.oddsHome ? parseFloat(predictor.oddsHome) : undefined,
-        predictor.oddsX ? parseFloat(predictor.oddsX) : undefined,
-        predictor.oddsAway ? parseFloat(predictor.oddsAway) : undefined
-      );
-      setResult(pred);
-      setLoading(false);
+      try {
+        const pred = predict(
+          homeTeam,
+          awayTeam,
+          predictor.homeForm,
+          predictor.awayForm,
+          predictor.matchdayPos,
+          predictor.oddsHome ? parseFloat(predictor.oddsHome) : undefined,
+          predictor.oddsX ? parseFloat(predictor.oddsX) : undefined,
+          predictor.oddsAway ? parseFloat(predictor.oddsAway) : undefined
+        );
+        setResult(pred);
+      } catch (err) {
+        console.error("Prediction failed:", err);
+        setResult(null);
+      } finally {
+        setLoading(false);
+      }
     }, 800);
   };
 
@@ -198,6 +217,16 @@ export default function PredictorPage() {
       {!canPredict && (
         <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl px-4 py-3 text-sm text-yellow-300">
           ⚠️ You've used all your predictions. <a href="/pricing" className="underline text-green-400">Upgrade to Pro</a> for more.
+        </div>
+      )}
+
+      {dataError && (
+        <div className="bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3 text-sm text-red-300">
+          <p className="font-bold mb-1">⚠️ Data Error</p>
+          <p>{dataError}</p>
+          <button onClick={() => window.location.reload()} className="mt-2 px-3 py-1.5 rounded bg-red-600/20 text-red-400 text-xs font-bold hover:bg-red-600/30 transition">
+            Reload Page
+          </button>
         </div>
       )}
 
@@ -387,7 +416,7 @@ export default function PredictorPage() {
                 </div>
                 <div className="mt-4">
                   <div className="flex justify-between text-xs mb-1">
-                    <span className="text-gray-400">Confidence</span>
+                    <span className="text-gray-400" title="Model Certainty indicates how consistently the algorithm has predicted this outcome from historical data. Not a win probability.">Model Certainty</span>
                     <span className="font-bold" style={{ color: confidenceColor(result.confidence) }}>{result.confidence}%</span>
                   </div>
                   <div className="w-full bg-white/[0.06] rounded-full h-3 overflow-hidden">

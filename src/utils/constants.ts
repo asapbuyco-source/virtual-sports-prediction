@@ -97,4 +97,4 @@ export const PLAN_LIMITS: Record<string, number> = {
 };
 
 export const APP_NAME = "Vantage AI";
-export const APP_TAGLINE = "BetPawa Official Virtual Sports AI";
+export const APP_TAGLINE = "AI-Powered Virtual Sports Predictions";

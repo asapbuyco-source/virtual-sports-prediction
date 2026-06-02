@@ -14,12 +14,16 @@ const ProfilePage = lazy(() => import("@/pages/ProfilePage"));
 const NotFoundPage = lazy(() => import("@/pages/NotFoundPage"));
 const PaymentCallbackPage = lazy(() => import("@/pages/PaymentCallbackPage"));
 const SubscriptionPage = lazy(() => import("@/pages/SubscriptionPage"));
+const TermsPage = lazy(() => import("@/pages/TermsPage"));
+const PrivacyPage = lazy(() => import("@/pages/PrivacyPage"));
 
 const router = createBrowserRouter([
   { path: "/", element: <LandingPage /> },
   { path: "/auth", element: <AuthPage /> },
   { path: "/pricing", element: <PricingPage /> },
   { path: "/payment-callback", element: <PaymentCallbackPage /> },
+  { path: "/terms", element: <TermsPage /> },
+  { path: "/privacy", element: <PrivacyPage /> },
   {
     element: <AuthLayout />,
     children: [

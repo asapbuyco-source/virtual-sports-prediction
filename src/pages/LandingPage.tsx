@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "@/lib/i18n/I18nContext";
 
 const fadeUp = { initial: { opacity: 0, y: 24 }, whileInView: { opacity: 1, y: 0 }, viewport: { once: true } };
 
@@ -12,16 +13,17 @@ const features = [
   { icon: "🌍", title: "6 Supported Leagues", desc: "EPL, La Liga, Serie A, Bundesliga, Ligue 1, Eredivisie." },
 ];
 
-const steps = [
-  { step: "01", title: "Select Your Teams", desc: "Choose from 6 leagues and 60+ teams in the BetPawa virtual football lobby." },
-  { step: "02", title: "Add Form Data", desc: "Enter recent results and optional odds for deeper statistical analysis." },
-  { step: "03", title: "Get Prediction", desc: "Receive a comprehensive breakdown with probabilities, tips, and signals." },
-];
-
 export default function LandingPage() {
+  const { t } = useTranslation();
+
+  const steps = [
+    { step: "01", title: t.landing.selectTeamsStep, desc: t.landing.selectTeamsDesc },
+    { step: "02", title: t.landing.addFormDataStep, desc: t.landing.addFormDataDesc },
+    { step: "03", title: t.landing.getPredictionStep, desc: t.landing.getPredictionDesc },
+  ];
+
   return (
     <div className="min-h-screen bg-[#0a0a0f] text-white">
-      {/* Hero */}
       <section className="min-h-screen flex items-center relative overflow-hidden">
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute top-1/4 -left-32 w-96 h-96 bg-green-500/10 rounded-full blur-[128px]" />
@@ -33,21 +35,21 @@ export default function LandingPage() {
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}>
             <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-green-500/10 border border-green-500/20 rounded-full text-xs text-green-400 font-semibold mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-              betpawa Official · Virtual Sports AI
+              {t.landing.aiPoweredPredictions} · 6 Leagues
             </div>
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.08] mb-6 tracking-tight">
-              Predict Smarter.<br />
-              <span className="text-gradient">Bet With Data.</span>
+              {t.landing.predictSmarter}<br />
+              <span className="text-gradient">{t.landing.betWithData}</span>
             </h1>
             <p className="text-gray-400 text-lg mb-8 max-w-md leading-relaxed">
-              Statistical analysis engine for BetPawa Virtual Football League. Get data-driven predictions, xG models, and value bet detection.
+              {t.landing.statisticalAnalysis}
             </p>
             <div className="flex flex-wrap gap-3">
               <Link to="/auth" className="group px-6 py-3.5 rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 text-white font-bold shadow-lg shadow-green-900/30 hover:shadow-green-500/30 transition-all duration-300">
-                Start Free — 5 Predictions
+                {t.landing.startFree}
               </Link>
               <a href="#how-it-works" className="px-6 py-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] text-white font-bold transition-all duration-300">
-                See How It Works
+                {t.landing.seeHowItWorks}
               </a>
             </div>
           </motion.div>
@@ -98,11 +100,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* How It Works */}
       <section id="how-it-works" className="py-24 bg-[#0d0d14]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">How It Works</p>
+            <p className="text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">{t.landing.howItWorks}</p>
             <h2 className="text-3xl sm:text-4xl font-black">Three Steps to Smarter Predictions</h2>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -120,11 +121,10 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Features */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6">
           <motion.div {...fadeUp} className="text-center mb-16">
-            <p className="text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">Features</p>
+            <p className="text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">{t.landing.features}</p>
             <h2 className="text-3xl sm:text-4xl font-black">Built for Virtual Football</h2>
           </motion.div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -139,30 +139,28 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Pricing CTA */}
       <section className="py-24 bg-[#0d0d14]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
           <motion.div {...fadeUp}>
-            <p className="text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">Pricing</p>
+            <p className="text-green-400 text-xs font-bold tracking-[0.2em] uppercase mb-3">{t.landing.pricing}</p>
             <h2 className="text-3xl sm:text-4xl font-black mb-4">Choose Your Edge</h2>
             <p className="text-gray-400 mb-8">Pay in XAF via Mobile Money — MTN & Orange</p>
             <Link to="/pricing" className="inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-500 hover:to-emerald-400 text-white font-bold shadow-lg shadow-green-900/30 hover:shadow-green-500/30 transition-all duration-300">
-              View Pricing
+              {t.landing.viewPricing}
               <span>→</span>
             </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
       <footer className="py-12 border-t border-white/[0.06]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center space-y-4">
           <div className="flex items-center justify-center gap-2.5">
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-[9px] font-black text-white">VA</div>
             <span className="font-bold text-white">Vantage AI</span>
           </div>
-          <p className="text-xs text-gray-600">Built in Cameroon 🇨🇲 · betpawa Official Partner</p>
-          <p className="text-[10px] text-gray-700">Virtual football outcomes are computer-generated. Past prediction accuracy does not guarantee future results. Responsible gambling: never bet more than you can afford to lose.</p>
+          <p className="text-xs text-gray-600">{t.landing.builtInCameroon} 🇨🇲 · {t.landing.aiPoweredPredictions}</p>
+          <p className="text-[10px] text-gray-700">{t.landing.virtualFootballOutcomes}</p>
         </div>
       </footer>
     </div>

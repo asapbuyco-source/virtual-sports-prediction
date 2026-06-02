@@ -11,7 +11,7 @@ export function Footer() {
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center text-xs font-black text-white">VA</div>
             <div>
               <p className="text-sm font-bold text-white">Vantage AI</p>
-              <p className="text-xs text-gray-500 font-medium">betpawa Official Partner</p>
+              <p className="text-xs text-gray-500 font-medium">Virtual Sports Predictions</p>
             </div>
           </div>
           <nav className="flex flex-wrap gap-5 text-xs text-gray-400">
@@ -22,9 +22,9 @@ export function Footer() {
           </nav>
         </div>
         <div className="flex flex-wrap gap-3 text-xs text-gray-500">
-          <span>Privacy Policy</span>
+          <Link to="/privacy" className="hover:text-white transition-colors">Privacy Policy</Link>
           <span>·</span>
-          <span>Terms of Service</span>
+          <Link to="/terms" className="hover:text-white transition-colors">Terms of Service</Link>
           <span>·</span>
           <span>Responsible Gambling</span>
         </div>
