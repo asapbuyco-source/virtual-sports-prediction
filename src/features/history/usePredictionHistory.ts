@@ -75,15 +75,10 @@ export function useSavePrediction() {
     onSuccess: async (_data, _vars, _ctx) => {
       queryClient.invalidateQueries({ queryKey: ["predictions", user?.uid] });
       if (user) {
-        const snap = await getDoc(firestoreDoc(db, "users", user.uid));
-        if (snap.exists()) {
-          const data = snap.data();
-          setUser({
-            ...user,
-            predictionsUsed: data.predictionsUsed ?? user.predictionsUsed,
-            predictionsLimit: data.predictionsLimit ?? user.predictionsLimit,
-          });
-        }
+        setUser({
+          ...user,
+          predictionsUsed: (user.predictionsUsed ?? 0) + 1,
+        });
       }
     },
     onError: (error: Error) => {
